@@ -92,3 +92,15 @@
     self.center = point;
 }
 @end
+
+@implementation NSString(extension)
+
+-(CGSize)sizeWithRestrictSize:(CGSize)size andFont:(CGFloat)fontSize
+{
+    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+    attrs[NSFontAttributeName] = [UIFont systemFontOfSize:fontSize];
+    return [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+}
+
+@end
+

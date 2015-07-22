@@ -7,7 +7,13 @@
 //
 
 #import "ZHUserModel.h"
+
 #import "MJExtension.h"
+
+@interface ZHUserModel()
+
+@end
+
 @implementation ZHUserModel
 
 @end

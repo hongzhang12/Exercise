@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ZHHomeTableViewCell : UITableViewCell
+@class ZHStatusModel;
+@interface ZHStatusCell : UITableViewCell
+@property (nonatomic ,weak) UIView *originView;
+@property (nonatomic ,weak) UIImageView *profile_image;
+@property (nonatomic ,weak) UILabel *nameLabel;
+@property (nonatomic ,weak) UILabel *created_atLabel;
+@property (nonatomic ,weak) UILabel *sourceLabel;
+@property (nonatomic ,weak) UILabel *contentLabel;
+@property (nonatomic ,strong) ZHStatusModel *model;
++ (instancetype)statusWithTableView:(UITableView *)tableView;
 
 @end

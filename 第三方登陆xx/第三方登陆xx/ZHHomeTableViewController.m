@@ -16,6 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "ZHNewStatusCountLabel.h"
 #import "MBProgressHUD+MJ.h"
+#import "ZHHomeTableViewCell.h"
 #define AccountInfo [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) lastObject]stringByAppendingPathComponent:@"account.plist"]
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -83,8 +84,11 @@
     parameters[@"since_id"] = [NSNumber numberWithDouble:self.sinceID];
     [[AFHTTPRequestOperationManager manager] GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        //NSLog(@"%@",responseObject[@"statuses"]);
+        NSLog(@"%@",responseObject[@"statuses"]);
         NSMutableArray *newStatuses = [ZHStatusModel objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+        for (ZHStatusModel *model in newStatuses) {
+            [model setFrames];
+        }
         NSRange range = NSMakeRange(0, newStatuses.count);
         NSIndexSet *index = [[NSIndexSet alloc] initWithIndexesInRange:range];
         [self.statuses insertObjects:newStatuses atIndexes:index];
@@ -134,7 +138,9 @@
         
         //NSLog(@"%@",responseObject[@"statuses"]);
         NSMutableArray *newStatuses = [ZHStatusModel objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        
+        for (ZHStatusModel *model in newStatuses) {
+            [model setFrames];
+        }
         [self.statuses addObjectsFromArray:newStatuses];
         ZHStatusModel *statusModel = [newStatuses lastObject];
         self.max_id = [statusModel.idstr doubleValue];
@@ -167,27 +173,28 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *StatusID = @"status";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:StatusID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:StatusID];
-    }
-    ZHStatusModel *temp = self.statuses[indexPath.row];
-    cell.textLabel.text = temp.user.name;
-    cell.detailTextLabel.text = temp.text;
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:temp.user.profile_image_url] placeholderImage:[UIImage imageNamed:@"placeHolder.jpg"]];
+    ZHStatusCell *cell = [ZHStatusCell statusWithTableView:tableView];
+    int row = indexPath.row;
+    cell.model = self.statuses[row];
     return cell;
 }
 
-#pragma mark - scrollView delegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    NSLog(@"%@---%@",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromCGSize(self.tableView.contentSize));
-    CGFloat offsetY = self.tableView.contentOffset.y;
-    CGFloat contentSizeH = self.tableView.contentSize.height;
-    if (offsetY > (contentSizeH-480)) {
-        NSLog(@"xxxx");
-    }
+    int row = indexPath.row;
+    ZHStatusModel *model = self.statuses[row];
+    return model.cellHeight;
 }
+
+#pragma mark - scrollView delegate
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//
+//    NSLog(@"%@---%@",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromCGSize(self.tableView.contentSize));
+//    CGFloat offsetY = self.tableView.contentOffset.y;
+//    CGFloat contentSizeH = self.tableView.contentSize.height;
+//    if (offsetY > (contentSizeH-480)) {
+//        NSLog(@"xxxx");
+//    }
+//}
 @end

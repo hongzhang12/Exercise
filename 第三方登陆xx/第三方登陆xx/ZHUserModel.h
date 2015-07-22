@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <CoreGraphics/CoreGraphics.h>
 @interface ZHUserModel : NSObject
 @property (nonatomic ,copy) NSString *idstr;
 @property (nonatomic ,copy) NSString *name;
 @property (nonatomic ,copy) NSString *profile_image_url;
+
 @end

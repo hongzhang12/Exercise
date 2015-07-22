@@ -85,6 +85,7 @@
 
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     window.rootViewController = nav;
+
     
 }
 #pragma mark - UIScrollView代理方法

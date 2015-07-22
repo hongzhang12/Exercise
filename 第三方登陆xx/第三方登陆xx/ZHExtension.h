@@ -28,3 +28,7 @@
 - (void)setCenterX:(CGFloat)centerX;
 - (void)setCenterY:(CGFloat)centerY;
 @end
+
+@interface NSString(extension)
+- (CGSize)sizeWithRestrictSize:(CGSize)size andFont:(CGFloat)fontSize;
+@end
