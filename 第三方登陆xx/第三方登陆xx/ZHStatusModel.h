@@ -15,6 +15,8 @@
 #define StatusPadding 10
 #define NameFontSize 16
 #define TextFontSize 18
+#define statusPictureLength 80
+#define StatusPictureColumn 3
 @class ZHUserModel;
 @interface ZHStatusModel : NSObject
 

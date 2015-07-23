@@ -111,6 +111,7 @@
 		FCAE9D701AE63FF6003D69D7 /* record_close_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAE9D6A1AE63FF6003D69D7 /* record_close_normal@2x.png */; };
 		FCAE9D761AE64931003D69D7 /* RedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAE9D751AE64931003D69D7 /* RedButton@2x.png */; };
 		FCAE9D781AE6493A003D69D7 /* RedButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCAE9D771AE6493A003D69D7 /* RedButtonPressed@2x.png */; };
+		FCB097361B608CF00034D7E0 /* ZHStatusPicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB097351B608CF00034D7E0 /* ZHStatusPicturesView.m */; };
 		FCB659151B4B5A8600DEF891 /* ZHHomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB659141B4B5A8600DEF891 /* ZHHomeTableViewController.m */; };
 		FCBABF8D1B3B907B00BB2D93 /* ZHNewFeaturesController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBABF8C1B3B907B00BB2D93 /* ZHNewFeaturesController.m */; };
 		FCBABF901B3B920F00BB2D93 /* ZHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBABF8F1B3B920F00BB2D93 /* ZHExtension.m */; };
@@ -331,6 +332,8 @@
 		FCAE9D6A1AE63FF6003D69D7 /* record_close_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_close_normal@2x.png"; sourceTree = "<group>"; };
 		FCAE9D751AE64931003D69D7 /* RedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedButton@2x.png"; sourceTree = "<group>"; };
 		FCAE9D771AE6493A003D69D7 /* RedButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedButtonPressed@2x.png"; sourceTree = "<group>"; };
+		FCB097341B608CF00034D7E0 /* ZHStatusPicturesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHStatusPicturesView.h; sourceTree = "<group>"; };
+		FCB097351B608CF00034D7E0 /* ZHStatusPicturesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHStatusPicturesView.m; sourceTree = "<group>"; };
 		FCB659131B4B5A8600DEF891 /* ZHHomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHHomeTableViewController.h; sourceTree = "<group>"; };
 		FCB659141B4B5A8600DEF891 /* ZHHomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHHomeTableViewController.m; sourceTree = "<group>"; };
 		FCBABF8B1B3B907B00BB2D93 /* ZHNewFeaturesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHNewFeaturesController.h; sourceTree = "<group>"; };
@@ -791,6 +794,8 @@
 				FCC560631B54B8F20009953D /* placeHolder.jpg */,
 				FCD1D3031B54EEE000E3AF24 /* ZHNewStatusCountLabel.h */,
 				FCD1D3041B54EEE000E3AF24 /* ZHNewStatusCountLabel.m */,
+				FCB097341B608CF00034D7E0 /* ZHStatusPicturesView.h */,
+				FCB097351B608CF00034D7E0 /* ZHStatusPicturesView.m */,
 			);
 			name = test;
 			sourceTree = "<group>";
@@ -1120,6 +1125,7 @@
 				FCEA4EC01AE6304900D5CE55 /* LoginViewController.m in Sources */,
 				FCE2E1211AEF695700E6B314 /* ZHGeneralModel.m in Sources */,
 				FC2514261B5397F50091A44A /* MJFoundation.m in Sources */,
+				FCB097361B608CF00034D7E0 /* ZHStatusPicturesView.m in Sources */,
 				FC2514281B5397F50091A44A /* MJType.m in Sources */,
 				FCAE9D2A1AE63CDC003D69D7 /* SDWebImageManager.m in Sources */,
 				FCAE9D251AE63CDC003D69D7 /* SDImageCache.m in Sources */,

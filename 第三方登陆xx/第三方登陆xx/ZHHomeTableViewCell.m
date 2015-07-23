@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "ZHStatusModel.h"
 #import "ZHExtension.h"
+#import "ZHStatusPicturesView.h"
 @implementation ZHStatusCell
 
 + (instancetype)statusWithTableView:(UITableView *)tableView
@@ -26,6 +27,8 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         UIView *originView = [[UIView alloc] init];
         [self addSubview:originView];
         self.originView = originView;
@@ -57,9 +60,9 @@
         [originView addSubview:contentLabel];
         self.contentLabel = contentLabel;
         
-        UIView *picturesView = [[UIView alloc] init];
+        ZHStatusPicturesView *picturesView = [[ZHStatusPicturesView alloc] init];
         [originView addSubview:picturesView];
-        picturesView.backgroundColor = [UIColor redColor];
+        //picturesView.backgroundColor = [UIColor redColor];
         self.picturesView = picturesView;
         
     }
@@ -87,7 +90,7 @@
     self.contentLabel.text = model.text;
     self.contentLabel.frame = model.textFrame;
     
-    self.picturesView.frame = model.picturesFrame;
+    [self.picturesView setPic_urls:model.pic_urls andFrame:model.picturesFrame];
     
 }
 

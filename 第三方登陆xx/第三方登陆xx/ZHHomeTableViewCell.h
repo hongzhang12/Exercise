@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class ZHStatusModel;
+@class ZHStatusPicturesView;
 @interface ZHStatusCell : UITableViewCell
 @property (nonatomic ,weak) UIView *originView;
 @property (nonatomic ,weak) UIImageView *profile_image;
@@ -15,7 +16,7 @@
 @property (nonatomic ,weak) UILabel *created_atLabel;
 @property (nonatomic ,weak) UILabel *sourceLabel;
 @property (nonatomic ,weak) UILabel *contentLabel;
-@property (nonatomic ,weak) UIView *picturesView;
+@property (nonatomic ,weak) ZHStatusPicturesView *picturesView;
 @property (nonatomic ,strong) ZHStatusModel *model;
 + (instancetype)statusWithTableView:(UITableView *)tableView;
 

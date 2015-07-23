@@ -56,7 +56,11 @@
         CGSize picturesSize = image.size;
         self.picturesFrame = CGRectMake(picturesX, picturesY, picturesSize.width, picturesSize.height);
     }else{
-        self.picturesFrame = CGRectMake(picturesX, picturesY, 170, 170);
+        int row = (picturesCount-1)/StatusPictureColumn;
+        //int col = picturesCount%3;
+        CGFloat picturesH = (row)*statusPictureLength + row*StatusPadding;
+        CGFloat picturesW = StatusPictureColumn*statusPictureLength + (StatusPictureColumn-1)*StatusPadding;
+        self.picturesFrame = CGRectMake(picturesX, picturesY, picturesW, picturesH);
     }
     self.cellHeight = CGRectGetMaxY(self.picturesFrame);
 }
