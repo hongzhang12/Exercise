@@ -38,10 +38,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(loginoutBtnClicked)];
-
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self initViews];
     self.sinceID = 0;
     self.max_id = 0;
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshStatus:) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];

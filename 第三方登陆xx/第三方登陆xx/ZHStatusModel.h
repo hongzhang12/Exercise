@@ -11,7 +11,7 @@
 #import "ZHUserModel.h"
 #import <UIKit/UIKit.h>
 #define StatusCellBorderWidth 10
-#define StatusProfileImageLength 35
+#define StatusProfileImageLength 45
 #define StatusPadding 10
 #define NameFontSize 16
 #define TextFontSize 18

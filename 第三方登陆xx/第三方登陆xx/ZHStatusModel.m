@@ -58,7 +58,7 @@
     }else{
         int row = (picturesCount-1)/StatusPictureColumn;
         //int col = picturesCount%3;
-        CGFloat picturesH = (row)*statusPictureLength + row*StatusPadding;
+        CGFloat picturesH = (row+1)*statusPictureLength + row*StatusPadding;
         CGFloat picturesW = StatusPictureColumn*statusPictureLength + (StatusPictureColumn-1)*StatusPadding;
         self.picturesFrame = CGRectMake(picturesX, picturesY, picturesW, picturesH);
     }

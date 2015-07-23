@@ -48,7 +48,7 @@
     }
     self.pictureImages = nil;
 //    self.pic_urls = pic_urls;
-    int count = pic_urls.count;
+    int count = (int)pic_urls.count;
     if (count == PictureCountNone) {
 
     }else if(count == PictureCountOnlyOne){
