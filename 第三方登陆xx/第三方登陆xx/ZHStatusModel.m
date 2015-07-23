@@ -44,6 +44,20 @@
     CGSize textSize = [self.text sizeWithRestrictSize:CGSizeMake(ScreenWidth - 2*StatusCellBorderWidth, MAXFLOAT) andFont:TextFontSize];
     self.textFrame = CGRectMake(textX, textY, textSize.width, textSize.height);
     
-    self.cellHeight = CGRectGetMaxY(self.textFrame); 
+    CGFloat picturesX = profile_imageX;
+    CGFloat picturesY = CGRectGetMaxY(self.textFrame) + StatusPadding;
+    int picturesCount = self.pic_urls.count;
+    if (picturesCount == 0) {
+        self.picturesFrame = CGRectMake(picturesX, picturesY, 0, 0);
+    }else if (picturesCount == 1){
+        NSString *urlStr = [self.pic_urls lastObject][@"thumbnail_pic"];
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+        UIImage *image = [UIImage imageWithData:data];
+        CGSize picturesSize = image.size;
+        self.picturesFrame = CGRectMake(picturesX, picturesY, picturesSize.width, picturesSize.height);
+    }else{
+        self.picturesFrame = CGRectMake(picturesX, picturesY, 170, 170);
+    }
+    self.cellHeight = CGRectGetMaxY(self.picturesFrame);
 }
 @end

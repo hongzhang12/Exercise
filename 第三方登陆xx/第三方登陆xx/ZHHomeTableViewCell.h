@@ -15,6 +15,7 @@
 @property (nonatomic ,weak) UILabel *created_atLabel;
 @property (nonatomic ,weak) UILabel *sourceLabel;
 @property (nonatomic ,weak) UILabel *contentLabel;
+@property (nonatomic ,weak) UIView *picturesView;
 @property (nonatomic ,strong) ZHStatusModel *model;
 + (instancetype)statusWithTableView:(UITableView *)tableView;
 

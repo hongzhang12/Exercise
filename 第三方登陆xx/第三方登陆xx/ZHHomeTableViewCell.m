@@ -57,6 +57,11 @@
         [originView addSubview:contentLabel];
         self.contentLabel = contentLabel;
         
+        UIView *picturesView = [[UIView alloc] init];
+        [originView addSubview:picturesView];
+        picturesView.backgroundColor = [UIColor redColor];
+        self.picturesView = picturesView;
+        
     }
     return self;
 }
@@ -81,6 +86,8 @@
     
     self.contentLabel.text = model.text;
     self.contentLabel.frame = model.textFrame;
+    
+    self.picturesView.frame = model.picturesFrame;
     
 }
 

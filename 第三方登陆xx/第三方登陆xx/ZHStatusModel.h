@@ -22,6 +22,7 @@
 @property(nonatomic ,copy) NSString *idstr;
 @property(nonatomic ,copy) NSString *source;
 @property(nonatomic ,copy) NSString *created_at;
+@property(nonatomic ,strong) NSArray *pic_urls;
 @property(nonatomic ,strong) ZHUserModel *user;
 
 @property (nonatomic ,assign) CGRect textFrame;
@@ -29,6 +30,7 @@
 @property (nonatomic ,assign) CGRect created_atFrame;
 @property (nonatomic ,assign) CGRect profile_imageFrame;
 @property (nonatomic ,assign) CGRect nameFrame;
+@property (nonatomic ,assign) CGRect picturesFrame;
 @property (nonatomic ,assign) CGFloat cellHeight;
 
 
