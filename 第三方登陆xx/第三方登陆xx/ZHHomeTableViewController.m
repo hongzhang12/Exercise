@@ -47,7 +47,6 @@
     [self.refreshControl addTarget:self action:@selector(refreshStatus:) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
     [self refreshStatus:self.refreshControl];
-    
 }
 
 

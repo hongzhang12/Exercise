@@ -17,6 +17,11 @@
 @property (nonatomic ,weak) UILabel *sourceLabel;
 @property (nonatomic ,weak) UILabel *contentLabel;
 @property (nonatomic ,weak) ZHStatusPicturesView *picturesView;
+
+@property (nonatomic ,weak) UIView *retweeted_statusView;
+@property (nonatomic ,weak) UILabel *re_StatusUserLabel;
+@property (nonatomic ,weak) UILabel *re_StatusTextLabel;
+@property (nonatomic ,weak) ZHStatusPicturesView *re_pictureView;
 @property (nonatomic ,strong) ZHStatusModel *model;
 + (instancetype)statusWithTableView:(UITableView *)tableView;
 

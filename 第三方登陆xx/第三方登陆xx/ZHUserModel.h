@@ -12,5 +12,5 @@
 @property (nonatomic ,copy) NSString *idstr;
 @property (nonatomic ,copy) NSString *name;
 @property (nonatomic ,copy) NSString *profile_image_url;
-
+@property (nonatomic ,copy) NSString *userDescription;
 @end

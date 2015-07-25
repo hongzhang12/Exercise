@@ -15,5 +15,8 @@
 @end
 
 @implementation ZHUserModel
-
++(NSDictionary *)replacedKeyFromPropertyName
+{
+    return @{@"userDescription":@"description"};
+}
 @end

@@ -47,21 +47,59 @@
     CGFloat picturesX = profile_imageX;
     CGFloat picturesY = CGRectGetMaxY(self.textFrame) + StatusPadding;
     int picturesCount = self.pic_urls.count;
+    CGSize picturesSize = [self pictureSizeByPicturesCount:picturesCount];
+    self.picturesFrame = CGRectMake(picturesX, picturesY, picturesSize.width, picturesSize.height);
+    
+    CGFloat originalH = CGRectGetMaxY(self.picturesFrame);
+    self.originalFrame = CGRectMake(0, 0, ScreenWidth, originalH);
+    CGFloat re_StatusX = profile_imageX;
+    CGFloat re_StatusY = CGRectGetMaxY(self.originalFrame);
+    CGFloat re_statusW = ScreenWidth - 2*StatusCellBorderWidth;
+    if (self.retweeted_status) {
+        
+        self.retweeted_statusUser = [NSString stringWithFormat:@"@%@:",self.retweeted_status.user.name];
+        CGFloat re_UserX = 0;
+        CGFloat re_UserY = 0;
+        CGSize re_UserSize = [self.retweeted_statusUser sizeWithRestrictSize:CGSizeMake(re_statusW, MAXFLOAT) andFont:NameFontSize];
+        self.re_UserFrame = CGRectMake(re_UserX, re_UserY, re_UserSize.width, re_UserSize.height);
+        
+        CGFloat re_TextX = re_UserX;
+        CGFloat re_TextY = CGRectGetMaxY(self.re_UserFrame) + StatusPadding;
+        CGSize re_TextSize = [self.retweeted_status.text sizeWithRestrictSize:CGSizeMake(re_statusW, MAXFLOAT) andFont:TextFontSize];
+        self.re_TextFrame = CGRectMake(re_TextX, re_TextY, re_TextSize.width, re_TextSize.height);
+        
+        CGFloat re_picturesX = re_UserX;
+        CGFloat re_picturesY = CGRectGetMaxY(self.re_TextFrame) + StatusPadding;
+        int re_picturesCount = self.retweeted_status.pic_urls.count;
+        CGSize re_picturesSize = [self pictureSizeByPicturesCount:re_picturesCount];
+        self.re_picturesFrame = CGRectMake(re_picturesX, re_picturesY, re_picturesSize.width, re_picturesSize.height);
+        
+        CGFloat re_statusH = CGRectGetMaxY(self.re_picturesFrame);
+        self.re_StatusFrame = CGRectMake(re_StatusX, re_StatusY, re_statusW, re_statusH);
+    }else{
+        self.re_StatusFrame = CGRectMake(re_StatusX, re_StatusY, 0, 0);
+    }
+
+    self.cellHeight = CGRectGetMaxY(self.re_StatusFrame);
+}
+
+- (CGSize)pictureSizeByPicturesCount:(int)picturesCount{
+    CGSize picturesSize = {0,0};
     if (picturesCount == 0) {
-        self.picturesFrame = CGRectMake(picturesX, picturesY, 0, 0);
+
     }else if (picturesCount == 1){
         NSString *urlStr = [self.pic_urls lastObject][@"thumbnail_pic"];
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
         UIImage *image = [UIImage imageWithData:data];
-        CGSize picturesSize = image.size;
-        self.picturesFrame = CGRectMake(picturesX, picturesY, picturesSize.width, picturesSize.height);
+        picturesSize = image.size;
+
     }else{
         int row = (picturesCount-1)/StatusPictureColumn;
         //int col = picturesCount%3;
         CGFloat picturesH = (row+1)*statusPictureLength + row*StatusPadding;
         CGFloat picturesW = StatusPictureColumn*statusPictureLength + (StatusPictureColumn-1)*StatusPadding;
-        self.picturesFrame = CGRectMake(picturesX, picturesY, picturesW, picturesH);
+        picturesSize = CGSizeMake(picturesW, picturesH);
     }
-    self.cellHeight = CGRectGetMaxY(self.picturesFrame);
+    return picturesSize;
 }
 @end

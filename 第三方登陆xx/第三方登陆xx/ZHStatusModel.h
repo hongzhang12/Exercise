@@ -27,12 +27,24 @@
 @property(nonatomic ,strong) NSArray *pic_urls;
 @property(nonatomic ,strong) ZHUserModel *user;
 
+@property(nonatomic ,strong) ZHStatusModel *retweeted_status;
+@property(nonatomic ,copy) NSString *retweeted_statusUser;
+//@property(nonatomic ,copy) NSString *retweeted_statusText;
+
+
 @property (nonatomic ,assign) CGRect textFrame;
 @property (nonatomic ,assign) CGRect sourceFrame;
 @property (nonatomic ,assign) CGRect created_atFrame;
 @property (nonatomic ,assign) CGRect profile_imageFrame;
 @property (nonatomic ,assign) CGRect nameFrame;
 @property (nonatomic ,assign) CGRect picturesFrame;
+@property (nonatomic ,assign) CGRect originalFrame;
+
+@property(nonatomic ,assign) CGRect re_StatusFrame;
+@property(nonatomic ,assign) CGRect re_UserFrame;
+@property(nonatomic ,assign) CGRect re_TextFrame;
+@property (nonatomic ,assign) CGRect re_picturesFrame;
+
 @property (nonatomic ,assign) CGFloat cellHeight;
 
 
