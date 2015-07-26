@@ -29,15 +29,18 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-
+        self.backgroundColor = [UIColor clearColor];
+        
         [self initOriginalStatus];
         [self initRetweeted_status];
+        [self initToolBar];
     }
     return self;
 }
 
 - (void)initOriginalStatus{
     UIView *originView = [[UIView alloc] init];
+    originView.backgroundColor = [UIColor whiteColor];
     [self addSubview:originView];
     self.originView = originView;
     
@@ -75,7 +78,7 @@
 }
 - (void)initRetweeted_status{
     UIView *retweeted_statusView = [[UIView alloc] init];
-    retweeted_statusView.backgroundColor = [UIColor grayColor];
+    retweeted_statusView.backgroundColor = ZHColor(240, 240, 240);
     [self addSubview:retweeted_statusView];
     self.retweeted_statusView = retweeted_statusView;
     
@@ -98,6 +101,32 @@
     //picturesView.backgroundColor = [UIColor redColor];
     self.re_pictureView = re_pictureView;
 }
+
+- (void)initToolBar{
+    UIView *toolBar = [[UIView alloc] init];
+    toolBar.backgroundColor = ZHColor(245, 245, 245);
+    [self addSubview:toolBar];
+    self.toolBar = toolBar;
+    
+    UIButton *responseBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [responseBtn setTitle:@"回复" forState:UIControlStateNormal];
+    [toolBar addSubview:responseBtn];
+    self.responseBtn = responseBtn;
+    
+    UIButton *forwardBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [forwardBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [forwardBtn setTitle:@"转发" forState:UIControlStateNormal];
+    [toolBar addSubview:forwardBtn];
+    self.forwardBtn = forwardBtn;
+    
+    UIButton *goodBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [goodBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [goodBtn setTitle:@"赞" forState:UIControlStateNormal];
+    [toolBar addSubview:goodBtn];
+    self.goodBtn = goodBtn;
+}
+
 - (void)setModel:(ZHStatusModel *)model
 {
     _model = model;
@@ -133,6 +162,13 @@
     
     [self.re_pictureView setPic_urls:model.retweeted_status.pic_urls andFrame:model.re_picturesFrame];
     
+    self.toolBar.frame = model.toolBarFrame;
+    
+    self.responseBtn.frame = model.responseBtnFrame;
+    
+    self.forwardBtn.frame = model.forwardBtnFrame;
+    
+    self.goodBtn.frame = model.goodBtnFrame;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

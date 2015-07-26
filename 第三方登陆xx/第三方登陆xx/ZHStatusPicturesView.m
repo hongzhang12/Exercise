@@ -29,10 +29,7 @@
     [super setFrame:frame];
     
 }
-//- (void)setPic_urls:(NSArray *)pic_urls
-//{
-//    [self setPic_urls:pic_urls];
-//}
+
 - (NSMutableArray *)pictureImages
 {
     if (_pictureImages == nil) {

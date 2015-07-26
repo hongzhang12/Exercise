@@ -17,6 +17,8 @@
 #define TextFontSize 18
 #define statusPictureLength 80
 #define StatusPictureColumn 3
+#define statusToolBarHeight 35
+#define statusCellMargin 20
 @class ZHUserModel;
 @interface ZHStatusModel : NSObject
 
@@ -44,6 +46,11 @@
 @property(nonatomic ,assign) CGRect re_UserFrame;
 @property(nonatomic ,assign) CGRect re_TextFrame;
 @property (nonatomic ,assign) CGRect re_picturesFrame;
+
+@property (nonatomic ,assign) CGRect toolBarFrame;
+@property (nonatomic ,assign) CGRect responseBtnFrame;
+@property (nonatomic ,assign) CGRect forwardBtnFrame;
+@property (nonatomic ,assign) CGRect goodBtnFrame;
 
 @property (nonatomic ,assign) CGFloat cellHeight;
 

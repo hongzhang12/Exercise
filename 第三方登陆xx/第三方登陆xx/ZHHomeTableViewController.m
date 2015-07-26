@@ -38,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(loginoutBtnClicked)];
+    self.tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
+    self.tableView.backgroundColor = ZHColor(211, 211, 211);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self initViews];
     self.sinceID = 0;
@@ -174,14 +176,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ZHStatusCell *cell = [ZHStatusCell statusWithTableView:tableView];
-    int row = indexPath.row;
+    int row = (int)indexPath.row;
     cell.model = self.statuses[row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int row = indexPath.row;
+    int row = (int)indexPath.row;
     ZHStatusModel *model = self.statuses[row];
     return model.cellHeight;
 }

@@ -23,6 +23,11 @@
 @property (nonatomic ,weak) UILabel *re_StatusTextLabel;
 @property (nonatomic ,weak) ZHStatusPicturesView *re_pictureView;
 @property (nonatomic ,strong) ZHStatusModel *model;
+
+@property (nonatomic ,weak) UIView *toolBar;
+@property (nonatomic ,weak) UIButton *responseBtn;
+@property (nonatomic ,weak) UIButton *forwardBtn;
+@property (nonatomic ,weak) UIButton *goodBtn;
 + (instancetype)statusWithTableView:(UITableView *)tableView;
 
 @end

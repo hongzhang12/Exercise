@@ -46,7 +46,7 @@
     
     CGFloat picturesX = profile_imageX;
     CGFloat picturesY = CGRectGetMaxY(self.textFrame) + StatusPadding;
-    int picturesCount = self.pic_urls.count;
+    int picturesCount = (int)self.pic_urls.count;
     CGSize picturesSize = [self pictureSizeByPicturesCount:picturesCount];
     self.picturesFrame = CGRectMake(picturesX, picturesY, picturesSize.width, picturesSize.height);
     
@@ -80,7 +80,26 @@
         self.re_StatusFrame = CGRectMake(re_StatusX, re_StatusY, 0, 0);
     }
 
-    self.cellHeight = CGRectGetMaxY(self.re_StatusFrame);
+    CGFloat toolBarX = 0;
+    CGFloat toolBarY = CGRectGetMaxY(self.re_StatusFrame) + 1;
+    CGFloat toolBarW = ScreenWidth;
+    CGFloat toolBarH = statusToolBarHeight;
+    self.toolBarFrame = CGRectMake(toolBarX, toolBarY, toolBarW, toolBarH);
+    
+    CGFloat toolBarItemY = 0;
+    CGFloat toolBarItemW = toolBarW/3;
+    CGFloat toolBarItemH = toolBarH;
+    
+    CGFloat responseX = 0;
+    self.responseBtnFrame = CGRectMake(responseX, toolBarItemY, toolBarItemW, toolBarItemH);
+    
+    CGFloat forwardX = CGRectGetMaxX(self.responseBtnFrame);
+    self.forwardBtnFrame = CGRectMake(forwardX, toolBarItemY, toolBarItemW, toolBarItemH);
+
+    CGFloat goodX = CGRectGetMaxX(self.forwardBtnFrame);
+    self.goodBtnFrame = CGRectMake(goodX, toolBarItemY, toolBarItemW, toolBarItemH);
+    
+    self.cellHeight = CGRectGetMaxY(self.toolBarFrame) + statusCellMargin;
 }
 
 - (CGSize)pictureSizeByPicturesCount:(int)picturesCount{
