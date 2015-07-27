@@ -52,20 +52,20 @@
     
     CGFloat originalH = CGRectGetMaxY(self.picturesFrame);
     self.originalFrame = CGRectMake(0, 0, ScreenWidth, originalH);
-    CGFloat re_StatusX = profile_imageX;
+    CGFloat re_StatusX = 0;
     CGFloat re_StatusY = CGRectGetMaxY(self.originalFrame);
-    CGFloat re_statusW = ScreenWidth - 2*StatusCellBorderWidth;
+    CGFloat re_statusW = ScreenWidth;
     if (self.retweeted_status) {
         
         self.retweeted_statusUser = [NSString stringWithFormat:@"@%@:",self.retweeted_status.user.name];
-        CGFloat re_UserX = 0;
+        CGFloat re_UserX = profile_imageX;
         CGFloat re_UserY = 0;
-        CGSize re_UserSize = [self.retweeted_statusUser sizeWithRestrictSize:CGSizeMake(re_statusW, MAXFLOAT) andFont:NameFontSize];
+        CGSize re_UserSize = [self.retweeted_statusUser sizeWithRestrictSize:CGSizeMake(re_statusW - 2*StatusCellBorderWidth, MAXFLOAT) andFont:NameFontSize];
         self.re_UserFrame = CGRectMake(re_UserX, re_UserY, re_UserSize.width, re_UserSize.height);
         
         CGFloat re_TextX = re_UserX;
         CGFloat re_TextY = CGRectGetMaxY(self.re_UserFrame) + StatusPadding;
-        CGSize re_TextSize = [self.retweeted_status.text sizeWithRestrictSize:CGSizeMake(re_statusW, MAXFLOAT) andFont:TextFontSize];
+        CGSize re_TextSize = [self.retweeted_status.text sizeWithRestrictSize:CGSizeMake(re_statusW - 2*StatusCellBorderWidth, MAXFLOAT) andFont:TextFontSize];
         self.re_TextFrame = CGRectMake(re_TextX, re_TextY, re_TextSize.width, re_TextSize.height);
         
         CGFloat re_picturesX = re_UserX;
