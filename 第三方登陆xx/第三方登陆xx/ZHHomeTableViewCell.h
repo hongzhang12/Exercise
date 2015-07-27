@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class ZHStatusModel;
 @class ZHStatusPicturesView;
+@class ZHStatusToolBar;
 @interface ZHStatusCell : UITableViewCell
 @property (nonatomic ,weak) UIView *originView;
 @property (nonatomic ,weak) UIImageView *profile_image;
@@ -24,10 +25,8 @@
 @property (nonatomic ,weak) ZHStatusPicturesView *re_pictureView;
 @property (nonatomic ,strong) ZHStatusModel *model;
 
-@property (nonatomic ,weak) UIView *toolBar;
-@property (nonatomic ,weak) UIButton *responseBtn;
-@property (nonatomic ,weak) UIButton *forwardBtn;
-@property (nonatomic ,weak) UIButton *goodBtn;
+@property (nonatomic ,weak) ZHStatusToolBar *toolBar;
+
 + (instancetype)statusWithTableView:(UITableView *)tableView;
 
 @end

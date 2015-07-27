@@ -25,7 +25,6 @@
     CGSize nameSize = [self.user.name sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
     self.nameFrame = CGRectMake(nameX, nameY, nameSize.width, nameSize.height);
     
-    self.created_at = [self.created_at substringWithRange:NSMakeRange(11, 8)];
     CGFloat created_atX = nameX;
     CGFloat created_atY = CGRectGetMaxY(self.nameFrame) + StatusPadding;
     CGSize created_atSize = [self.created_at sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
@@ -120,5 +119,40 @@
         picturesSize = CGSizeMake(picturesW, picturesH);
     }
     return picturesSize;
+}
+//Fri Sep 12 12:35:51 +0800 2014
+//Thu Oct 16 17:06:25 +0800 2014
+- (NSString *)created_at
+{
+    if (_created_at.length <20) return _created_at;
+    //NSLog(@"--%@",_created_at);
+    _created_at = [_created_at stringByReplacingOccurrencesOfString:@"0800" withString:@"0000"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"EEE MMM dd HH:mm:ss ZZZZ yyyy";
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    //formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    NSDate *createDate = [formatter dateFromString:_created_at];
+    
+    NSDate *localDate = [NSDate localDate];
+    NSTimeInterval timeInterval = [localDate timeIntervalSinceDate:createDate];
+    if (timeInterval <= 60) {
+        _created_at = @"刚刚";
+    }else if(timeInterval <= 60*60){
+        int minutes =(int)(timeInterval/60);
+        _created_at = [NSString stringWithFormat:@"%d分钟前",minutes];
+    }else if(timeInterval <= 24*60*60){
+        int hours = (int)(timeInterval/3600);
+        _created_at = [NSString stringWithFormat:@"%d小时前",hours];
+    }else if(timeInterval <= 2*24*60*60){
+        _created_at = @"昨天";
+    }else if(timeInterval <= 365*24*60*60){
+        int months = (int)(timeInterval/30*24*60*60);
+        _created_at = [NSString stringWithFormat:@"%d月内",months+1];
+    }else{
+        [formatter setDateFormat:@"yyyy-MM--dd"];
+        _created_at = [formatter stringFromDate:createDate];
+    }
+    //NSLog(@"%@",_created_at);
+    return _created_at;
 }
 @end

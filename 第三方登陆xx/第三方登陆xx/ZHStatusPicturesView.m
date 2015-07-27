@@ -50,7 +50,7 @@
 
     }else if(count == PictureCountOnlyOne){
         UIImageView *picture = [[UIImageView alloc] initWithFrame:self.bounds];
-        [picture sd_setImageWithURL:[NSURL URLWithString:[pic_urls lastObject][@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"placeHolder.jpg"]];
+        [picture sd_setImageWithURL:[NSURL URLWithString:[pic_urls lastObject][@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
         [self addSubview:picture];
         [self.pictureImages addObject:picture];
     }else{
@@ -61,7 +61,7 @@
             CGFloat picturesX = col*(statusPictureLength+StatusPadding);
             CGFloat picturesY = row*(statusPictureLength+StatusPadding);
             picture.frame = CGRectMake(picturesX, picturesY, statusPictureLength, statusPictureLength);
-            [picture sd_setImageWithURL:[NSURL URLWithString:(pic_urls[i])[@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"placeHolder.jpg"]];
+            [picture sd_setImageWithURL:[NSURL URLWithString:(pic_urls[i])[@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
             [self addSubview:picture];
             [self.pictureImages addObject:picture];
         }

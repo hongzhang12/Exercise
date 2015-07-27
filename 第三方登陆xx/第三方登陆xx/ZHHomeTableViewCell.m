@@ -11,6 +11,7 @@
 #import "ZHStatusModel.h"
 #import "ZHExtension.h"
 #import "ZHStatusPicturesView.h"
+#import "ZHStatusToolBar.h"
 @implementation ZHStatusCell
 
 + (instancetype)statusWithTableView:(UITableView *)tableView
@@ -103,28 +104,11 @@
 }
 
 - (void)initToolBar{
-    UIView *toolBar = [[UIView alloc] init];
+    ZHStatusToolBar *toolBar = [[ZHStatusToolBar alloc] init];
     toolBar.backgroundColor = ZHColor(245, 245, 245);
     [self addSubview:toolBar];
     self.toolBar = toolBar;
     
-    UIButton *responseBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [responseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [responseBtn setTitle:@"回复" forState:UIControlStateNormal];
-    [toolBar addSubview:responseBtn];
-    self.responseBtn = responseBtn;
-    
-    UIButton *forwardBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [forwardBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [forwardBtn setTitle:@"转发" forState:UIControlStateNormal];
-    [toolBar addSubview:forwardBtn];
-    self.forwardBtn = forwardBtn;
-    
-    UIButton *goodBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [goodBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [goodBtn setTitle:@"赞" forState:UIControlStateNormal];
-    [toolBar addSubview:goodBtn];
-    self.goodBtn = goodBtn;
 }
 
 - (void)setModel:(ZHStatusModel *)model
@@ -164,11 +148,13 @@
     
     self.toolBar.frame = model.toolBarFrame;
     
-    self.responseBtn.frame = model.responseBtnFrame;
+    self.toolBar.responseBtn.frame = model.responseBtnFrame;
     
-    self.forwardBtn.frame = model.forwardBtnFrame;
+    self.toolBar.forwardBtn.frame = model.forwardBtnFrame;
     
-    self.goodBtn.frame = model.goodBtnFrame;
+    self.toolBar.goodBtn.frame = model.goodBtnFrame;
+    
+    [self.toolBar setCountWithStatusModel:model];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -10,6 +10,23 @@
 #import <UIKit/UIKit.h>
 
 #define ZHColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#ifdef DEBUG
+#define ZHLog(...) NSLog(__VA_ARGS__)
+
+#else
+#define ZHLog(...)
+
+#endif
+
+//typedef void(^configureCellBlock)(id,id);
+
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+@interface UIBarButtonItem(Extension)
+
++ (UIBarButtonItem *)itemWithTarget:(id)target andAction:(SEL)action andImage:(NSString *)image andHighImage:(NSString *)highImage;
+
+@end
 
 @interface UIView(extension)
 
@@ -34,4 +51,13 @@
 
 @interface NSString(extension)
 - (CGSize)sizeWithRestrictSize:(CGSize)size andFont:(CGFloat)fontSize;
+@end
+
+@interface UIWindow(Extension)
++ (UIWindow *)currentWindow;
+@end
+
+@interface NSDate(Extension)
++ (instancetype)localDate;
++ (instancetype)localDateWithTimeIntervalSinceNow:(NSTimeInterval)secs;
 @end

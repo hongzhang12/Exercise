@@ -19,6 +19,9 @@
 #define StatusPictureColumn 3
 #define statusToolBarHeight 35
 #define statusCellMargin 20
+
+#define StatusFromAPP @"app"
+#define StatusFromCom @"weibo"
 @class ZHUserModel;
 @interface ZHStatusModel : NSObject
 
@@ -31,6 +34,9 @@
 
 @property(nonatomic ,strong) ZHStatusModel *retweeted_status;
 @property(nonatomic ,copy) NSString *retweeted_statusUser;
+@property(nonatomic ,assign) int reposts_count;
+@property(nonatomic ,assign) int comments_count;
+@property(nonatomic ,assign) int attitudes_count;
 //@property(nonatomic ,copy) NSString *retweeted_statusText;
 
 
@@ -56,4 +62,5 @@
 
 
 - (void)setFrames;
+- (NSString *)created_at;
 @end

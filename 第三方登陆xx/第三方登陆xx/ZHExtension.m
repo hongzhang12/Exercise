@@ -8,6 +8,20 @@
 
 #import "ZHExtension.h"
 
+@implementation UIBarButtonItem(Extension)
+
++ (UIBarButtonItem *)itemWithTarget:(id)target andAction:(SEL)action andImage:(NSString *)image andHighImage:(NSString *)highImage
+{
+    CGSize size = [UIImage imageNamed:@"navigationbar_back.png"].size;
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    [button setImage:[UIImage imageNamed:@"navigationbar_back.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"navigationbar_back_highlighted"] forState:UIControlStateHighlighted];
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    return  [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+@end
+
 @implementation UIView (extension)
 
 - (CGFloat)x
@@ -104,3 +118,26 @@
 
 @end
 
+@implementation UIWindow(Extension)
+
++ (UIWindow *)currentWindow
+{
+    return [[UIApplication sharedApplication].windows lastObject];
+}
+
+@end
+
+@implementation NSDate(Extension)
+
++(instancetype)localDate
+{
+    NSDate *date = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate:date];
+    return [date dateByAddingTimeInterval:interval];
+}
++(instancetype)localDateWithTimeIntervalSinceNow:(NSTimeInterval)secs
+{
+    return [[NSDate localDate] dateByAddingTimeInterval:secs];
+}
+@end
