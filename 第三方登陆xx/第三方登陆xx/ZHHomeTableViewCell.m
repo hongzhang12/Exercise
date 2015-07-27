@@ -124,7 +124,7 @@
     
     self.nameLabel.text = model.user.name;
     self.nameLabel.frame = model.nameFrame;
-    
+
     self.created_atLabel.text = model.created_at;
     self.created_atLabel.frame = model.created_atFrame;
     

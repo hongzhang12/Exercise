@@ -140,4 +140,74 @@
 {
     return [[NSDate localDate] dateByAddingTimeInterval:secs];
 }
+- (int)year{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy";
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    return [[formatter stringFromDate:self] intValue];
+}
+- (int)month{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"MM";
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    return [[[formatter stringFromDate:self] stringByReplacingOccurrencesOfString:@"0" withString:@""] intValue];
+}
+- (int)day{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"d";
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    return [[formatter stringFromDate:self] intValue];
+}
+- (int)hour{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"H";
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    return [[[formatter stringFromDate:self] stringByReplacingOccurrencesOfString:@"0" withString:@""] intValue];
+}
+- (int)minute{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"m";
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    return [[formatter stringFromDate:self] intValue];
+}
+- (int)second{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"s";
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    return [[formatter stringFromDate:self] intValue];
+}
+- (NSString *)relationWithOtherDate:(NSDate *)date
+{
+    NSString *relation = @"";
+    
+    //NSDate *localDate = [NSDate localDate];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd H:mm:ss";
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    NSDate *longtimeDate = [formatter dateFromString:@"2015-01-01 00:00:00"];
+    //NSDate *date2013 = [formatter dateFromString:@"2014-01-01 00:00:00"];
+    //NSTimeInterval timeInterval = [localDate timeIntervalSinceDate:date];
+    if (date.year < longtimeDate.year) {
+        formatter.dateFormat = @"yyyy-MM-dd";
+        relation = [formatter stringFromDate:date];
+    }else if(date.month < self.month){
+        relation = [NSString stringWithFormat:@"%d个月前",self.month - date.month];
+    }else if(self.day == (date.day + 1)){
+        relation = @"昨天";
+    }else if(date.day == self.day ){
+        if(self.hour == date.hour){
+            if(self.minute == date.minute){
+                relation = @"刚刚";
+            }else{
+                relation = [NSString stringWithFormat:@"%d分钟前",self.minute - date.minute];
+            }
+        }else{
+            relation = [NSString stringWithFormat:@"%d小时前",self.hour - date.hour];
+        }
+    }else{
+        relation = [NSString stringWithFormat:@"%d天前",self.day - date.day];
+    }
+    return relation;
+}
 @end

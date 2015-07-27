@@ -27,7 +27,7 @@
     
     CGFloat created_atX = nameX;
     CGFloat created_atY = CGRectGetMaxY(self.nameFrame) + StatusPadding;
-    CGSize created_atSize = [self.created_at sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
+    CGSize created_atSize = [_created_at sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
     self.created_atFrame = CGRectMake(created_atX, created_atY, created_atSize.width, created_atSize.height);
     
     self.source = [self.source substringFromIndex:16];
@@ -124,35 +124,42 @@
 //Thu Oct 16 17:06:25 +0800 2014
 - (NSString *)created_at
 {
-    if (_created_at.length <20) return _created_at;
+    //if (_created_at.length <20) return _created_at;
     //NSLog(@"--%@",_created_at);
-    _created_at = [_created_at stringByReplacingOccurrencesOfString:@"0800" withString:@"0000"];
+    NSString *create_at = [_created_at stringByReplacingOccurrencesOfString:@"0800" withString:@"0000"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"EEE MMM dd HH:mm:ss ZZZZ yyyy";
+    formatter.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";
+    //formatter.dateFormat = @"yyyy-MM-dd H:mm:ss";
+    //formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
     formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     //formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
-    NSDate *createDate = [formatter dateFromString:_created_at];
+    NSDate *createDate = [formatter dateFromString:create_at];
     
     NSDate *localDate = [NSDate localDate];
-    NSTimeInterval timeInterval = [localDate timeIntervalSinceDate:createDate];
-    if (timeInterval <= 60) {
-        _created_at = @"刚刚";
-    }else if(timeInterval <= 60*60){
-        int minutes =(int)(timeInterval/60);
-        _created_at = [NSString stringWithFormat:@"%d分钟前",minutes];
-    }else if(timeInterval <= 24*60*60){
-        int hours = (int)(timeInterval/3600);
-        _created_at = [NSString stringWithFormat:@"%d小时前",hours];
-    }else if(timeInterval <= 2*24*60*60){
-        _created_at = @"昨天";
-    }else if(timeInterval <= 365*24*60*60){
-        int months = (int)(timeInterval/30*24*60*60);
-        _created_at = [NSString stringWithFormat:@"%d月内",months+1];
-    }else{
-        [formatter setDateFormat:@"yyyy-MM--dd"];
-        _created_at = [formatter stringFromDate:createDate];
-    }
-    //NSLog(@"%@",_created_at);
-    return _created_at;
+//    NSCalendar *calender = [NSCalendar currentCalendar];
+//    NSCalendarUnit unit = NSCalendarUnitYear|NSCalendarUnitMonth|
+//                           NSCalendarUnitDay|NSCalendarUnitHour|
+//    NSCalendarUnitMinute|NSCalendarUnitSecond;
+//    NSDateComponents *component = [calender components:unit fromDate:createDate toDate:localDate options:0];
+    
+    
+    
+    return [localDate relationWithOtherDate:createDate];
+}
+
+- (CGRect)created_atFrame
+{
+    CGFloat created_atX = _created_atFrame.origin.x;
+    CGFloat created_atY = _created_atFrame.origin.y;
+    CGSize created_atSize = [self.created_at sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
+    _created_atFrame = CGRectMake(created_atX, created_atY, created_atSize.width, created_atSize.height);
+    return _created_atFrame;
+}
+- (CGRect)sourceFrame
+{
+    CGFloat sourceX = CGRectGetMaxX(self.created_atFrame) + StatusPadding;
+    CGFloat sourceY = _sourceFrame.origin.y;
+    _sourceFrame = CGRectMake(sourceX, sourceY, _sourceFrame.size.width, _sourceFrame.size.height);
+    return _sourceFrame;
 }
 @end

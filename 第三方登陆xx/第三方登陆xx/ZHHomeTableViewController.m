@@ -85,8 +85,8 @@
     parameters[@"access_token"] = account.oAuthToken;
     parameters[@"since_id"] = [NSNumber numberWithDouble:self.sinceID];
     [[AFHTTPRequestOperationManager manager] GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSLog(@"%@",responseObject[@"statuses"]);
+        NSLog(@"success");
+        //NSLog(@"%@",responseObject[@"statuses"]);
         NSMutableArray *newStatuses = [ZHStatusModel objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         for (ZHStatusModel *model in newStatuses) {
             [model setFrames];
