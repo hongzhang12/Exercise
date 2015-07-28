@@ -10,6 +10,10 @@
 #import "UIImageView+WebCache.h"
 #import "ZHExtension.h"
 #import "ZHStatusModel.h"
+#import "ZHPictureBtn.h"
+#import "customNavigationController.h"
+#import "ZHHomeTableViewController.h"
+#import "ZHPictureViewController.h"
 @implementation ZHStatusPicturesView
 
 - (instancetype)init
@@ -49,22 +53,39 @@
     if (count == PictureCountNone) {
 
     }else if(count == PictureCountOnlyOne){
-        UIImageView *picture = [[UIImageView alloc] initWithFrame:self.bounds];
-        [picture sd_setImageWithURL:[NSURL URLWithString:[pic_urls lastObject][@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
+        ZHPictureBtn *picture = [[ZHPictureBtn alloc] init];
+        picture.frame = self.bounds;
+        [picture.imageView sd_setImageWithURL:[NSURL URLWithString:[pic_urls lastObject][@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
+        picture.tag = 0;
+        [picture addTarget:self action:@selector(pictureBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:picture];
         [self.pictureImages addObject:picture];
     }else{
         for (int i = 0; i < count; i++) {
-            UIImageView *picture = [[UIImageView alloc] init];
+            ZHPictureBtn *picture = [[ZHPictureBtn alloc] init];
             int row = i/StatusPictureColumn;
             int col = i%StatusPictureColumn;
             CGFloat picturesX = col*(statusPictureLength+StatusPadding);
             CGFloat picturesY = row*(statusPictureLength+StatusPadding);
             picture.frame = CGRectMake(picturesX, picturesY, statusPictureLength, statusPictureLength);
-            [picture sd_setImageWithURL:[NSURL URLWithString:(pic_urls[i])[@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
+            [picture.imageView sd_setImageWithURL:[NSURL URLWithString:(pic_urls[i])[@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder"]];
+            picture.tag = i;
+            [picture addTarget:self action:@selector(pictureBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:picture];
             [self.pictureImages addObject:picture];
         }
     }
+}
+- (void)pictureBtnClicked:(ZHPictureBtn *)pictureBtn{
+    UIWindow *window = [UIWindow currentWindow];
+    customNavigationController *customerCtr = (customNavigationController *)window.rootViewController;
+    ZHHomeTableViewController *homeCtr = (ZHHomeTableViewController *)customerCtr.topViewController;
+//    NSLog(@"%@",customerCtr.topViewController);
+    ZHPictureViewController *pictureCtr = [[ZHPictureViewController alloc] init];
+    pictureCtr.pictureID = pictureBtn.tag;
+    pictureCtr.pictureImages = self.pictureImages;
+    [homeCtr presentViewController:pictureCtr animated:NO completion:^{
+        
+    }];
 }
 @end

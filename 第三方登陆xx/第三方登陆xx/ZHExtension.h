@@ -58,8 +58,8 @@
 @end
 
 @interface NSDate(Extension)
-+ (instancetype)localDate;
-+ (instancetype)localDateWithTimeIntervalSinceNow:(NSTimeInterval)secs;
+//+ (instancetype)localDate;
+//+ (instancetype)localDateWithTimeIntervalSinceNow:(NSTimeInterval)secs;
 - (int)year;
 - (int)month;
 - (int)day;
@@ -67,4 +67,5 @@
 - (int)minute;
 - (int)second;
 - (NSString *)relationWithOtherDate:(NSDate *)date;
+- (NSString *)relationWithCurrentDate;
 @end

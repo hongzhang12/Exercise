@@ -17,6 +17,8 @@
 		FC25142C1B5397F50091A44A /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2514241B5397F50091A44A /* NSString+MJExtension.m */; };
 		FC25142F1B539B2B0091A44A /* ZHStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC25142E1B539B2B0091A44A /* ZHStatusModel.m */; };
 		FC2514321B539B450091A44A /* ZHUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2514311B539B450091A44A /* ZHUserModel.m */; };
+		FC3A0ABF1B67672E00E97ACF /* ZHPictureBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3A0ABE1B67672E00E97ACF /* ZHPictureBtn.m */; };
+		FC3A0AC21B67734000E97ACF /* ZHPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3A0AC11B67734000E97ACF /* ZHPictureViewController.m */; };
 		FC4923DD1B465BA40093D5E7 /* account_weibo_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4923D91B465BA40093D5E7 /* account_weibo_press@2x.png */; };
 		FC4923DE1B465BA40093D5E7 /* account_qq_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4923DA1B465BA40093D5E7 /* account_qq_press@2x.png */; };
 		FC4923DF1B465BA40093D5E7 /* account_weibo_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4923DB1B465BA40093D5E7 /* account_weibo_normal@2x.png */; };
@@ -202,6 +204,10 @@
 		FC25142E1B539B2B0091A44A /* ZHStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHStatusModel.m; sourceTree = "<group>"; };
 		FC2514301B539B450091A44A /* ZHUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHUserModel.h; sourceTree = "<group>"; };
 		FC2514311B539B450091A44A /* ZHUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHUserModel.m; sourceTree = "<group>"; };
+		FC3A0ABD1B67672E00E97ACF /* ZHPictureBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHPictureBtn.h; sourceTree = "<group>"; };
+		FC3A0ABE1B67672E00E97ACF /* ZHPictureBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHPictureBtn.m; sourceTree = "<group>"; };
+		FC3A0AC01B67734000E97ACF /* ZHPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHPictureViewController.h; sourceTree = "<group>"; };
+		FC3A0AC11B67734000E97ACF /* ZHPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHPictureViewController.m; sourceTree = "<group>"; };
 		FC4923D91B465BA40093D5E7 /* account_weibo_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_weibo_press@2x.png"; sourceTree = "<group>"; };
 		FC4923DA1B465BA40093D5E7 /* account_qq_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_qq_press@2x.png"; sourceTree = "<group>"; };
 		FC4923DB1B465BA40093D5E7 /* account_weibo_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_weibo_normal@2x.png"; sourceTree = "<group>"; };
@@ -786,6 +792,8 @@
 			children = (
 				FCB659131B4B5A8600DEF891 /* ZHHomeTableViewController.h */,
 				FCB659141B4B5A8600DEF891 /* ZHHomeTableViewController.m */,
+				FC3A0AC01B67734000E97ACF /* ZHPictureViewController.h */,
+				FC3A0AC11B67734000E97ACF /* ZHPictureViewController.m */,
 				FCD59BD31B4F5B8F00D357B3 /* ZHHomeTableViewCell.h */,
 				FCD59BD41B4F5B8F00D357B3 /* ZHHomeTableViewCell.m */,
 				FC25142D1B539B2B0091A44A /* ZHStatusModel.h */,
@@ -798,6 +806,8 @@
 				FCB097351B608CF00034D7E0 /* ZHStatusPicturesView.m */,
 				FC78B5251B65DA9E0030A980 /* ZHStatusToolBar.h */,
 				FC78B5261B65DA9E0030A980 /* ZHStatusToolBar.m */,
+				FC3A0ABD1B67672E00E97ACF /* ZHPictureBtn.h */,
+				FC3A0ABE1B67672E00E97ACF /* ZHPictureBtn.m */,
 			);
 			name = test;
 			sourceTree = "<group>";
@@ -1137,6 +1147,7 @@
 				FCEDAC221AE89B2400884858 /* MBProgressHUD.m in Sources */,
 				FC78DD8E1AE731FA007B445A /* AFHTTPSessionManager.m in Sources */,
 				FCE2E1221AEF695700E6B314 /* ZHGeneralVIew.m in Sources */,
+				FC3A0ABF1B67672E00E97ACF /* ZHPictureBtn.m in Sources */,
 				FCE2E11F1AEF695700E6B314 /* ZHFutureTrendView.m in Sources */,
 				FCEA4E781AE62F8B00D5CE55 /* main.m in Sources */,
 				FCE2E11C1AEF695700E6B314 /* ZHDetailView.m in Sources */,
@@ -1186,6 +1197,7 @@
 				FCE2E11B1AEF695700E6B314 /* ZHDetailModel.m in Sources */,
 				FCAE9D301AE63CDC003D69D7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				FCAE9D2D1AE63CDC003D69D7 /* UIImage+GIF.m in Sources */,
+				FC3A0AC21B67734000E97ACF /* ZHPictureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

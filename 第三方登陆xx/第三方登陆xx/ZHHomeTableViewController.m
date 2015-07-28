@@ -37,8 +37,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(loginoutBtnClicked)];
-    self.tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"modal" style:UIBarButtonItemStylePlain target:self action:@selector(modal)];
+    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.backgroundColor = ZHColor(211, 211, 211);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self initViews];
@@ -49,9 +49,38 @@
     [self.refreshControl addTarget:self action:@selector(refreshStatus:) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
     [self refreshStatus:self.refreshControl];
+    
 }
 
-
+- (void)modal{
+    UIViewController *controller = [[UIViewController alloc] init];
+    controller.view.backgroundColor = [UIColor redColor];
+    [self presentViewController:controller animated:NO completion:^{
+        NSLog(@"ModalSuccess");
+//        NSLog(@"%@",NSStringFromCGRect(controller.view.frame));
+//        controller.view.frame = CGRectMake(0, 480, 0, 0);
+    }];
+//
+//    [UIView animateWithDuration:2.0 animations:^{
+//        controller.view.frame = CGRectMake(0, 0, 320, 480);
+//    } completion:^(BOOL finished) {
+//        NSLog(@"--%@",NSStringFromCGRect(controller.view.frame));
+//    }];
+}
+//- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion{
+//
+//    [super presentViewController:viewControllerToPresent animated:NO completion:^{
+//
+//        viewControllerToPresent.view.frame = CGRectMake(0, 480, 0, 0);
+//        
+//    }];
+//    
+//    [UIView animateWithDuration:2.0 animations:^{
+//        viewControllerToPresent.view.frame = CGRectMake(0, 0, 320, 480);
+//    } completion:^(BOOL finished) {
+//
+//    }];
+//}
 //初始化控件
 - (void)initViews{
     ZHNewStatusCountLabel *promptCount = [[ZHNewStatusCountLabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];

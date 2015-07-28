@@ -30,7 +30,7 @@
     CGSize created_atSize = [_created_at sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
     self.created_atFrame = CGRectMake(created_atX, created_atY, created_atSize.width, created_atSize.height);
     
-    self.source = [self.source substringFromIndex:16];
+//    self.source = [self.source substringFromIndex:16];
     CGFloat sourceX = CGRectGetMaxX(self.created_atFrame) + StatusPadding;
     CGFloat sourceY = CGRectGetMaxY(self.nameFrame) + StatusPadding;
     CGSize sourceSize = [self.source sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
@@ -126,40 +126,39 @@
 {
     //if (_created_at.length <20) return _created_at;
     //NSLog(@"--%@",_created_at);
-    NSString *create_at = [_created_at stringByReplacingOccurrencesOfString:@"0800" withString:@"0000"];
+    NSString *create_at = _created_at;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";
-    //formatter.dateFormat = @"yyyy-MM-dd H:mm:ss";
-    //formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    //formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    //formatter.timeZone = [NSTimeZone localTimeZone];
+    //formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    //NSLog(@"%@",[formatter.timeZone name]);
     formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    //formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+    //timezone默认为GMT格林尼治时区，需改为本地时区
+    formatter.timeZone = [NSTimeZone localTimeZone];
     NSDate *createDate = [formatter dateFromString:create_at];
     
-    NSDate *localDate = [NSDate localDate];
-//    NSCalendar *calender = [NSCalendar currentCalendar];
-//    NSCalendarUnit unit = NSCalendarUnitYear|NSCalendarUnitMonth|
-//                           NSCalendarUnitDay|NSCalendarUnitHour|
-//    NSCalendarUnitMinute|NSCalendarUnitSecond;
-//    NSDateComponents *component = [calender components:unit fromDate:createDate toDate:localDate options:0];
+    create_at = [createDate relationWithCurrentDate];
     
+    CGFloat created_atX = self.created_atFrame.origin.x;
+    CGFloat created_atY = self.created_atFrame.origin.y;
+    CGSize created_atSize = [create_at sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
+    self.created_atFrame = CGRectMake(created_atX, created_atY, created_atSize.width, created_atSize.height);
     
+    CGFloat sourceX = CGRectGetMaxX(self.created_atFrame) + StatusPadding;
+    CGFloat sourceY = self.sourceFrame.origin.y;
+    self.sourceFrame = CGRectMake(sourceX, sourceY, self.sourceFrame.size.width, self.sourceFrame.size.height);
     
-    return [localDate relationWithOtherDate:createDate];
+    return create_at;
 }
 
-- (CGRect)created_atFrame
-{
-    CGFloat created_atX = _created_atFrame.origin.x;
-    CGFloat created_atY = _created_atFrame.origin.y;
-    CGSize created_atSize = [self.created_at sizeWithRestrictSize:CGSizeMake(MAXFLOAT, MAXFLOAT) andFont:NameFontSize];
-    _created_atFrame = CGRectMake(created_atX, created_atY, created_atSize.width, created_atSize.height);
-    return _created_atFrame;
-}
-- (CGRect)sourceFrame
-{
-    CGFloat sourceX = CGRectGetMaxX(self.created_atFrame) + StatusPadding;
-    CGFloat sourceY = _sourceFrame.origin.y;
-    _sourceFrame = CGRectMake(sourceX, sourceY, _sourceFrame.size.width, _sourceFrame.size.height);
-    return _sourceFrame;
+- (void)setSource:(NSString *)source{
+    //NSLog(@"%@",source);
+    NSRange rangeBegin = [source rangeOfString:@">"];
+    NSRange rangeEnd = [source rangeOfString:@"</" options:NSBackwardsSearch];
+    int length = rangeEnd.location - rangeBegin.location - 1;
+    int location = rangeBegin.location + 1;
+    _source = [NSString stringWithFormat:@"来自 %@",[source substringWithRange:NSMakeRange(location, length)]];
+
 }
 @end
