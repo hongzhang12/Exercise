@@ -29,6 +29,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+//    SDWebImageManager *mgr = [SDWebImageManager sharedManager];
+//    mgr.imageCache.maxMemoryCost = 10240*10;
+//    [SDImageCache sharedImageCache].maxMemoryCost = 10240*10;
+    
     [ShareSDK registerApp:@"6cbf75e70463"];
     [ShareSDK connectQZoneWithAppKey:@"1104542574" appSecret:@"cVNsmBSPQRU9Maln"  qqApiInterfaceCls:[QQApiInterface class] tencentOAuthCls:[TencentOAuth class]];
     [ShareSDK connectSinaWeiboWithAppKey:@"1068761365" appSecret:@"45528fed0ad15d4225fa6691ecc32184" redirectUri:@"http://www.baidu.com" weiboSDKCls:[WeiboApi class]];
@@ -94,8 +98,9 @@
 {
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     [manager cancelAll];
+    NSLog(@"zzzz");
     [manager.imageCache clearMemory];
-    [manager.imageCache clearDisk];
+    //[manager.imageCache clearDisk];
     
 }
 @end

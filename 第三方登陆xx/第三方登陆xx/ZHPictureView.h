@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef enum{
+    ZHPictureTypeImage,
+    ZHPictureTypeUrl
+}ZHPictureType;
 @interface ZHPicture :UIImageView
 
 @end
@@ -14,9 +18,11 @@
 @interface ZHPictureView : UIView
 @property (nonatomic ,weak) UILabel *pageLabel;
 @property (nonatomic ,strong) NSMutableArray *pictureImages;
+@property (nonatomic ,strong) NSArray *pictureUrls;
 @property (nonatomic ,assign) int pictureID;
 @property (nonatomic ,assign) CGRect originalFrame;
 @property (nonatomic ,weak) UIScrollView *scrollView;
+@property (nonatomic ,assign) ZHPictureType pictureType;
 /*
  默认属性
 */
