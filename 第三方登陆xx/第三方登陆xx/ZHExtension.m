@@ -23,6 +23,9 @@
 @end
 
 @implementation UIView (extension)
+- (CGRect)golbalFrame{
+    return [self convertRect:self.bounds toView:[UIWindow currentWindow]];
+}
 
 - (CGFloat)x
 {
@@ -105,6 +108,8 @@
     point.y = centerY;
     self.center = point;
 }
+
+
 @end
 
 @implementation NSString(extension)

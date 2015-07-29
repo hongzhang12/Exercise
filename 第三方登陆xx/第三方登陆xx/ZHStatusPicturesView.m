@@ -13,7 +13,8 @@
 #import "ZHPictureBtn.h"
 #import "customNavigationController.h"
 #import "ZHHomeTableViewController.h"
-#import "ZHPictureViewController.h"
+#import "ZHPictureView.h"
+#import "MBProgressHUD+MJ.h"
 @implementation ZHStatusPicturesView
 
 - (instancetype)init
@@ -91,6 +92,31 @@
 //    [homeCtr presentViewController:pictureCtr animated:NO completion:^{
 //        
 //    }];
-    [pictureBtn setFullScreenFrame];
+    
+    
+//    [pictureBtn setFullScreenFrame];
+    NSMutableArray *pictures = [NSMutableArray array];
+    for (ZHPictureBtn *pic in self.pictureImages) {
+        
+        [pictures addObject:pic.imageView.image];
+    }
+    
+//    ZHPictureView *pictureView = [[ZHPictureView alloc] initWithImages:pictures andPictureID:pictureBtn.tag andOriginalFrame:[pictureBtn golbalFrame]];
+    //[MBProgressHUD showMessage:@"loading.."];
+
+    
+    NSMutableArray *pic_urls = [NSMutableArray array];
+    for (NSDictionary *dict in self.pic_urls) {
+        NSString *url = dict[@"thumbnail_pic"];
+        url = [url stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        NSLog(@"%@",url);
+        [pic_urls addObject:url];
+    }
+    
+    
+    ZHPictureView *pictureView = [[ZHPictureView alloc] initWithImageUrlS:pic_urls andPictureID:pictureBtn.tag andOriginalFrame:[pictureBtn golbalFrame]];
+    //[hud hide:YES];
+
+    [pictureView run];
 }
 @end

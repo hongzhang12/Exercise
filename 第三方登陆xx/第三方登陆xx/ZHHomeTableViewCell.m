@@ -106,7 +106,7 @@
 - (void)initToolBar{
     ZHStatusToolBar *toolBar = [[ZHStatusToolBar alloc] init];
     toolBar.backgroundColor = ZHColor(245, 245, 245);
-    [self addSubview:toolBar];
+    [self insertSubview:toolBar atIndex:0];
     self.toolBar = toolBar;
     
 }
