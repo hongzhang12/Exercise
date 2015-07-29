@@ -48,7 +48,9 @@
         [view removeFromSuperview];
     }
     self.pictureImages = nil;
-//    self.pic_urls = pic_urls;
+    self.pic_urls = nil;
+    
+    self.pic_urls = pic_urls;
     int count = (int)pic_urls.count;
     if (count == PictureCountNone) {
 
@@ -77,15 +79,18 @@
     }
 }
 - (void)pictureBtnClicked:(ZHPictureBtn *)pictureBtn{
-    UIWindow *window = [UIWindow currentWindow];
-    customNavigationController *customerCtr = (customNavigationController *)window.rootViewController;
-    ZHHomeTableViewController *homeCtr = (ZHHomeTableViewController *)customerCtr.topViewController;
-//    NSLog(@"%@",customerCtr.topViewController);
-    ZHPictureViewController *pictureCtr = [[ZHPictureViewController alloc] init];
-    pictureCtr.pictureID = pictureBtn.tag;
-    pictureCtr.pictureImages = self.pictureImages;
-    [homeCtr presentViewController:pictureCtr animated:NO completion:^{
-        
-    }];
+//    //NSLog(@"xxxxxxxxx");
+//    UIWindow *window = [UIWindow currentWindow];
+//    customNavigationController *customerCtr = (customNavigationController *)window.rootViewController;
+//    ZHHomeTableViewController *homeCtr = (ZHHomeTableViewController *)customerCtr.topViewController;
+////    NSLog(@"%@",customerCtr.topViewController);
+//    ZHPictureViewController *pictureCtr = [[ZHPictureViewController alloc] init];
+//    pictureCtr.pictureID = pictureBtn.tag;
+//    pictureCtr.pictureImages = self.pic_urls;
+//    pictureCtr.zh_frame = [pictureBtn convertRect:pictureBtn.bounds toView:[UIWindow currentWindow]];
+//    [homeCtr presentViewController:pictureCtr animated:NO completion:^{
+//        
+//    }];
+    [pictureBtn setFullScreenFrame];
 }
 @end

@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ZHPictureBtn;
 @interface ZHPictureViewController : UIViewController
 @property (nonatomic ,weak) UIScrollView *scrollView;
-@property (nonatomic ,strong) NSMutableArray *pictureImages;
+@property (nonatomic ,strong) NSArray *pictureImages;
+@property (nonatomic ,strong) NSMutableArray *pictures;
+@property (nonatomic ,strong) ZHPictureBtn *originalPicture;
 @property (nonatomic ,assign) int pictureID;
+@property (nonatomic ,assign) CGRect zh_frame;
 @end

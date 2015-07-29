@@ -20,19 +20,28 @@
     return self;
 }
 - (void)setFullScreenFrame{
+    //self.originalFrame = self.frame;
+    
     CGFloat ratio = self.height/self.width;
-    [UIView animateWithDuration:2.0 animations:^{
-
-        self.width = 320;
-        self.height = 100;
-//        self.centerY = ScreenHeight/2;
-//        self.x = ScreenWidth*self.tag;
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor blackColor];
+    view.frame = CGRectMake(ScreenWidth*self.tag, (ScreenHeight-ratio*ScreenWidth)/2, ScreenWidth, ratio*ScreenWidth);
+    [[UIWindow currentWindow] addSubview:view];
+    CGRect rect = [view convertRect:view.bounds toView:self.superview];
+    //[view removeFromSuperview];
+    view.frame = [UIWindow currentWindow].bounds;
+    [[UIWindow currentWindow] bringSubviewToFront:self];
+    [UIView animateWithDuration:1.0 animations:^{
+        self.frame = rect;
     }];
 
 }
+
 -(void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
     self.imageView.frame = self.bounds;
+    //self.originalFrame = self.frame;
 }
+
 @end

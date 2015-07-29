@@ -10,5 +10,7 @@
 
 @interface ZHPictureBtn : UIControl
 @property (nonatomic ,weak) UIImageView *imageView;
+
 - (void)setFullScreenFrame;
+
 @end

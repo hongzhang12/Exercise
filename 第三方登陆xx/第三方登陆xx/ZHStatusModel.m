@@ -154,6 +154,10 @@
 
 - (void)setSource:(NSString *)source{
     //NSLog(@"%@",source);
+    if ([source isEqualToString:@""]) {
+        _source = source;
+        return;
+    }
     NSRange rangeBegin = [source rangeOfString:@">"];
     NSRange rangeEnd = [source rangeOfString:@"</" options:NSBackwardsSearch];
     int length = rangeEnd.location - rangeBegin.location - 1;

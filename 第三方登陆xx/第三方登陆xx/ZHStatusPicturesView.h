@@ -13,7 +13,7 @@ typedef enum{
     PictureCountMulti
 }PictureCountType;
 @interface ZHStatusPicturesView : UIView
-//@property (nonatomic ,strong) NSArray *pic_urls;
+@property (nonatomic ,strong) NSArray *pic_urls;
 @property (nonatomic ,strong) NSMutableArray *pictureImages;
 - (void)setPic_urls:(NSArray *)pic_urls andFrame:(CGRect)frame;
 @end
