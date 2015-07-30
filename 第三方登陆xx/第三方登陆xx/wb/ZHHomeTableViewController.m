@@ -17,7 +17,9 @@
 #import "ZHNewStatusCountLabel.h"
 #import "MBProgressHUD+MJ.h"
 #import "ZHHomeTableViewCell.h"
-#define AccountInfo [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) lastObject]stringByAppendingPathComponent:@"account.plist"]
+#import "ZHSendStatusController.h"
+#import "customNavigationController.h"
+
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -37,7 +39,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"modal" style:UIBarButtonItemStylePlain target:self action:@selector(modal)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"send" style:UIBarButtonItemStylePlain target:self action:@selector(sendStatus)];
     self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.backgroundColor = ZHColor(211, 211, 211);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -45,42 +48,20 @@
     self.sinceID = 0;
     self.max_id = 0;
     
-    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl = [  [UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshStatus:) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
     [self refreshStatus:self.refreshControl];
     
 }
-
-- (void)modal{
-    UIViewController *controller = [[UIViewController alloc] init];
-    controller.view.backgroundColor = [UIColor redColor];
-    [self presentViewController:controller animated:NO completion:^{
-        NSLog(@"ModalSuccess");
-//        NSLog(@"%@",NSStringFromCGRect(controller.view.frame));
-//        controller.view.frame = CGRectMake(0, 480, 0, 0);
+- (void)sendStatus{
+    
+    ZHSendStatusController *sendCtrl = [[ZHSendStatusController alloc] init];
+    [self presentViewController:[[customNavigationController alloc] initWithRootViewController:sendCtrl] animated:YES completion:^{
+        
     }];
-//
-//    [UIView animateWithDuration:2.0 animations:^{
-//        controller.view.frame = CGRectMake(0, 0, 320, 480);
-//    } completion:^(BOOL finished) {
-//        NSLog(@"--%@",NSStringFromCGRect(controller.view.frame));
-//    }];
 }
-//- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion{
-//
-//    [super presentViewController:viewControllerToPresent animated:NO completion:^{
-//
-//        viewControllerToPresent.view.frame = CGRectMake(0, 480, 0, 0);
-//        
-//    }];
-//    
-//    [UIView animateWithDuration:2.0 animations:^{
-//        viewControllerToPresent.view.frame = CGRectMake(0, 0, 320, 480);
-//    } completion:^(BOOL finished) {
-//
-//    }];
-//}
+
 //初始化控件
 - (void)initViews{
     ZHNewStatusCountLabel *promptCount = [[ZHNewStatusCountLabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
@@ -109,7 +90,7 @@
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     [window addSubview:hud];
 
-    ZHAccountModel *account = [NSKeyedUnarchiver unarchiveObjectWithFile:AccountInfo];
+    ZHAccountModel *account = [ZHAccountModel accountModel];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"access_token"] = account.oAuthToken;
     parameters[@"since_id"] = [NSNumber numberWithDouble:self.sinceID];
@@ -161,7 +142,7 @@
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     [window addSubview:hud];
     
-    ZHAccountModel *account = [NSKeyedUnarchiver unarchiveObjectWithFile:AccountInfo];
+    ZHAccountModel *account = [ZHAccountModel accountModel];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"access_token"] = account.oAuthToken;
     parameters[@"max_id"] = [NSNumber numberWithDouble:self.max_id];
@@ -215,6 +196,7 @@
     int row = (int)indexPath.row;
     ZHStatusModel *model = self.statuses[row];
     return model.cellHeight;
+
 }
 
 #pragma mark - scrollView delegate

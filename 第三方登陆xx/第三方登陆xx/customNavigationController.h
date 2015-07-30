@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define ZHCustomerNavBarFont 18
+#define ZHCustomerNavItemFont 16
 @interface customNavigationController : UINavigationController
 
 @end

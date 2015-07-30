@@ -8,24 +8,39 @@
 
 #import "customNavigationController.h"
 #import "LoginViewController.h"
+#import "ZHExtension.h"
 @implementation customNavigationController
-- (void)viewDidLoad
+
++ (void)initialize
 {
-
     UIBarButtonItem *item = [UIBarButtonItem appearance];
-    // 设置文字颜色
-    NSMutableDictionary *itemAttrs = [NSMutableDictionary dictionary];
-    itemAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
-    itemAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:16];
-    [item setTitleTextAttributes:itemAttrs forState:UIControlStateNormal];
-//导航栏透明
-//    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_middle_rain.jpg"] forBarMetrics:UIBarMetricsCompact];
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]};
+    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavItemFont]} forState:UIControlStateNormal];
+    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavItemFont]} forState:UIControlStateDisabled];
     
-
-    LoginViewController *loginViewcontroller = [[LoginViewController alloc] init];
-    
-    [self pushViewController:loginViewcontroller animated:NO];
+    UINavigationBar *bar = [UINavigationBar appearance];
+    bar.barTintColor = [UIColor whiteColor];
+    bar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavBarFont]};
+    ZHLog(@"zhanghong%d",6666);
 }
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.viewControllers.count != 0) {
+        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self andAction:@selector(backButtonClicked) andImage:@"navigationbar_back.png" andHighImage:@"navigationbar_back_highlighted"];
+        
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:animated];
+}
+- (void)backButtonClicked
+{
+    [self popViewControllerAnimated:YES];
+}
+
+
 
 @end

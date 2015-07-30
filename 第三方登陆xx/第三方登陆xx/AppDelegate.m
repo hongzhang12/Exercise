@@ -18,6 +18,7 @@
 #import "customNavigationController.h"
 #import "ZHHomeTableViewController.h"
 #import "SDWebImageManager.h"
+#import "LoginViewController.h"
 #define PreiousVersion [[NSUserDefaults standardUserDefaults] objectForKey:@"preiousVersion"]
 #define CurrentVersion ([NSBundle mainBundle].infoDictionary)[@"CFBundleShortVersionString"]
 @interface AppDelegate ()
@@ -44,7 +45,9 @@
 
     if ([CurrentVersion isEqualToString:PreiousVersion]) {
 
-        window.rootViewController = [[customNavigationController alloc] init];
+        LoginViewController *loginViewcontroller = [[LoginViewController alloc] init];
+        
+        window.rootViewController = [[customNavigationController alloc] initWithRootViewController:loginViewcontroller];
     }else{
         [userDefaults setObject:CurrentVersion forKey:@"preiousVersion"];
         [userDefaults synchronize];

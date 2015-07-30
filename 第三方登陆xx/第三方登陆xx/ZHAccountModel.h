@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 @interface ZHAccountModel : NSObject<NSCoding>
 //        NSLog(@"%@",[userInfo nickname]);
 @property (nonatomic ,copy) NSString *nickname;
@@ -16,5 +18,7 @@
 @property (nonatomic ,copy) NSString *profileImage;
 
 @property (nonatomic ,copy) NSString *oAuthToken;
+
++ (ZHAccountModel *)accountModel;
 
 @end

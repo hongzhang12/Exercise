@@ -7,7 +7,7 @@
 //
 
 #import "ZHAccountModel.h"
-
+#define AccountInfo [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) lastObject]stringByAppendingPathComponent:@"account.plist"]
 @implementation ZHAccountModel
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
@@ -24,5 +24,9 @@
         
     }
     return self;
+}
++ (ZHAccountModel *)accountModel
+{
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:AccountInfo];
 }
 @end
