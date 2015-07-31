@@ -18,11 +18,13 @@
     }
     return self;
 }
-- (void)setText:(NSString *)text{
+-(void)setText:(NSString *)text{
+    [super setText:text];
     NSLog(@"text");
 }
 - (void)setAttributedText:(NSAttributedString *)attributedText
 {
+    [super setAttributedText:attributedText];
     NSLog(@"AttributedText");
 }
 @end

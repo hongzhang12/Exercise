@@ -10,8 +10,8 @@
 #import "ZHAccountModel.h"
 #import "ZHExtension.h"
 #import "ZHTextView.h"
-@interface ZHSendStatusController ()
-
+@interface ZHSendStatusController ()<UITextViewDelegate>
+@property (nonatomic ,weak) ZHTextView *textView;
 @end
 
 @implementation ZHSendStatusController
@@ -24,7 +24,10 @@
     
     ZHTextView *textView = [[ZHTextView alloc] initWithFrame:self.view.bounds];
 
-    ZHLog(@"%@",NSStringFromUIEdgeInsets(textView.textContainerInset));
+    //ZHLog(@"%@",NSStringFromUIEdgeInsets(textView.textContainerInset));
+    
+    textView.delegate = self;
+    self.textView = textView;
     [self.view addSubview:textView];
 }
 - (void)initNavigationBar{
@@ -54,6 +57,21 @@
     }];
 }
 - (void)sendStatus{
+    [self.textView endEditing:YES];
+    NSLog(@"%@",self.textView.text);
+}
+#pragma mark - textView Delegate
+-(void)textViewDidChange:(UITextView *)textView
+{
+    self.navigationItem.rightBarButtonItem.enabled = [textView.text isEqualToString:@""]?NO:YES;
+
+}
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.textView.text = @"";
+}
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
     
 }
 @end
