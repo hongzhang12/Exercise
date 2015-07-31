@@ -11,6 +11,9 @@ typedef enum{
     ZHPictureTypeImage,
     ZHPictureTypeUrl
 }ZHPictureType;
+#define ZHPictureViewTransitionTime 0.25
+#define ZHPictureViewRunTime 0.75
+
 @interface ZHPicture :UIImageView
 
 @end
@@ -26,8 +29,7 @@ typedef enum{
 /*
  默认属性
 */
-//默认为0.75
-@property (nonatomic ,assign) CGFloat runTime;
+
 - (instancetype)initWithImages:(NSMutableArray *)images andPictureID:(int)pictureID andOriginalFrame:(CGRect)originalFrame;
 - (instancetype)initWithImageUrlS:(NSArray *)imageUrls andPictureID:(int)pictureID andOriginalFrame:(CGRect)originalFrame;
 - (void)run;

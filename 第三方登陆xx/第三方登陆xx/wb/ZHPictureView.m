@@ -27,7 +27,7 @@
         
         self.pictureType = ZHPictureTypeUrl;
         self.pictureUrls = imageUrls;
-        
+        self.alpha = 0;
         NSString *url = imageUrls[pictureID];
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         UIImage *image = [UIImage imageWithData:data];
@@ -36,7 +36,6 @@
 
         
         self.originalFrame = originalFrame;
-        self.runTime = 0.75;
         if (pictureID > (imageUrls.count - 1)) {
             self.pictureID = 0;
         }else{
@@ -77,7 +76,7 @@
                 //imageView.size = image.size;
                 self.ratio = image.size.height/image.size.width;
                 self.originalView = imageView;
-                
+                self.originalView.alpha = 1;
                 [self.pictureImages addObject:imageView];
             }else{
                 ZHPicture *imageView = [[ZHPicture alloc] initWithFrame:CGRectMake(ScreenWidth*i, 0, ScreenWidth, ScreenHeight)];
@@ -99,9 +98,9 @@
     if (self = [super init]) {
         self.pictureType = ZHPictureTypeImage;
         self.pictureImages = images;
-        
+        self.alpha = 0;
         self.originalFrame = originalFrame;
-        self.runTime = 0.75;
+
         if (pictureID > (images.count - 1)) {
             self.pictureID = 0;
         }else{
@@ -145,6 +144,7 @@
                 //imageView.size = image.size;
                 self.ratio = image.size.height/image.size.width;
                 self.originalView = imageView;
+                self.originalView.alpha = 1;
             }else{
                 CGFloat ratio = imageView.height/imageView.width;
                 imageView.frame = CGRectMake(ScreenWidth*i, (ScreenHeight-ratio*ScreenWidth)/2, ScreenWidth, ratio*ScreenWidth);
@@ -155,11 +155,23 @@
     return self;
 }
 
-
+-(void)removeFromSuperview
+{
+    [UIView animateWithDuration:ZHPictureViewTransitionTime animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [super removeFromSuperview];
+    }];
+}
 - (void)run{
     [[UIWindow currentWindow] addSubview:self];
     
-    [UIView animateWithDuration:self.runTime animations:^{
+//    [UIView animateWithDuration:ZHPictureViewTransitionTime animations:^{
+//        self.alpha = 1;
+//    }];
+    
+    [UIView animateWithDuration:ZHPictureViewRunTime animations:^{
+        
         if (self.ratio < (ScreenHeight/ScreenWidth)) {
             self.originalView.frame = CGRectMake(ScreenWidth*self.pictureID, (ScreenHeight-self.ratio*ScreenWidth)/2, ScreenWidth, self.ratio*ScreenWidth);
         }else{
@@ -168,6 +180,7 @@
 
 
     } completion:^(BOOL finished) {
+        
         if (self.pictureType == ZHPictureTypeUrl) {
             NSString *url = self.pictureUrls[self.pictureID];
             [self.originalView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:self.originalView.image];

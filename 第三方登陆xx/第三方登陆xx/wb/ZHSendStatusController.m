@@ -10,7 +10,8 @@
 #import "ZHAccountModel.h"
 #import "ZHExtension.h"
 #import "ZHTextView.h"
-@interface ZHSendStatusController ()<UITextViewDelegate>
+#import "AFNetworking.h"
+@interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate>
 @property (nonatomic ,weak) ZHTextView *textView;
 @end
 
@@ -23,12 +24,14 @@
     [self initNavigationBar];
     
     ZHTextView *textView = [[ZHTextView alloc] initWithFrame:self.view.bounds];
-
+    textView.placeHolder = @"想说点社呢么...";
+//    textView.placeHolderColor = [UIColor yellowColor];
     //ZHLog(@"%@",NSStringFromUIEdgeInsets(textView.textContainerInset));
     
     textView.delegate = self;
     self.textView = textView;
     [self.view addSubview:textView];
+
 }
 - (void)initNavigationBar{
     ZHAccountModel *account = [ZHAccountModel accountModel];
@@ -52,26 +55,60 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 - (void)returnToHome{
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    if ([self.textView.text isEqualToString:@""]) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"是否取消输入" message:nil delegate:self cancelButtonTitle:@"返回" otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
+    
 }
 - (void)sendStatus{
     [self.textView endEditing:YES];
     NSLog(@"%@",self.textView.text);
+    
+    ZHAccountModel *account = [ZHAccountModel accountModel];
+    
+    NSString *status = self.textView.text;
+    status = [status stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = account.oAuthToken;
+    params[@"status"] = status;
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager POST:@"https://upload.api.weibo.com/2/statuses/upload.json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 #pragma mark - textView Delegate
 -(void)textViewDidChange:(UITextView *)textView
 {
+
     self.navigationItem.rightBarButtonItem.enabled = [textView.text isEqualToString:@""]?NO:YES;
 
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    self.textView.text = @"";
+    
 }
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    
+
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+}
+#pragma mark - alertView delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(!buttonIndex) return;
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 @end

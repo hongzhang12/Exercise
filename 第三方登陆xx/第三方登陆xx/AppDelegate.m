@@ -57,7 +57,7 @@
     [window makeKeyAndVisible];
     self.window = window;
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    //[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     return YES;
 }
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url

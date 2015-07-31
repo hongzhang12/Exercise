@@ -60,6 +60,7 @@
 
 @interface UIWindow(Extension)
 + (UIWindow *)currentWindow;
++ (void)switchRootViewController:(UIViewController *)ctrl;
 @end
 
 @interface NSDate(Extension)

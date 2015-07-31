@@ -129,7 +129,9 @@
 {
     return [[UIApplication sharedApplication].windows lastObject];
 }
-
++(void)switchRootViewController:(UIViewController *)ctrl{
+    [UIWindow currentWindow].rootViewController = ctrl;
+}
 @end
 
 @implementation NSDate(Extension)

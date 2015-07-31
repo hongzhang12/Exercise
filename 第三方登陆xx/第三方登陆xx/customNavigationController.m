@@ -18,7 +18,7 @@
     [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavItemFont]} forState:UIControlStateDisabled];
     
     UINavigationBar *bar = [UINavigationBar appearance];
-    bar.barTintColor = [UIColor whiteColor];
+    bar.tintColor = [UIColor whiteColor];
     bar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavBarFont]};
     ZHLog(@"zhanghong%d",6666);
 }

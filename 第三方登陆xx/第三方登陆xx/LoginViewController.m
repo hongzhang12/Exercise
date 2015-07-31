@@ -13,6 +13,8 @@
 #import "MBProgressHUD+MJ.h"
 #import "ZHAccountModel.h"
 #import "ZHHomeTableViewController.h"
+#import "ZHExtension.h"
+#import "customNavigationController.h"
 #define ScreenBoundsWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenBoundsHeight [UIScreen mainScreen].bounds.size.height
 #define AccountInfo [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) lastObject]stringByAppendingPathComponent:@"account.plist"]
@@ -25,6 +27,8 @@
 @implementation LoginViewController
 - (void)viewDidLoad
 {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     self.mapManager = [[BMKMapManager alloc] init];
     if (![self.mapManager start:@"6SiyDbbeHDSRnaz2Tx8qsfnb" generalDelegate:self]) {
         NSLog(@"mapManager start failed");
@@ -99,7 +103,8 @@
                 weather.title = json[@"city"];
 
                 ZHHomeTableViewController *home = [[ZHHomeTableViewController alloc] init];
-                [self.navigationController pushViewController:home animated:YES];
+                
+                [UIWindow switchRootViewController:[[customNavigationController alloc] initWithRootViewController:home]];
             }
         }else{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

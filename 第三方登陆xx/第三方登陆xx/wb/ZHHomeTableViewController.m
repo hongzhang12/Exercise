@@ -39,8 +39,13 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ZHAccountModel *account = [ZHAccountModel accountModel];
+    self.navigationItem.title = account.nickname;
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"send" style:UIBarButtonItemStylePlain target:self action:@selector(sendStatus)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendStatus)];
+    
     self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.backgroundColor = ZHColor(211, 211, 211);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
