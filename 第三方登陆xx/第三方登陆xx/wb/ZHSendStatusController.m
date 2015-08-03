@@ -144,9 +144,9 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager POST:@"https://api.weibo.com/2/statuses/update.json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"%@",responseObject);
+        [ZHProgrossHUD showSuccess];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@",error);
+        [ZHProgrossHUD showError];
     }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

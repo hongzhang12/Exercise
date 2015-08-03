@@ -15,6 +15,10 @@
 		FC25142A1B5397F50091A44A /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2514201B5397F50091A44A /* NSObject+MJKeyValue.m */; };
 		FC25142B1B5397F50091A44A /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2514221B5397F50091A44A /* NSObject+MJProperty.m */; };
 		FC25142C1B5397F50091A44A /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2514241B5397F50091A44A /* NSString+MJExtension.m */; };
+		FC26B5011B6F533F00B81F76 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = FC26B4FD1B6F533F00B81F76 /* error.png */; };
+		FC26B5021B6F533F00B81F76 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC26B4FE1B6F533F00B81F76 /* error@2x.png */; };
+		FC26B5031B6F533F00B81F76 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = FC26B4FF1B6F533F00B81F76 /* success.png */; };
+		FC26B5041B6F533F00B81F76 /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC26B5001B6F533F00B81F76 /* success@2x.png */; };
 		FC4923DD1B465BA40093D5E7 /* account_weibo_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4923D91B465BA40093D5E7 /* account_weibo_press@2x.png */; };
 		FC4923DE1B465BA40093D5E7 /* account_qq_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4923DA1B465BA40093D5E7 /* account_qq_press@2x.png */; };
 		FC4923DF1B465BA40093D5E7 /* account_weibo_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4923DB1B465BA40093D5E7 /* account_weibo_normal@2x.png */; };
@@ -205,6 +209,10 @@
 		FC2514221B5397F50091A44A /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
 		FC2514231B5397F50091A44A /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		FC2514241B5397F50091A44A /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		FC26B4FD1B6F533F00B81F76 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
+		FC26B4FE1B6F533F00B81F76 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
+		FC26B4FF1B6F533F00B81F76 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
+		FC26B5001B6F533F00B81F76 /* success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@2x.png"; sourceTree = "<group>"; };
 		FC4923D91B465BA40093D5E7 /* account_weibo_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_weibo_press@2x.png"; sourceTree = "<group>"; };
 		FC4923DA1B465BA40093D5E7 /* account_qq_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_qq_press@2x.png"; sourceTree = "<group>"; };
 		FC4923DB1B465BA40093D5E7 /* account_weibo_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_weibo_normal@2x.png"; sourceTree = "<group>"; };
@@ -521,6 +529,17 @@
 				FC2514241B5397F50091A44A /* NSString+MJExtension.m */,
 			);
 			path = MJExtension;
+			sourceTree = "<group>";
+		};
+		FC26B4FC1B6F533F00B81F76 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				FC26B4FD1B6F533F00B81F76 /* error.png */,
+				FC26B4FE1B6F533F00B81F76 /* error@2x.png */,
+				FC26B4FF1B6F533F00B81F76 /* success.png */,
+				FC26B5001B6F533F00B81F76 /* success@2x.png */,
+			);
+			path = HUD;
 			sourceTree = "<group>";
 		};
 		FC4923E11B465BAA0093D5E7 /* images */ = {
@@ -1011,6 +1030,7 @@
 		FCEDAC2C1AE8F36B00884858 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				FC26B4FC1B6F533F00B81F76 /* HUD */,
 				FC78DDB01AE77ED8007B445A /* NavBar64@2x.png */,
 				FCEA4EC11AE6305D00D5CE55 /* customNavigationController.h */,
 				FCEA4EC21AE6305D00D5CE55 /* customNavigationController.m */,
@@ -1130,6 +1150,7 @@
 				FCAE9D4D1AE63E6A003D69D7 /* record_flashlight_highlighted@2x.png in Resources */,
 				FCEDAC211AE89B2400884858 /* MBProgressHUD.bundle in Resources */,
 				FCE2E10E1AEF695700E6B314 /* bg_middle_rain.jpg in Resources */,
+				FC26B5011B6F533F00B81F76 /* error.png in Resources */,
 				FCE2E1151AEF695700E6B314 /* weather_aqi_level_2.png in Resources */,
 				FCE2E12C1AEF70C800E6B314 /* bg_blue@2x.png in Resources */,
 				FCAE9D6C1AE63FF6003D69D7 /* record_close_disable@2x.png in Resources */,
@@ -1138,6 +1159,7 @@
 				FCAE9D6D1AE63FF6003D69D7 /* record_close_highlighted.png in Resources */,
 				FCAE9D5A1AE63E6A003D69D7 /* video_longvideo_btn_shoot.png in Resources */,
 				FCE2E11A1AEF695700E6B314 /* weather_aqi_level_100.png in Resources */,
+				FC26B5041B6F533F00B81F76 /* success@2x.png in Resources */,
 				FCAE9D781AE6493A003D69D7 /* RedButtonPressed@2x.png in Resources */,
 				FCAE9D4B1AE63E6A003D69D7 /* record_flashlight_disable@2x.png in Resources */,
 				FCAE9D591AE63E6A003D69D7 /* video_longvideo_btn_pause@2x.png in Resources */,
@@ -1149,12 +1171,14 @@
 				FC4924621B4664390093D5E7 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				FCE2E1141AEF695700E6B314 /* weather_aqi_level_1.png in Resources */,
 				FCAE9D701AE63FF6003D69D7 /* record_close_normal@2x.png in Resources */,
+				FC26B5021B6F533F00B81F76 /* error@2x.png in Resources */,
 				FC4924581B4664390093D5E7 /* ShareSDKLocalizable.strings in Resources */,
 				FC78DDB11AE77ED8007B445A /* NavBar64@2x.png in Resources */,
 				FC4923DD1B465BA40093D5E7 /* account_weibo_press@2x.png in Resources */,
 				FCAE9D521AE63E6A003D69D7 /* record_lensflip_highlighted.png in Resources */,
 				FCAE9D6F1AE63FF6003D69D7 /* record_close_normal.png in Resources */,
 				FCE2E10D1AEF695700E6B314 /* air_status_bg@2x.png in Resources */,
+				FC26B5031B6F533F00B81F76 /* success.png in Resources */,
 				FCAE9D581AE63E6A003D69D7 /* video_longvideo_btn_pause.png in Resources */,
 				FCAE9D561AE63E6A003D69D7 /* touch_focus_not.png in Resources */,
 				FCE2E1101AEF695700E6B314 /* left_button_back_press@2x.png in Resources */,

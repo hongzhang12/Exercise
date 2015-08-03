@@ -12,4 +12,9 @@
 + (void)show;
 
 + (void)hidden;
+
++ (void)showSuccess;
+
++ (void)showError;
+
 @end
