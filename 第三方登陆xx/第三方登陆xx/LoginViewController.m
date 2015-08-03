@@ -15,6 +15,7 @@
 #import "ZHHomeTableViewController.h"
 #import "ZHExtension.h"
 #import "customNavigationController.h"
+#import "ZHProgrossHUD.h"
 #define ScreenBoundsWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenBoundsHeight [UIScreen mainScreen].bounds.size.height
 #define AccountInfo [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) lastObject]stringByAppendingPathComponent:@"account.plist"]
@@ -53,16 +54,16 @@
     //NSLog(@"%d",loginBtn.isAccessibilityElement);
     loginBtn.accessibilityLabel = @"登录";
     //[loginBtn setBackgroundColor:[UIColor greenColor]];
-    [self.view addSubview:loginBtn];
+    //[self.view addSubview:loginBtn];
     
     
-    UIButton *QQLogin = [[UIButton alloc] initWithFrame:CGRectMake(100, 380, 50, 50)];
+    UIButton *QQLogin = [[UIButton alloc] initWithFrame:CGRectMake(100, 300, 50, 50)];
     [QQLogin setBackgroundImage:[UIImage imageNamed:@"account_qq_press"] forState:UIControlStateHighlighted];
     [QQLogin setBackgroundImage:[UIImage imageNamed:@"account_qq_normal"] forState:UIControlStateNormal];
     [QQLogin addTarget:self action:@selector(QQLoginBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:QQLogin];
     
-    UIButton *weiboLogin = [[UIButton alloc] initWithFrame:CGRectMake(170, 380, 50, 50)];
+    UIButton *weiboLogin = [[UIButton alloc] initWithFrame:CGRectMake(170, 300, 50, 50)];
     [weiboLogin setBackgroundImage:[UIImage imageNamed:@"account_weibo_press"] forState:UIControlStateHighlighted];
     [weiboLogin setBackgroundImage:[UIImage imageNamed:@"account_weibo_normal"] forState:UIControlStateNormal];
     [weiboLogin addTarget:self action:@selector(weiboLoginBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -94,10 +95,10 @@
         if (data&&!connectionError) {
             id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             if ([json[@"city"] isEqualToString:@""]) {
-                [MBProgressHUD showError:@"获取位置失败"];
+                //[MBProgressHUD showError:@"获取位置失败"];
                 
             }else{
-
+                
                 NSLog(@"%@",json[@"city"]);
                 ZHWeatherController *weather = [[ZHWeatherController alloc] init];
                 weather.title = json[@"city"];
@@ -105,10 +106,11 @@
                 ZHHomeTableViewController *home = [[ZHHomeTableViewController alloc] init];
                 
                 [UIWindow switchRootViewController:[[customNavigationController alloc] initWithRootViewController:home]];
+                [ZHProgrossHUD hidden];
             }
         }else{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:@"网络连接失败"];
+                //[MBProgressHUD showError:@"网络连接失败"];
             });
         }
     }];
@@ -133,6 +135,7 @@
 }
 
 - (void)weiboLoginBtnClicked{
+    [ZHProgrossHUD show];
     NSLog(@"weibo是否已经授权%d",[ShareSDK hasAuthorizedWithType:ShareTypeSinaWeibo]);
     if ([ShareSDK hasAuthorizedWithType:ShareTypeSinaWeibo]) {
         [self startMap];

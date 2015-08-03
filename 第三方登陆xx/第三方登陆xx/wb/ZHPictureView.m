@@ -76,7 +76,7 @@
                 //imageView.size = image.size;
                 self.ratio = image.size.height/image.size.width;
                 self.originalView = imageView;
-                self.originalView.alpha = 1;
+                //self.originalView.alpha = 1;
                 [self.pictureImages addObject:imageView];
             }else{
                 ZHPicture *imageView = [[ZHPicture alloc] initWithFrame:CGRectMake(ScreenWidth*i, 0, ScreenWidth, ScreenHeight)];
@@ -144,7 +144,7 @@
                 //imageView.size = image.size;
                 self.ratio = image.size.height/image.size.width;
                 self.originalView = imageView;
-                self.originalView.alpha = 1;
+                //self.originalView.alpha = 1;
             }else{
                 CGFloat ratio = imageView.height/imageView.width;
                 imageView.frame = CGRectMake(ScreenWidth*i, (ScreenHeight-ratio*ScreenWidth)/2, ScreenWidth, ratio*ScreenWidth);
@@ -166,9 +166,9 @@
 - (void)run{
     [[UIWindow currentWindow] addSubview:self];
     
-//    [UIView animateWithDuration:ZHPictureViewTransitionTime animations:^{
-//        self.alpha = 1;
-//    }];
+    [UIView animateWithDuration:ZHPictureViewTransitionTime animations:^{
+        self.alpha = 1;
+    }];
     
     [UIView animateWithDuration:ZHPictureViewRunTime animations:^{
         

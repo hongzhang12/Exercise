@@ -52,6 +52,9 @@
 		FC4924701B4665DB0093D5E7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC49246F1B4665DB0093D5E7 /* CoreText.framework */; };
 		FC4924721B4665E60093D5E7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4924711B4665E60093D5E7 /* AssetsLibrary.framework */; };
 		FC4924741B4665EE0093D5E7 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4924731B4665EE0093D5E7 /* AddressBook.framework */; };
+		FC6FA3F31B6E2255005AD5EF /* ZHComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */; };
+		FC6FA3F61B6E2FC6005AD5EF /* ZHProgrossHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */; };
+		FC6FA3F81B6E330F005AD5EF /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC6FA3F71B6E330F005AD5EF /* Storyboard.storyboard */; };
 		FC78DD8C1AE731FA007B445A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD7A1AE731FA007B445A /* AFHTTPRequestOperation.m */; };
 		FC78DD8D1AE731FA007B445A /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD7C1AE731FA007B445A /* AFHTTPRequestOperationManager.m */; };
 		FC78DD8E1AE731FA007B445A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD7E1AE731FA007B445A /* AFHTTPSessionManager.m */; };
@@ -245,6 +248,11 @@
 		FC49246F1B4665DB0093D5E7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		FC4924711B4665E60093D5E7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		FC4924731B4665EE0093D5E7 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FC6FA3F11B6E2255005AD5EF /* ZHComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHComposeToolBar.h; sourceTree = "<group>"; };
+		FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHComposeToolBar.m; sourceTree = "<group>"; };
+		FC6FA3F41B6E2FC6005AD5EF /* ZHProgrossHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHProgrossHUD.h; sourceTree = "<group>"; };
+		FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHProgrossHUD.m; sourceTree = "<group>"; };
+		FC6FA3F71B6E330F005AD5EF /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		FC78DD791AE731FA007B445A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FC78DD7A1AE731FA007B445A /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FC78DD7B1AE731FA007B445A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -803,6 +811,7 @@
 				FCCDFB391B6A0D0E00C17EBA /* ZHPictureView.m */,
 				FCCDFB511B6A2A5100C17EBA /* ZHTextView.h */,
 				FCCDFB521B6A2A5100C17EBA /* ZHTextView.m */,
+				FC6FA3F71B6E330F005AD5EF /* Storyboard.storyboard */,
 			);
 			path = wb;
 			sourceTree = "<group>";
@@ -831,6 +840,8 @@
 				FCCDFB3F1B6A0D0E00C17EBA /* ZHStatusToolBar.m */,
 				FCCDFB301B6A0D0E00C17EBA /* ZHHomeTableViewCell.h */,
 				FCCDFB311B6A0D0E00C17EBA /* ZHHomeTableViewCell.m */,
+				FC6FA3F11B6E2255005AD5EF /* ZHComposeToolBar.h */,
+				FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1009,6 +1020,8 @@
 				FCBABF8C1B3B907B00BB2D93 /* ZHNewFeaturesController.m */,
 				FCBABF8E1B3B920F00BB2D93 /* ZHExtension.h */,
 				FCBABF8F1B3B920F00BB2D93 /* ZHExtension.m */,
+				FC6FA3F41B6E2FC6005AD5EF /* ZHProgrossHUD.h */,
+				FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1099,6 +1112,7 @@
 				FCAE9D531AE63E6A003D69D7 /* record_lensflip_highlighted@2x.png in Resources */,
 				FCE2E10F1AEF695700E6B314 /* bg_night_rain.jpg in Resources */,
 				FCAE9D6E1AE63FF6003D69D7 /* record_close_highlighted@2x.png in Resources */,
+				FC6FA3F81B6E330F005AD5EF /* Storyboard.storyboard in Resources */,
 				FCE2E1191AEF695700E6B314 /* weather_aqi_level_6.png in Resources */,
 				FCAE9D571AE63E6A003D69D7 /* touch_focus_not@2x.png in Resources */,
 				FCAE9D761AE64931003D69D7 /* RedButton@2x.png in Resources */,
@@ -1220,6 +1234,7 @@
 				FC78DD8D1AE731FA007B445A /* AFHTTPRequestOperationManager.m in Sources */,
 				FCAE9D231AE63CDC003D69D7 /* MKAnnotationView+WebCache.m in Sources */,
 				FCE2E1251AEF695700E6B314 /* ZHTrendView.m in Sources */,
+				FC6FA3F61B6E2FC6005AD5EF /* ZHProgrossHUD.m in Sources */,
 				FC2514271B5397F50091A44A /* MJProperty.m in Sources */,
 				FCAE9D261AE63CDC003D69D7 /* SDWebImageCompat.m in Sources */,
 				FCE2E11D1AEF695700E6B314 /* ZHDetailWeatherControllerViewController.m in Sources */,
@@ -1232,6 +1247,7 @@
 				FC25142A1B5397F50091A44A /* NSObject+MJKeyValue.m in Sources */,
 				FCCDFB4D1B6A0FA200C17EBA /* ZHSendStatusController.m in Sources */,
 				FCE2E11B1AEF695700E6B314 /* ZHDetailModel.m in Sources */,
+				FC6FA3F31B6E2255005AD5EF /* ZHComposeToolBar.m in Sources */,
 				FCAE9D301AE63CDC003D69D7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				FCAE9D2D1AE63CDC003D69D7 /* UIImage+GIF.m in Sources */,
 			);
