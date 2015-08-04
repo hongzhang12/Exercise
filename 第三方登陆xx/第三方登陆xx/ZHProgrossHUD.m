@@ -27,13 +27,16 @@ ZHProgrossHUD *_shareHUD;
         _shareHUD.backgroundColor = [UIColor clearColor];
         
         UIView *backgroundView = [[UIView alloc] init];
-        backgroundView.backgroundColor = [UIColor blackColor];
+        backgroundView.backgroundColor = [UIColor grayColor];
         backgroundView.alpha = 1.0;
+        
+        backgroundView.layer.cornerRadius = 5.0;
+        
         [_shareHUD addSubview:backgroundView];
         _shareHUD.backgroundView = backgroundView;
         
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.backgroundColor = [UIColor clearColor];
+        //imageView.backgroundColor = [UIColor clearColor];
         //imageView.alpha = 0.3;
         imageView.hidden = YES;
         [_shareHUD addSubview:imageView];
@@ -83,20 +86,24 @@ ZHProgrossHUD *_shareHUD;
 }
 -(void)layoutSubviews{
     
-    CGFloat HUDW = self.frame.size.width;
-    CGFloat HUDH = self.frame.size.height;
-    self.indicator.frame = CGRectMake(0, (HUDH-HUDW)/2, HUDW, HUDW);
-    
-    CGSize imageViewSize = [UIImage imageNamed:@"success@2x"].size;
-    CGFloat imageViewX = (HUDW - imageViewSize.width)/2;
-    CGFloat imageViewY = (HUDH - imageViewSize.height)/2;
-    self.imageView.frame = CGRectMake(imageViewX, imageViewY, imageViewSize.width, imageViewSize.height);
-    
-    CGFloat backgroundW = imageViewSize.width + 50;
-    CGFloat backgroundH = imageViewSize.height + 50;
-    CGFloat backgroundX = (HUDW - backgroundW)/2;
-    CGFloat backgroundY = (HUDH - backgroundH)/2;
-    self.backgroundView.frame = CGRectMake(backgroundX, backgroundY, backgroundW, backgroundH);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        CGFloat HUDW = self.frame.size.width;
+        CGFloat HUDH = self.frame.size.height;
+        self.indicator.frame = CGRectMake(0, (HUDH-HUDW)/2, HUDW, HUDW);
+        
+        CGSize imageViewSize = [UIImage imageNamed:@"success@2x"].size;
+        CGFloat imageViewX = (HUDW - imageViewSize.width)/2;
+        CGFloat imageViewY = (HUDH - imageViewSize.height)/2;
+        self.imageView.frame = CGRectMake(imageViewX, imageViewY, imageViewSize.width, imageViewSize.height);
+        
+        CGFloat backgroundW = imageViewSize.width + 60;
+        CGFloat backgroundH = imageViewSize.height + 50;
+        CGFloat backgroundX = (HUDW - backgroundW)/2;
+        CGFloat backgroundY = (HUDH - backgroundH)/2;
+        self.backgroundView.frame = CGRectMake(backgroundX, backgroundY, backgroundW, backgroundH);
+    });
+
 }
 
 @end

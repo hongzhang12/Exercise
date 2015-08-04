@@ -10,7 +10,7 @@
 @class ZHComposeToolBar;
 @protocol ZHComposeToolBarDelegate <NSObject>
 
-- (void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedWithTag:(int)tag;
+- (void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedAtIndex:(int)index;
 
 @end
 

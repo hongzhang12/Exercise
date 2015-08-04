@@ -50,10 +50,10 @@
     [center addObserver:self selector:@selector(keyBoardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
 }
-- (void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedWithTag:(int)tag
+- (void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedAtIndex:(int)index
 {
     [self.textView endEditing:YES];
-    if (tag == 4) {
+    if (index == 4) {
         self.textView.inputView = nil;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.textView becomeFirstResponder];

@@ -33,8 +33,8 @@
     
 }
 - (void)toolBarBtnClicked:(UIButton *)btn{
-    if ([self.delegate respondsToSelector:@selector(ComposeToolBar:buttonClickedWithTag:)]) {
-        [self.delegate ComposeToolBar:self buttonClickedWithTag:btn.tag];
+    if ([self.delegate respondsToSelector:@selector(ComposeToolBar:buttonClickedAtIndex:)]) {
+        [self.delegate ComposeToolBar:self buttonClickedAtIndex:btn.tag];
     }
 }
 
