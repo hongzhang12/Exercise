@@ -99,7 +99,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"access_token"] = account.oAuthToken;
     parameters[@"since_id"] = [NSNumber numberWithDouble:self.sinceID];
-    [[AFHTTPRequestOperationManager manager] GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AFHTTPRequestOperationManager manager] GET:friends_timelineUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"success");
         //NSLog(@"%@",responseObject[@"statuses"]);
         NSMutableArray *newStatuses = [ZHStatusModel objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
@@ -151,7 +151,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"access_token"] = account.oAuthToken;
     parameters[@"max_id"] = [NSNumber numberWithDouble:self.max_id];
-    [[AFHTTPRequestOperationManager manager] GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AFHTTPRequestOperationManager manager] GET:friends_timelineUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         //NSLog(@"%@",responseObject[@"statuses"]);
         NSMutableArray *newStatuses = [ZHStatusModel objectArrayWithKeyValuesArray:responseObject[@"statuses"]];

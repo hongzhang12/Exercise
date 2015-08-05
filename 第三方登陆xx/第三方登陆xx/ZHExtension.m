@@ -229,3 +229,26 @@
     return [localDate relationWithOtherDate:self];
 }
 @end
+
+@implementation UIImage(Extension)
+
+- (UIImage *)imageWIthCompressInSize:(CGSize)compressSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(compressSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [self drawInRect:CGRectMake(0,0,compressSize.width,compressSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
+
+@end

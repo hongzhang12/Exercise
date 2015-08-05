@@ -76,3 +76,7 @@
 - (NSString *)relationWithOtherDate:(NSDate *)date;
 - (NSString *)relationWithCurrentDate;
 @end
+
+@interface UIImage(Extension)
+- (UIImage *)imageWIthCompressInSize:(CGSize)compressSize;
+@end

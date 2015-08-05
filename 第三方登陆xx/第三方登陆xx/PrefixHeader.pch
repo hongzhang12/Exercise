@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  第三方登陆xx
+//
+//  Created by zhanghong on 15/8/5.
+//  Copyright (c) 2015年 zhanghong. All rights reserved.
+//
+
+#ifndef _____xx_PrefixHeader_pch
+#define _____xx_PrefixHeader_pch
+
+#define  updateUrl @"https://api.weibo.com/2/statuses/update.json"
+#define  uploadUrl @"https://upload.api.weibo.com/2/statuses/upload.json"
+#define  friends_timelineUrl @"https://api.weibo.com/2/statuses/friends_timeline.json"
+#endif

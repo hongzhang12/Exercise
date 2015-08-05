@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef enum{
+    ZHComposeToolBarItemTypeCamera,
+    ZHComposeToolBarItemTypeEmoticon,
+    ZHComposeToolBarItemTypeMention,
+    ZHComposeToolBarItemTypePicture,
+    ZHComposeToolBarItemTypeTrend
+}ZHComposeToolBarItemType;
+
 @class ZHComposeToolBar;
 @protocol ZHComposeToolBarDelegate <NSObject>
 
-- (void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedAtIndex:(int)index;
+- (void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedWithType:(ZHComposeToolBarItemType)type;
 
 @end
 

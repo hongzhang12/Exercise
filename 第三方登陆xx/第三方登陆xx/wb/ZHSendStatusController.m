@@ -13,9 +13,11 @@
 #import "AFNetworking.h"
 #import "ZHComposeToolBar.h"
 #import "ZHProgrossHUD.h"
-@interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate,ZHComposeToolBarDelegate>
+#import <AssetsLibrary/AssetsLibrary.h>
+@interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate,ZHComposeToolBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic ,weak) ZHTextView *textView;
 @property (nonatomic ,weak) ZHComposeToolBar *toolBar;
+@property (nonatomic ,strong) NSMutableArray *uploadPictureDataArr;
 @end
 
 @implementation ZHSendStatusController
@@ -26,54 +28,99 @@
     
     [self initNavigationBar];
     
-    ZHTextView *textView = [[ZHTextView alloc] initWithFrame:self.view.bounds];
-    textView.placeHolder = @"想说点社呢么...";
-//    textView.placeHolderColor = [UIColor yellowColor];
-    //ZHLog(@"%@",NSStringFromUIEdgeInsets(textView.textContainerInset));
-    textView.alwaysBounceVertical = YES;
-    textView.delegate = self;
-    self.textView = textView;
-    [self.view addSubview:textView];
+    [self initTextView];
+    [self initToolbar];
     
-    CGFloat toolBarW = ScreenWidth;
-    CGFloat toolBarH = 44;
-    CGFloat toolBarX = 0;
-    CGFloat toolBarY = ScreenHeight - toolBarH;
-    ZHComposeToolBar *toolBar = [[ZHComposeToolBar alloc] initWithFrame:CGRectMake(toolBarX, toolBarY, toolBarW, toolBarH)];
-    toolBar.delegate = self;
-    [self.view addSubview:toolBar];
-    self.toolBar = toolBar;
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyBoardWillappear) name:UIKeyboardWillShowNotification object:nil];
-    [center addObserver:self selector:@selector(keyBoardWillDisapper) name:UIKeyboardWillHideNotification object:nil];
     [center addObserver:self selector:@selector(keyBoardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
 }
-- (void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedAtIndex:(int)index
-{
-    [self.textView endEditing:YES];
-    if (index == 4) {
-        self.textView.inputView = nil;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.textView becomeFirstResponder];
-        });
-        
-        return;
-    }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 480, 320, 184)];
-    view.backgroundColor = [UIColor blueColor];
-    self.textView.inputView = view;
-    
-    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionTransitionNone animations:^{
-        view.frame = CGRectMake(0, 0, 320, 184);
-    } completion:nil];
-    [self.textView becomeFirstResponder];
-}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+- (NSMutableArray *)uploadPictureDataArr
+{
+    if (_uploadPictureDataArr == nil) {
+        _uploadPictureDataArr = [NSMutableArray array];
+    }
+    return _uploadPictureDataArr;
+}
+#pragma mark - ZHComposeToolBar delegate
+-(void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedWithType:(ZHComposeToolBarItemType)type
+{
+    switch (type) {
+        case ZHComposeToolBarItemTypeCamera:
+            [self getPictureByCamera];
+            break;
+        case ZHComposeToolBarItemTypeTrend:
+            
+            break;
+        case ZHComposeToolBarItemTypePicture:
+            [self getPictureFromAlbum];
+            break;
+        case ZHComposeToolBarItemTypeMention:
+            
+            break;
+        case ZHComposeToolBarItemTypeEmoticon:
+            [self inputMessageOrEmoticon];
+            break;
+        default:
+            break;
+    }
+    
+    
+}
+#pragma mark - toolBarItems target
+- (void)getPictureFromAlbum{
+    
+    [self getPictureBySourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+
+}
+- (void)getPictureByCamera{
+    [self getPictureBySourceType:UIImagePickerControllerSourceTypeCamera];
+}
+- (void)getPictureBySourceType:(UIImagePickerControllerSourceType)type{
+    if ([UIImagePickerController isSourceTypeAvailable:type]) {
+        UIImagePickerController *imagePickerCtrl = [[UIImagePickerController alloc] init];
+        imagePickerCtrl.sourceType = type;
+        imagePickerCtrl.delegate = self;
+        [self presentViewController:imagePickerCtrl animated:YES completion:nil];
+    }
+}
+- (void)inputMessageOrEmoticon{
+    [self.textView endEditing:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.textView.inputView) {
+            self.textView.inputView = nil;
+            
+                [self.textView becomeFirstResponder];
+            
+        }else{
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 480, 320, 184)];
+            view.backgroundColor = [UIColor blueColor];
+            self.textView.inputView = view;
+            
+            [self.textView becomeFirstResponder];
+        }
+    });
+    
+}
+
+#pragma mark - UIImagePickerController delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    [picker dismissViewControllerAnimated:YES completion:^{
+        self.navigationItem.rightBarButtonItem.enabled = ![self.textView.text isEqualToString:@""];
+    }];
+    UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+    image = [image imageWIthCompressInSize:CGSizeMake(100, 100)];
+    NSData *imagedata = UIImageJPEGRepresentation(image, 1);
+    [self.uploadPictureDataArr addObject:imagedata];
+    NSLog(@"%@",self.uploadPictureDataArr);
+}
+#pragma mark - private init
 - (void)initNavigationBar{
     ZHAccountModel *account = [ZHAccountModel accountModel];
     
@@ -95,29 +142,46 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStylePlain target:self action:@selector(sendStatus)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
-- (void)keyBoardWillappear{
-    NSLog(@"keyBoardWillappear");
-    
-//    [UIView animateWithDuration:0.4 animations:^{
-//        self.toolBar.frame = CGRectMake(0, 252, ScreenWidth, 44);
-//    }];
+
+- (void)initTextView{
+    ZHTextView *textView = [[ZHTextView alloc] initWithFrame:self.view.bounds];
+    textView.placeHolder = @"想说点社么呢...";
+    textView.alwaysBounceVertical = YES;
+    textView.delegate = self;
+    self.textView = textView;
+    [self.view addSubview:textView];
 }
-- (void)keyBoardWillDisapper{
-//    [UIView animateWithDuration:0.25 animations:^{
-//        self.toolBar.frame = CGRectMake(0, 436, ScreenWidth, 44);
-//    }];
+
+- (void)initToolbar{
+    CGFloat toolBarW = ScreenWidth;
+    CGFloat toolBarH = 44;
+    CGFloat toolBarX = 0;
+    CGFloat toolBarY = ScreenHeight - toolBarH;
+    ZHComposeToolBar *toolBar = [[ZHComposeToolBar alloc] initWithFrame:CGRectMake(toolBarX, toolBarY, toolBarW, toolBarH)];
+    toolBar.delegate = self;
+    [self.view addSubview:toolBar];
+    self.toolBar = toolBar;
 }
+
+#pragma mark - keyboard - target
 - (void)keyBoardChangeFrame:(NSNotification*)info{
     NSLog(@"keyBoardChangeFrame%@",info);
     NSDictionary *userInfo = info.userInfo;
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     NSValue *endFrame = userInfo[UIKeyboardFrameEndUserInfoKey];
+    NSNumber *curve = userInfo[UIKeyboardAnimationCurveUserInfoKey];
     CGRect endframe = [endFrame CGRectValue];
     int endY = endframe.origin.y - self.toolBar.height;
+    if (endY > ScreenHeight) {
+        endY = ScreenHeight - self.toolBar.height;
+    }
     [UIView animateWithDuration:duration animations:^{
+        [UIView setAnimationCurve:[curve intValue]];
         self.toolBar.frame = CGRectMake(0, endY, ScreenWidth, 44);
     }];
+    
 }
+#pragma mark - navigationBarItem - target
 - (void)returnToHome{
     if ([self.textView.text isEqualToString:@""]) {
         [self dismissViewControllerAnimated:YES completion:^{
@@ -130,6 +194,7 @@
 
 }
 - (void)sendStatus{
+    
     [self.textView endEditing:YES];
     NSLog(@"%@",self.textView.text);
     
@@ -143,11 +208,30 @@
     params[@"status"] = status;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:@"https://api.weibo.com/2/statuses/update.json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        [ZHProgrossHUD showSuccess];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [ZHProgrossHUD showError];
-    }];
+    if (self.uploadPictureDataArr.count == 0) {
+        
+        [manager POST:updateUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+            [ZHProgrossHUD showSuccess];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [ZHProgrossHUD showError];
+        }];
+    }else{
+        
+        [manager POST:uploadUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            int i = 0;
+            for (NSData *imageData in self.uploadPictureDataArr) {
+                
+                [formData appendPartWithFileData:imageData name:@"pic" fileName:[NSString stringWithFormat:@"%dxx.jpg",i] mimeType:@"image/jpeg"];
+                i++;
+            }
+            
+        } success:^(NSURLSessionDataTask *task, id responseObject) {
+            [ZHProgrossHUD showSuccess];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [ZHProgrossHUD showError];
+        }];
+    }
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - textView Delegate

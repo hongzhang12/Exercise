@@ -281,6 +281,7 @@
 		FC78DD8A1AE731FA007B445A /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		FC78DD8B1AE731FA007B445A /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FC78DDB01AE77ED8007B445A /* NavBar64@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBar64@2x.png"; sourceTree = "<group>"; };
+		FC78E4071B71CCAC007EB794 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		FC83D7001B2EAD400075060D /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = "第三方登陆xx/BaiduMapAPI.framework"; sourceTree = "<group>"; };
 		FC83D7021B2EAE260075060D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		FCAE9D021AE63CDC003D69D7 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -1042,6 +1043,7 @@
 				FCBABF8F1B3B920F00BB2D93 /* ZHExtension.m */,
 				FC6FA3F41B6E2FC6005AD5EF /* ZHProgrossHUD.h */,
 				FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */,
+				FC78E4071B71CCAC007EB794 /* PrefixHeader.pch */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1463,6 +1465,7 @@
 					"$(PROJECT_DIR)/第三方登陆xx/ShareSDK",
 					3/UI,
 				);
+				GCC_PREFIX_HEADER = "/Users/zhanghong/Desktop/Exercise/第三方登陆xx/第三方登陆xx/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1546,6 +1549,7 @@
 					"$(PROJECT_DIR)/第三方登陆xx/ShareSDK",
 					3/UI,
 				);
+				GCC_PREFIX_HEADER = "/Users/zhanghong/Desktop/Exercise/第三方登陆xx/第三方登陆xx/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
