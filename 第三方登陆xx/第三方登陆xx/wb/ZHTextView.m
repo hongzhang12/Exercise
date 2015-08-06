@@ -12,7 +12,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.font = [UIFont systemFontOfSize:16];
+        self.font = [UIFont systemFontOfSize:ZHTextViewFontSize];
         self.backgroundColor = [UIColor whiteColor];
         self.placeHolderColor = [UIColor blackColor];
         [self becomeFirstResponder];

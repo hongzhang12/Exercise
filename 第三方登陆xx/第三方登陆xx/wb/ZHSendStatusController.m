@@ -14,10 +14,12 @@
 #import "ZHComposeToolBar.h"
 #import "ZHProgrossHUD.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "ZHComposeAlbum.h"
 @interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate,ZHComposeToolBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic ,weak) ZHTextView *textView;
 @property (nonatomic ,weak) ZHComposeToolBar *toolBar;
-@property (nonatomic ,strong) NSMutableArray *uploadPictureDataArr;
+//@property (nonatomic ,strong) NSMutableArray *uploadPictureDataArr;
+@property (nonatomic ,weak) ZHComposeAlbum *album;
 @end
 
 @implementation ZHSendStatusController
@@ -28,7 +30,7 @@
     
     [self initNavigationBar];
     
-    [self initTextView];
+    [self initTextViewAndAlbum];
     [self initToolbar];
     
     
@@ -41,13 +43,13 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-- (NSMutableArray *)uploadPictureDataArr
-{
-    if (_uploadPictureDataArr == nil) {
-        _uploadPictureDataArr = [NSMutableArray array];
-    }
-    return _uploadPictureDataArr;
-}
+//- (NSMutableArray *)uploadPictureDataArr
+//{
+//    if (_uploadPictureDataArr == nil) {
+//        _uploadPictureDataArr = [NSMutableArray array];
+//    }
+//    return _uploadPictureDataArr;
+//}
 #pragma mark - ZHComposeToolBar delegate
 -(void)ComposeToolBar:(ZHComposeToolBar *)composeBar buttonClickedWithType:(ZHComposeToolBarItemType)type
 {
@@ -115,10 +117,10 @@
         self.navigationItem.rightBarButtonItem.enabled = ![self.textView.text isEqualToString:@""];
     }];
     UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
-    image = [image imageWIthCompressInSize:CGSizeMake(100, 100)];
-    NSData *imagedata = UIImageJPEGRepresentation(image, 1);
-    [self.uploadPictureDataArr addObject:imagedata];
-    NSLog(@"%@",self.uploadPictureDataArr);
+    
+//    [self.uploadPictureDataArr addObject:imagedata];
+//    NSLog(@"%@",self.uploadPictureDataArr);
+    [self.album addPicture:image];
 }
 #pragma mark - private init
 - (void)initNavigationBar{
@@ -143,13 +145,18 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-- (void)initTextView{
+- (void)initTextViewAndAlbum{
     ZHTextView *textView = [[ZHTextView alloc] initWithFrame:self.view.bounds];
     textView.placeHolder = @"想说点社么呢...";
     textView.alwaysBounceVertical = YES;
     textView.delegate = self;
     self.textView = textView;
     [self.view addSubview:textView];
+    
+    ZHComposeAlbum *album = [[ZHComposeAlbum alloc] initWithFrame:textView.bounds];
+    album.y = 150;
+    [textView addSubview:album];
+    self.album = album;
 }
 
 - (void)initToolbar{
@@ -208,7 +215,7 @@
     params[@"status"] = status;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    if (self.uploadPictureDataArr.count == 0) {
+    if (self.album.pictureArr.count == 0) {
         
         [manager POST:updateUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
             [ZHProgrossHUD showSuccess];
@@ -219,7 +226,7 @@
         
         [manager POST:uploadUrl parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             int i = 0;
-            for (NSData *imageData in self.uploadPictureDataArr) {
+            for (NSData *imageData in self.self.album.pictureArr) {
                 
                 [formData appendPartWithFileData:imageData name:@"pic" fileName:[NSString stringWithFormat:@"%dxx.jpg",i] mimeType:@"image/jpeg"];
                 i++;
@@ -239,7 +246,12 @@
 {
 
     self.navigationItem.rightBarButtonItem.enabled = ![textView.text isEqualToString:@""];
-
+    CGSize textSize = [textView.text sizeWithRestrictSize:CGSizeMake(ScreenWidth, MAXFLOAT) andFont:ZHTextViewFontSize];
+    CGFloat albumY = self.album.y;
+    if ((albumY - textSize.height)!=30&&textSize.height>150) {
+        self.album.y = textSize.height + 30;
+    }
+    
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {

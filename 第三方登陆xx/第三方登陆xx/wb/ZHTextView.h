@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define ZHTextViewFontSize 16
 @interface ZHTextView : UITextView
 
 @property (nonatomic ,copy) NSString *placeHolder;

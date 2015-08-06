@@ -12,4 +12,6 @@
 #define  updateUrl @"https://api.weibo.com/2/statuses/update.json"
 #define  uploadUrl @"https://upload.api.weibo.com/2/statuses/upload.json"
 #define  friends_timelineUrl @"https://api.weibo.com/2/statuses/friends_timeline.json"
+
+#import "ZHExtension.h"
 #endif

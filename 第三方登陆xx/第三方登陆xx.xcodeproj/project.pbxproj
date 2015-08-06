@@ -69,6 +69,7 @@
 		FC78DD931AE731FA007B445A /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD891AE731FA007B445A /* AFURLResponseSerialization.m */; };
 		FC78DD941AE731FA007B445A /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD8B1AE731FA007B445A /* AFURLSessionManager.m */; };
 		FC78DDB11AE77ED8007B445A /* NavBar64@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC78DDB01AE77ED8007B445A /* NavBar64@2x.png */; };
+		FC7D19A91B732C4B009F1124 /* ZHComposeAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */; };
 		FC83D7011B2EAD400075060D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC83D7001B2EAD400075060D /* BaiduMapAPI.framework */; };
 		FC83D7031B2EAE260075060D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC83D7021B2EAE260075060D /* libc++.dylib */; };
 		FCAE9D231AE63CDC003D69D7 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAE9D031AE63CDC003D69D7 /* MKAnnotationView+WebCache.m */; };
@@ -282,6 +283,8 @@
 		FC78DD8B1AE731FA007B445A /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		FC78DDB01AE77ED8007B445A /* NavBar64@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBar64@2x.png"; sourceTree = "<group>"; };
 		FC78E4071B71CCAC007EB794 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		FC7D19A71B732C4B009F1124 /* ZHComposeAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHComposeAlbum.h; sourceTree = "<group>"; };
+		FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHComposeAlbum.m; sourceTree = "<group>"; };
 		FC83D7001B2EAD400075060D /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = "第三方登陆xx/BaiduMapAPI.framework"; sourceTree = "<group>"; };
 		FC83D7021B2EAE260075060D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		FCAE9D021AE63CDC003D69D7 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -862,6 +865,8 @@
 				FCCDFB311B6A0D0E00C17EBA /* ZHHomeTableViewCell.m */,
 				FC6FA3F11B6E2255005AD5EF /* ZHComposeToolBar.h */,
 				FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */,
+				FC7D19A71B732C4B009F1124 /* ZHComposeAlbum.h */,
+				FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1231,6 +1236,7 @@
 				FC78DD941AE731FA007B445A /* AFURLSessionManager.m in Sources */,
 				FCCDFB471B6A0D0E00C17EBA /* ZHStatusModel.m in Sources */,
 				FCE2E1241AEF695700E6B314 /* ZHTrendChartView.m in Sources */,
+				FC7D19A91B732C4B009F1124 /* ZHComposeAlbum.m in Sources */,
 				FCC4E5771B46789100FA8EC9 /* ZHAccountModel.m in Sources */,
 				FCE2E1261AEF695700E6B314 /* ZHWeatherController.m in Sources */,
 				FCAE9D2B1AE63CDC003D69D7 /* SDWebImagePrefetcher.m in Sources */,
