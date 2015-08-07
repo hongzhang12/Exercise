@@ -15,6 +15,7 @@
 #import "ZHProgrossHUD.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ZHComposeAlbum.h"
+#import "ZHEmotionKeyboard.h"
 @interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate,ZHComposeToolBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic ,weak) ZHTextView *textView;
 @property (nonatomic ,weak) ZHComposeToolBar *toolBar;
@@ -96,14 +97,15 @@
     [self.textView endEditing:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.textView.inputView) {
+            
             self.textView.inputView = nil;
             
                 [self.textView becomeFirstResponder];
             
         }else{
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 480, 320, 184)];
-            view.backgroundColor = [UIColor blueColor];
-            self.textView.inputView = view;
+            ZHEmotionKeyboard *emotionKB = [[ZHEmotionKeyboard alloc] initWithFrame:CGRectMake(0, 480, 320, 216)];
+            
+            self.textView.inputView = emotionKB;
             
             [self.textView becomeFirstResponder];
         }
@@ -172,7 +174,7 @@
 
 #pragma mark - keyboard - target
 - (void)keyBoardChangeFrame:(NSNotification*)info{
-    NSLog(@"keyBoardChangeFrame%@",info);
+    //kNSLog(@"keyBoardChangeFrame%@",info);
     NSDictionary *userInfo = info.userInfo;
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
     NSValue *endFrame = userInfo[UIKeyboardFrameEndUserInfoKey];
@@ -203,7 +205,7 @@
 - (void)sendStatus{
     
     [self.textView endEditing:YES];
-    NSLog(@"%@",self.textView.text);
+    //NSLog(@"%@",self.textView.text);
     
     ZHAccountModel *account = [ZHAccountModel accountModel];
     

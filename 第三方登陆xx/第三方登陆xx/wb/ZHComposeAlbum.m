@@ -30,7 +30,7 @@
     picture = [picture imageWIthCompressInSize:CGSizeMake(100, 100)];
     NSData *imagedata = UIImageJPEGRepresentation(picture, 1);
     
-    int count = self.pictureArr.count;
+    int count = (int)self.pictureArr.count;
     int row = count%3;
     int col = count/3;
     CGFloat pictureViewX = row*(ZHComposeAlbumPictureLength+ZHComposeAlbumPictureMargin);

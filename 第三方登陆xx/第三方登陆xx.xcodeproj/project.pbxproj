@@ -56,6 +56,7 @@
 		FC4924701B4665DB0093D5E7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC49246F1B4665DB0093D5E7 /* CoreText.framework */; };
 		FC4924721B4665E60093D5E7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4924711B4665E60093D5E7 /* AssetsLibrary.framework */; };
 		FC4924741B4665EE0093D5E7 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4924731B4665EE0093D5E7 /* AddressBook.framework */; };
+		FC5E8DEF1B7426FF004DE555 /* ZHEmotionKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5E8DEE1B7426FF004DE555 /* ZHEmotionKeyboard.m */; };
 		FC6FA3F31B6E2255005AD5EF /* ZHComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */; };
 		FC6FA3F61B6E2FC6005AD5EF /* ZHProgrossHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */; };
 		FC6FA3F81B6E330F005AD5EF /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC6FA3F71B6E330F005AD5EF /* Storyboard.storyboard */; };
@@ -257,6 +258,8 @@
 		FC49246F1B4665DB0093D5E7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		FC4924711B4665E60093D5E7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		FC4924731B4665EE0093D5E7 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FC5E8DED1B7426FF004DE555 /* ZHEmotionKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHEmotionKeyboard.h; sourceTree = "<group>"; };
+		FC5E8DEE1B7426FF004DE555 /* ZHEmotionKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHEmotionKeyboard.m; sourceTree = "<group>"; };
 		FC6FA3F11B6E2255005AD5EF /* ZHComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHComposeToolBar.h; sourceTree = "<group>"; };
 		FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHComposeToolBar.m; sourceTree = "<group>"; };
 		FC6FA3F41B6E2FC6005AD5EF /* ZHProgrossHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHProgrossHUD.h; sourceTree = "<group>"; };
@@ -867,6 +870,8 @@
 				FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */,
 				FC7D19A71B732C4B009F1124 /* ZHComposeAlbum.h */,
 				FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */,
+				FC5E8DED1B7426FF004DE555 /* ZHEmotionKeyboard.h */,
+				FC5E8DEE1B7426FF004DE555 /* ZHEmotionKeyboard.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1239,6 +1244,7 @@
 				FC7D19A91B732C4B009F1124 /* ZHComposeAlbum.m in Sources */,
 				FCC4E5771B46789100FA8EC9 /* ZHAccountModel.m in Sources */,
 				FCE2E1261AEF695700E6B314 /* ZHWeatherController.m in Sources */,
+				FC5E8DEF1B7426FF004DE555 /* ZHEmotionKeyboard.m in Sources */,
 				FCAE9D2B1AE63CDC003D69D7 /* SDWebImagePrefetcher.m in Sources */,
 				FCCDFB421B6A0D0E00C17EBA /* ZHHomeTableViewCell.m in Sources */,
 				FCCDFB531B6A2A5100C17EBA /* ZHTextView.m in Sources */,

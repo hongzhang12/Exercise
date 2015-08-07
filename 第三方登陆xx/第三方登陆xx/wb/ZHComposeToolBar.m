@@ -37,6 +37,16 @@
     
 }
 - (void)toolBarBtnClicked:(UIButton *)btn{
+    if (btn.tag == ZHComposeToolBarItemTypeEmoticon) {
+        btn.selected = !btn.selected;
+        if (!btn.selected) {
+            [btn setImage:[UIImage imageNamed:@"compose_emoticonbutton_background"] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"compose_emoticonbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        }else{
+            [btn setImage:[UIImage imageNamed:@"compose_keyboardbutton_background"] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"compose_keyboardbutton_background_highlighted"] forState:UIControlStateHighlighted];
+        }
+    }
     if ([self.delegate respondsToSelector:@selector(ComposeToolBar:buttonClickedWithType:)]) {
         [self.delegate ComposeToolBar:self buttonClickedWithType:btn.tag];
     }
