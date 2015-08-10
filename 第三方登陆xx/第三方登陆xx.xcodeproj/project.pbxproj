@@ -73,6 +73,8 @@
 		FC7D19A91B732C4B009F1124 /* ZHComposeAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */; };
 		FC83D7011B2EAD400075060D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC83D7001B2EAD400075060D /* BaiduMapAPI.framework */; };
 		FC83D7031B2EAE260075060D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC83D7021B2EAE260075060D /* libc++.dylib */; };
+		FCA8606B1B7728100079035A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA8606A1B7728100079035A /* Images.xcassets */; };
+		FCA8606D1B77291C0079035A /* EmotionIcons in Resources */ = {isa = PBXBuildFile; fileRef = FCA8606C1B77291C0079035A /* EmotionIcons */; };
 		FCAE9D231AE63CDC003D69D7 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAE9D031AE63CDC003D69D7 /* MKAnnotationView+WebCache.m */; };
 		FCAE9D241AE63CDC003D69D7 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAE9D051AE63CDC003D69D7 /* NSData+ImageContentType.m */; };
 		FCAE9D251AE63CDC003D69D7 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAE9D071AE63CDC003D69D7 /* SDImageCache.m */; };
@@ -162,7 +164,6 @@
 		FCE2E12C1AEF70C800E6B314 /* bg_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE2E12B1AEF70C800E6B314 /* bg_blue@2x.png */; };
 		FCE2E12E1AEF718C00E6B314 /* bg_na.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCE2E12D1AEF718C00E6B314 /* bg_na.jpg */; };
 		FCEA4E781AE62F8B00D5CE55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEA4E771AE62F8B00D5CE55 /* main.m */; };
-		FCEA4E831AE62F8B00D5CE55 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCEA4E821AE62F8B00D5CE55 /* Images.xcassets */; };
 		FCEA4E921AE62F8B00D5CE55 /* _____xxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEA4E911AE62F8B00D5CE55 /* _____xxTests.m */; };
 		FCEA4E9D1AE6302A00D5CE55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEA4E9C1AE6302A00D5CE55 /* AppDelegate.m */; };
 		FCEA4EC01AE6304900D5CE55 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEA4EBF1AE6304900D5CE55 /* LoginViewController.m */; };
@@ -290,6 +291,8 @@
 		FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHComposeAlbum.m; sourceTree = "<group>"; };
 		FC83D7001B2EAD400075060D /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = "第三方登陆xx/BaiduMapAPI.framework"; sourceTree = "<group>"; };
 		FC83D7021B2EAE260075060D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		FCA8606A1B7728100079035A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FCA8606C1B77291C0079035A /* EmotionIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmotionIcons; sourceTree = "<group>"; };
 		FCAE9D021AE63CDC003D69D7 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		FCAE9D031AE63CDC003D69D7 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		FCAE9D041AE63CDC003D69D7 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -427,7 +430,6 @@
 		FCEA4E721AE62F8B00D5CE55 /* 第三方登陆xx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "第三方登陆xx.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEA4E761AE62F8B00D5CE55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCEA4E771AE62F8B00D5CE55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FCEA4E821AE62F8B00D5CE55 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FCEA4E8B1AE62F8B00D5CE55 /* 第三方登陆xxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "第三方登陆xxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEA4E901AE62F8B00D5CE55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCEA4E911AE62F8B00D5CE55 /* _____xxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_____xxTests.m"; sourceTree = "<group>"; };
@@ -990,7 +992,8 @@
 		FCEA4E751AE62F8B00D5CE55 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FCEA4E821AE62F8B00D5CE55 /* Images.xcassets */,
+				FCA8606A1B7728100079035A /* Images.xcassets */,
+				FCA8606C1B77291C0079035A /* EmotionIcons */,
 				FCEA4E761AE62F8B00D5CE55 /* Info.plist */,
 				FCEA4E771AE62F8B00D5CE55 /* main.m */,
 			);
@@ -1157,10 +1160,10 @@
 				FC4923DF1B465BA40093D5E7 /* account_weibo_normal@2x.png in Resources */,
 				FC4923E01B465BA40093D5E7 /* account_qq_normal@2x.png in Resources */,
 				FC49245C1B4664390093D5E7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				FCEA4E831AE62F8B00D5CE55 /* Images.xcassets in Resources */,
 				FCE2E10C1AEF695700E6B314 /* air_status_bg_white@2x.png in Resources */,
 				FCAE9D4D1AE63E6A003D69D7 /* record_flashlight_highlighted@2x.png in Resources */,
 				FCEDAC211AE89B2400884858 /* MBProgressHUD.bundle in Resources */,
+				FCA8606B1B7728100079035A /* Images.xcassets in Resources */,
 				FCE2E10E1AEF695700E6B314 /* bg_middle_rain.jpg in Resources */,
 				FC26B5011B6F533F00B81F76 /* error.png in Resources */,
 				FCE2E1151AEF695700E6B314 /* weather_aqi_level_2.png in Resources */,
@@ -1174,6 +1177,7 @@
 				FC26B5041B6F533F00B81F76 /* success@2x.png in Resources */,
 				FCAE9D781AE6493A003D69D7 /* RedButtonPressed@2x.png in Resources */,
 				FCAE9D4B1AE63E6A003D69D7 /* record_flashlight_disable@2x.png in Resources */,
+				FCA8606D1B77291C0079035A /* EmotionIcons in Resources */,
 				FCAE9D591AE63E6A003D69D7 /* video_longvideo_btn_pause@2x.png in Resources */,
 				FCAE9D4A1AE63E6A003D69D7 /* record_flashlight_disable.png in Resources */,
 				FC4923DE1B465BA40093D5E7 /* account_qq_press@2x.png in Resources */,

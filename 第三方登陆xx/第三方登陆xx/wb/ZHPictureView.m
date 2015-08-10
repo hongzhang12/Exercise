@@ -43,6 +43,7 @@
         }
         
         UILabel *pageLabel = [[UILabel alloc] init];
+        pageLabel.textAlignment = NSTextAlignmentCenter;
         pageLabel.width = 50;
         pageLabel.height = 15;
         pageLabel.centerX = ScreenWidth/2;

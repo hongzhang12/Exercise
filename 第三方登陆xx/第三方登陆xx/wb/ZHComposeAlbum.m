@@ -43,4 +43,20 @@
     [self.pictureArr addObject:imagedata];
 }
 
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    int count = 0;
+    for (UIImageView *picture in self.subviews) {
+        
+        int row = count%3;
+        int col = count/3;
+        CGFloat pictureViewX = row*(ZHComposeAlbumPictureLength+ZHComposeAlbumPictureMargin)+ZHComposeAlbumPictureMargin;
+        CGFloat pictureViewY = col*(ZHComposeAlbumPictureLength+ZHComposeAlbumPictureMargin);
+        
+        picture.frame = CGRectMake(pictureViewX, pictureViewY, ZHComposeAlbumPictureLength, ZHComposeAlbumPictureLength);
+        count++;
+
+    }
+    
+}
 @end

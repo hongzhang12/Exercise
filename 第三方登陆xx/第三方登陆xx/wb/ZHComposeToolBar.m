@@ -54,6 +54,7 @@
 
 -(void)layoutSubviews
 {
+    [super layoutSubviews];
     int count = self.subviews.count;
     for (int i = 0; i<count; i++) {
         UIView *btn = self.subviews[i];

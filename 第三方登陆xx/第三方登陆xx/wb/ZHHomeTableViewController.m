@@ -59,6 +59,7 @@
     [self refreshStatus:self.refreshControl];
     
 }
+
 - (void)sendStatus{
     
     ZHSendStatusController *sendCtrl = [[ZHSendStatusController alloc] init];
@@ -81,11 +82,7 @@
 {
 
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.promptCount removeFromSuperview];
-}
+
 //刷新
 - (void)refreshStatus:(UIRefreshControl *)control{
     //[MBProgressHUD showMessage:@"加载中。。。"];

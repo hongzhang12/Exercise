@@ -21,6 +21,7 @@
 @property (nonatomic ,weak) ZHComposeToolBar *toolBar;
 //@property (nonatomic ,strong) NSMutableArray *uploadPictureDataArr;
 @property (nonatomic ,weak) ZHComposeAlbum *album;
+@property (nonatomic ,strong) ZHEmotionKeyboard *emotionKB;
 @end
 
 @implementation ZHSendStatusController
@@ -33,7 +34,7 @@
     
     [self initTextViewAndAlbum];
     [self initToolbar];
-    
+    [self initEmotionKeyboard];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyBoardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -100,15 +101,12 @@
             
             self.textView.inputView = nil;
             
-                [self.textView becomeFirstResponder];
-            
         }else{
-            ZHEmotionKeyboard *emotionKB = [[ZHEmotionKeyboard alloc] initWithFrame:CGRectMake(0, 480, 320, 216)];
             
-            self.textView.inputView = emotionKB;
+            self.textView.inputView = self.emotionKB;
             
-            [self.textView becomeFirstResponder];
         }
+        [self.textView becomeFirstResponder];
     });
     
 }
@@ -125,6 +123,12 @@
     [self.album addPicture:image];
 }
 #pragma mark - private init
+
+- (void)initEmotionKeyboard{
+    ZHEmotionKeyboard *emotionKB = [[ZHEmotionKeyboard alloc] initWithFrame:CGRectMake(0, 480, 320, 216)];
+    self.emotionKB = emotionKB;
+}
+
 - (void)initNavigationBar{
     ZHAccountModel *account = [ZHAccountModel accountModel];
     
@@ -148,7 +152,9 @@
 }
 
 - (void)initTextViewAndAlbum{
+    
     ZHTextView *textView = [[ZHTextView alloc] initWithFrame:self.view.bounds];
+    
     textView.placeHolder = @"想说点社么呢...";
     textView.alwaysBounceVertical = YES;
     textView.delegate = self;

@@ -17,7 +17,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor redColor];
+        self.backgroundColor = [UIColor orangeColor];
         self.textAlignment = NSTextAlignmentCenter;
         self.contentMode = UIViewContentModeBottom;
         self.textColor = [UIColor whiteColor];
