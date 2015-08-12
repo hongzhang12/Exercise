@@ -16,6 +16,7 @@
 #import "ZHExtension.h"
 #import "customNavigationController.h"
 #import "ZHProgrossHUD.h"
+#import "ZHTabBarController.h"
 #define ScreenBoundsWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenBoundsHeight [UIScreen mainScreen].bounds.size.height
 #define AccountInfo [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) lastObject]stringByAppendingPathComponent:@"account.plist"]
@@ -104,13 +105,14 @@
                 weather.title = json[@"city"];
 
                 ZHHomeTableViewController *home = [[ZHHomeTableViewController alloc] init];
-                
-                [UIWindow switchRootViewController:[[customNavigationController alloc] initWithRootViewController:home]];
+                ZHTabBarController *tabBarCtrl = [[ZHTabBarController alloc] init];
+                [tabBarCtrl setViewControllers:@[[[customNavigationController alloc] initWithRootViewController:home]] animated:YES];
+                [UIWindow switchRootViewController:tabBarCtrl];
                 [ZHProgrossHUD hidden];
             }
         }else{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                //[MBProgressHUD showError:@"网络连接失败"];
+                [MBProgressHUD showError:@"网络连接失败"];
             });
         }
     }];

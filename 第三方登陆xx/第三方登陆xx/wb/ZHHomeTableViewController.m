@@ -58,6 +58,7 @@
     [self.refreshControl beginRefreshing];
     [self refreshStatus:self.refreshControl];
     
+    //[UIWindow currentWindow].userInteractionEnabled = NO;
 }
 
 - (void)sendStatus{
@@ -165,6 +166,7 @@
         if (!newStatuses.count) {
             button.enabled = NO;
         }
+
         //NSLog(@"%@",self.statuses);
         [hud removeFromSuperview];
         

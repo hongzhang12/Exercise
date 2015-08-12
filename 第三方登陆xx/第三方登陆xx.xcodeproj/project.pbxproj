@@ -73,6 +73,8 @@
 		FC7D19A91B732C4B009F1124 /* ZHComposeAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */; };
 		FC83D7011B2EAD400075060D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC83D7001B2EAD400075060D /* BaiduMapAPI.framework */; };
 		FC83D7031B2EAE260075060D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC83D7021B2EAE260075060D /* libc++.dylib */; };
+		FC8B25BE1B7B1E6500C3BDF6 /* ZHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8B25BD1B7B1E6500C3BDF6 /* ZHTabBarController.m */; };
+		FC8B25C11B7B27AA00C3BDF6 /* ZHSliderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8B25C01B7B27AA00C3BDF6 /* ZHSliderTableView.m */; };
 		FCA8606B1B7728100079035A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCA8606A1B7728100079035A /* Images.xcassets */; };
 		FCA8606D1B77291C0079035A /* EmotionIcons in Resources */ = {isa = PBXBuildFile; fileRef = FCA8606C1B77291C0079035A /* EmotionIcons */; };
 		FCAE9D231AE63CDC003D69D7 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAE9D031AE63CDC003D69D7 /* MKAnnotationView+WebCache.m */; };
@@ -291,6 +293,10 @@
 		FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHComposeAlbum.m; sourceTree = "<group>"; };
 		FC83D7001B2EAD400075060D /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = "第三方登陆xx/BaiduMapAPI.framework"; sourceTree = "<group>"; };
 		FC83D7021B2EAE260075060D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		FC8B25BC1B7B1E6500C3BDF6 /* ZHTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHTabBarController.h; sourceTree = "<group>"; };
+		FC8B25BD1B7B1E6500C3BDF6 /* ZHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHTabBarController.m; sourceTree = "<group>"; };
+		FC8B25BF1B7B27AA00C3BDF6 /* ZHSliderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHSliderTableView.h; sourceTree = "<group>"; };
+		FC8B25C01B7B27AA00C3BDF6 /* ZHSliderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHSliderTableView.m; sourceTree = "<group>"; };
 		FCA8606A1B7728100079035A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FCA8606C1B77291C0079035A /* EmotionIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmotionIcons; sourceTree = "<group>"; };
 		FCAE9D021AE63CDC003D69D7 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -1057,6 +1063,10 @@
 				FC6FA3F41B6E2FC6005AD5EF /* ZHProgrossHUD.h */,
 				FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */,
 				FC78E4071B71CCAC007EB794 /* PrefixHeader.pch */,
+				FC8B25BC1B7B1E6500C3BDF6 /* ZHTabBarController.h */,
+				FC8B25BD1B7B1E6500C3BDF6 /* ZHTabBarController.m */,
+				FC8B25BF1B7B27AA00C3BDF6 /* ZHSliderTableView.h */,
+				FC8B25C01B7B27AA00C3BDF6 /* ZHSliderTableView.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1237,6 +1247,7 @@
 				FCE2E1221AEF695700E6B314 /* ZHGeneralVIew.m in Sources */,
 				FCE2E11F1AEF695700E6B314 /* ZHFutureTrendView.m in Sources */,
 				FCEA4E781AE62F8B00D5CE55 /* main.m in Sources */,
+				FC8B25BE1B7B1E6500C3BDF6 /* ZHTabBarController.m in Sources */,
 				FCE2E11C1AEF695700E6B314 /* ZHDetailView.m in Sources */,
 				FCEDAC201AE89B2400884858 /* MBProgressHUD+MJ.m in Sources */,
 				FCAE9D2C1AE63CDC003D69D7 /* UIButton+WebCache.m in Sources */,
@@ -1285,6 +1296,7 @@
 				FCAE9D641AE63E82003D69D7 /* ZHViewController.m in Sources */,
 				FCAE9D2E1AE63CDC003D69D7 /* UIImage+MultiFormat.m in Sources */,
 				FC2514251B5397F50091A44A /* MJConst.m in Sources */,
+				FC8B25C11B7B27AA00C3BDF6 /* ZHSliderTableView.m in Sources */,
 				FC2514291B5397F50091A44A /* NSObject+MJCoding.m in Sources */,
 				FC25142A1B5397F50091A44A /* NSObject+MJKeyValue.m in Sources */,
 				FCCDFB4D1B6A0FA200C17EBA /* ZHSendStatusController.m in Sources */,
@@ -1428,7 +1440,6 @@
 		FCEA4E961AE62F8B00D5CE55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/第三方登陆xx/ShareSDK",
@@ -1512,7 +1523,6 @@
 		FCEA4E971AE62F8B00D5CE55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/第三方登陆xx/ShareSDK",

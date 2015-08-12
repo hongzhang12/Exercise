@@ -20,11 +20,7 @@
     UINavigationBar *bar = [UINavigationBar appearance];
     bar.tintColor = [UIColor whiteColor];
     bar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavBarFont]};
-    ZHLog(@"zhanghong%d",6666);
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
