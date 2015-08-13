@@ -11,7 +11,7 @@
 
 @interface ZHTabBarController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,weak) ZHSliderTableView *sliderTableView;
-
+@property (nonatomic ,assign) ZHTabBarControllerSliderState sliderState;
 @end
 
 @implementation ZHTabBarController
@@ -19,11 +19,14 @@
     [super viewDidLoad];
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeToslideBar)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:swipeRight];
+    //[self.view addGestureRecognizer:swipeRight];
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeForBack)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeft];
+    //[self.view addGestureRecognizer:swipeLeft];
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panForSlider:)];
+    [self.view addGestureRecognizer:pan];
     
     self.view.backgroundColor = [UIColor orangeColor];
     
@@ -31,8 +34,72 @@
     [self.view insertSubview:test atIndex:0];
     test.dataSource = self;
     test.delegate = self;
+    test.backgroundColor = [UIColor blueColor];
     self.sliderTableView = test;
+    
+    self.sliderState = ZHTabBarControllerSliderStateHidden;
 }
+- (void)panForSlider:(UIPanGestureRecognizer *)pan{
+    //NSLog(@"%@",NSStringFromCGPoint([pan translationInView:self.view]));
+    CGPoint translationPoint = [pan translationInView:self.view];
+    
+    UIView *topView = self.selectedViewController.view;
+    
+    CGFloat ratio = topView.width/topView.height;
+    
+    CGFloat topX;
+    if (self.sliderState == ZHTabBarControllerSliderStateHidden) {
+        topX = 0 + translationPoint.x;
+    }else{
+        topX = ZHTabBarControllerSliderHiddenX + translationPoint.x;
+    }
+    
+    
+    
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        for (UIView *subView in self.view.subviews) {
+            if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
+                subView.userInteractionEnabled = NO;
+                NSLog(@"%@",subView.subviews);
+            }
+        }
+    }else if(pan.state == UIGestureRecognizerStateEnded){
+        for (UIView *subView in self.view.subviews) {
+            if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
+                
+                NSLog(@"%@",subView.subviews);
+                
+                if (topX>ZHTabBarControllerSliderWillHiddenX) {
+                    topX = ZHTabBarControllerSliderHiddenX;
+                    self.sliderState = ZHTabBarControllerSliderStateShow;
+                    subView.userInteractionEnabled = NO;
+                }else{
+                    topX = 0;
+                    self.sliderState = ZHTabBarControllerSliderStateHidden;
+                    subView.userInteractionEnabled = YES;
+                }
+            }
+        }
+    }
+    CGFloat topY = topX/3;
+    CGFloat topH = self.view.height - topY*2;
+    CGFloat topW = ratio*topH;
+    
+    if (topX<0 || topX>ZHTabBarControllerSliderHiddenX) {
+        NSLog(@"%f",topX);
+        return;
+    };
+    
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            topView.frame = CGRectMake(topX, topY, topW, topH);
+        } completion:nil];
+    }else{
+        topView.frame = CGRectMake(topX, topY, topW, topH);
+    }
+    
+}
+
 - (void)swipeToslideBar{
     self.tabBar.hidden = YES;
     UIView *topView = self.selectedViewController.view;

@@ -10,8 +10,8 @@
 @class ZHEmotionToolBar;
 typedef enum{
     ZHEmotionToolBarItemTypeLXH,
-    ZHEmotionToolBarItemTypeSMD,
-    ZHEmotionToolBarItemTypeWDXW,
+    ZHEmotionToolBarItemTypeDefault,
+    ZHEmotionToolBarItemTypeEMOJI,
     ZHEmotionToolBarItemTypeMore
 }ZHEmotionToolBarItemType;
 
@@ -34,10 +34,10 @@ typedef enum{
 #define ZHEmotionViewMargin (ScreenWidth*ZHEmotionViewPageCount - ZHEmotionViewCountPerRow*ZHEmotionViewLength)/(ZHEmotionViewCountPerRow + 1)
 
 @interface ZHEmotion :UIView
-
+- (instancetype)initWIthImageName:(NSString *)imageName;
 @end
 
-@interface ZHEmotionView : UIScrollView
+@interface ZHEmotionView : UIView
 
 @end
 

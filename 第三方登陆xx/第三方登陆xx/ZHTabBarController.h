@@ -7,6 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef enum{
+    ZHTabBarControllerSliderStateShow,
+    ZHTabBarControllerSliderStateHidden
+}ZHTabBarControllerSliderState;
+
+#define ZHTabBarControllerSliderHiddenX 240
+#define ZHTabBarControllerSliderWillHiddenX 70
 
 @interface ZHTabBarController : UITabBarController
 //@property (nonatomic ,weak) UIView *sliderTableView;
