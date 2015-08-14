@@ -80,3 +80,7 @@
 @interface UIImage(Extension)
 - (UIImage *)imageWIthCompressInSize:(CGSize)compressSize;
 @end
+
+@interface NSAttributedString(Extension)
+- (NSAttributedString*)appendImage:(NSString *)imageName;
+@end

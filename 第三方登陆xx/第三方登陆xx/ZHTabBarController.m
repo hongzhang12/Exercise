@@ -30,7 +30,7 @@
     
     self.view.backgroundColor = [UIColor orangeColor];
     
-    ZHSliderTableView *test = [[ZHSliderTableView alloc] initWithFrame:CGRectMake(0, 0, 140, ScreenHeight)];
+    ZHSliderTableView *test = [[ZHSliderTableView alloc] initWithFrame:CGRectMake(-140, 0, 140, ScreenHeight)];
     [self.view insertSubview:test atIndex:0];
     test.dataSource = self;
     test.delegate = self;
@@ -40,7 +40,7 @@
     self.sliderState = ZHTabBarControllerSliderStateHidden;
 }
 - (void)panForSlider:(UIPanGestureRecognizer *)pan{
-    //NSLog(@"%@",NSStringFromCGPoint([pan translationInView:self.view]));
+    NSLog(@"%f",[pan locationInView:self.view].x);
     CGPoint translationPoint = [pan translationInView:self.view];
     
     UIView *topView = self.selectedViewController.view;
@@ -50,8 +50,18 @@
     CGFloat topX;
     if (self.sliderState == ZHTabBarControllerSliderStateHidden) {
         topX = 0 + translationPoint.x;
+        if (self.sliderTableView.x <-1) {
+            self.sliderTableView.x = translationPoint.x-140;
+        }else{
+            self.sliderTableView.x = 0;
+        }
     }else{
-        topX = ZHTabBarControllerSliderHiddenX + translationPoint.x;
+        topX = ZHTabBarControllerSliderShowX + translationPoint.x;
+        if (self.sliderTableView.x >-139) {
+            self.sliderTableView.x = translationPoint.x;
+        }else{
+            self.sliderTableView.x = -140;
+        }
     }
     
     
@@ -64,13 +74,14 @@
             }
         }
     }else if(pan.state == UIGestureRecognizerStateEnded){
+        
         for (UIView *subView in self.view.subviews) {
             if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
                 
                 NSLog(@"%@",subView.subviews);
                 
-                if (topX>ZHTabBarControllerSliderWillHiddenX) {
-                    topX = ZHTabBarControllerSliderHiddenX;
+                if (topX>ZHTabBarControllerSliderWillShowX) {
+                    topX = ZHTabBarControllerSliderShowX;
                     self.sliderState = ZHTabBarControllerSliderStateShow;
                     subView.userInteractionEnabled = NO;
                 }else{
@@ -85,7 +96,7 @@
     CGFloat topH = self.view.height - topY*2;
     CGFloat topW = ratio*topH;
     
-    if (topX<0 || topX>ZHTabBarControllerSliderHiddenX) {
+    if (topX<0 || topX>ZHTabBarControllerSliderShowX) {
         NSLog(@"%f",topX);
         return;
     };

@@ -16,7 +16,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ZHComposeAlbum.h"
 #import "ZHEmotionKeyboard.h"
-@interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate,ZHComposeToolBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import "ZHEmotionModel.h"
+@interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate,ZHComposeToolBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ZHEmotionKeyboardDelegate>
 @property (nonatomic ,weak) ZHTextView *textView;
 @property (nonatomic ,weak) ZHComposeToolBar *toolBar;
 //@property (nonatomic ,strong) NSMutableArray *uploadPictureDataArr;
@@ -126,6 +127,7 @@
 
 - (void)initEmotionKeyboard{
     ZHEmotionKeyboard *emotionKB = [[ZHEmotionKeyboard alloc] initWithFrame:CGRectMake(0, 480, 320, 216)];
+    emotionKB.delegate = self;
     self.emotionKB = emotionKB;
 }
 
@@ -282,4 +284,15 @@
         
     }];
 }
+#pragma mark - emotionKB delegate
+
+-(void)EmotionKeyboard:(ZHEmotionKeyboard *)emotionKeyboard emotionInfo:(ZHEmotionModel *)emotionModel{
+    //NSLog(@"%@",emotionModel);
+    
+    self.textView.attributedText = [self.textView.attributedText appendImage:emotionModel.png];
+    //self.textView.text = [NSString stringWithFormat:@"%@%@",self.textView.text,emotionModel.chs];
+    self.textView.font = [UIFont systemFontOfSize:16];
+    NSLog(@"%@",self.textView.text);
+}
+
 @end

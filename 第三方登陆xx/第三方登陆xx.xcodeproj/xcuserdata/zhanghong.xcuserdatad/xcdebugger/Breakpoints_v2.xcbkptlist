@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x7b2c;&#x4e09;&#x65b9;&#x767b;&#x9646;xx/ZHTabBarController.m"
-            timestampString = "461136937.368229"
+            timestampString = "461238525.971819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "-swipeToslideBar"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x7b2c;&#x4e09;&#x65b9;&#x767b;&#x9646;xx/ZHTabBarController.m"
-            timestampString = "461136937.368229"
+            timestampString = "461238525.971819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "-swipeForBack"
             landmarkType = "5">
          </BreakpointContent>

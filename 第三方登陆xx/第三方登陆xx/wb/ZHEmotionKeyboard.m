@@ -11,7 +11,7 @@
 #import "MJExtension.h"
 
 #pragma mark =====================================
-#pragma mark - ZHEmotionToolBar
+#pragma mark  ZHEmotionToolBar
 @implementation ZHEmotionToolBar
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -68,7 +68,7 @@
 @end
 
 #pragma mark =====================================
-#pragma mark - ZHEmotion
+#pragma mark  ZHEmotion
 @interface ZHEmotion()
 @property (nonatomic ,weak) UIImageView *imageView;
 @end
@@ -94,7 +94,7 @@
 @end
 
 #pragma mark =====================================
-#pragma mark - ZHEmotionView
+#pragma mark  ZHEmotionView
 @interface ZHEmotionView()<UIScrollViewDelegate>
 @property (nonatomic ,strong) NSArray *emotionArr;
 @property (nonatomic ,weak) UIScrollView *scrollView;
@@ -143,7 +143,7 @@
 #pragma mark - scrollView 手势回调方法
 - (void)pan:(UIPanGestureRecognizer *)pan{
     
-    //NSLog(@"pan--%@",NSStringFromCGPoint([pan locationInView:self.scrollView]));
+    NSLog(@"pan--%@",NSStringFromCGPoint([pan locationInView:self.scrollView]));
     CGPoint touchPoint = [pan locationInView:self.scrollView];
     
     CGFloat emotionLength = self.scrollView.width/ZHEmotionViewCountPerRow;
@@ -158,8 +158,11 @@
     
     NSUInteger index = page*ZHEmotionViewPageSize+row*ZHEmotionViewCountPerRow+col;
     
-    [self sendCurrentEmotionClickedAtIndex:index];
-    
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        [self sendEndedEmotionClickedAtIndex:index];
+    }else{
+        [self sendCurrentEmotionClickedAtIndex:index];
+    }
 }
 - (void)swipeLeft:(UISwipeGestureRecognizer*)swipe{
     NSLog(@"swipeLeft");
@@ -186,10 +189,21 @@
     } completion:nil];
 }
 - (void)sendCurrentEmotionClickedAtIndex:(NSUInteger)index{
-    if ([self.delegate respondsToSelector:@selector(emotionView:EmotionBtnClickedAtIndex:)]) {
-        [self.delegate emotionView:self EmotionBtnClickedAtIndex:index];
+    if ([self.delegate respondsToSelector:@selector(emotionView:EmotionBtnClickedMovedAtIndex:)]) {
+        [self.delegate emotionView:self EmotionBtnClickedMovedAtIndex:index];
     }
 }
+- (void)sendEndedEmotionClickedAtIndex:(NSUInteger)index{
+    if ([self.delegate respondsToSelector:@selector(emotionView:EmotionBtnClickedEndAtIndex:)]) {
+        [self.delegate emotionView:self EmotionBtnClickedEndAtIndex:index];
+    }
+}
+- (void)sendBeginEmotionClickedAtIndex:(NSUInteger)index{
+    if ([self.delegate respondsToSelector:@selector(emotionView:EmotionBtnClickedBeginedAtIndex:)]) {
+        [self.delegate emotionView:self EmotionBtnClickedBeginedAtIndex:index];
+    }
+}
+
 -(void)setEmotionArr:(NSArray *)emotionArr{
 
     _emotionArr = emotionArr;
@@ -222,7 +236,8 @@
             
             ZHEmotion *emotion = [[ZHEmotion alloc] initWIthImageName:model.png];
             emotion.tag = currentCount;
-            [emotion addTarget:self action:@selector(emotionBtnClicked:) forControlEvents:UIControlEventTouchDown];
+            [emotion addTarget:self action:@selector(emotionBtnTouchDown:) forControlEvents:UIControlEventTouchDown];
+            [emotion addTarget:self action:@selector(emotionBtnTouchUpinside:) forControlEvents:UIControlEventTouchUpInside];
             emotion.frame = CGRectMake(emotionX, emotionY, emotionLength, emotionLength);
 
             
@@ -244,13 +259,16 @@
     self.pageControl.frame = CGRectMake(pageControlX, pageControlY, pageControlW, pageControlH);
 }
 #pragma mark - emotion button 回调方法
-- (void)emotionBtnClicked:(ZHEmotion *)emotion{
-    [self sendCurrentEmotionClickedAtIndex:emotion.tag];
+- (void)emotionBtnTouchDown:(ZHEmotion *)emotion{
+    [self sendBeginEmotionClickedAtIndex:emotion.tag];
+}
+- (void)emotionBtnTouchUpinside:(ZHEmotion *)emotion{
+    [self sendEndedEmotionClickedAtIndex:emotion.tag];
 }
 @end
 
 #pragma mark =====================================
-#pragma mark - ZHEmotionKeyboard
+#pragma mark  ZHEmotionKeyboard
 
 @interface ZHEmotionKeyboard()<ZHEmotionToolBarDelegate,ZHEmotionViewDelegate>
 @property (nonatomic ,weak) ZHEmotionView *emotionView;
@@ -259,6 +277,10 @@
 @property (nonatomic ,strong) NSArray *lxhEmotions;
 @property (nonatomic ,strong) NSArray *defaultEmotions;
 @property (nonatomic ,strong) NSArray *emojiEmotions;
+@property (nonatomic ,weak) NSArray *selectedEmotions;
+
+@property (nonatomic ,assign) int selectedEmotionIndex;
+
 @end
 @implementation ZHEmotionKeyboard
 
@@ -267,6 +289,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor yellowColor];
         [self setUpSubViews];
+        
     }
     return self;
 }
@@ -279,6 +302,8 @@
     return self;
 }
 - (void)setUpSubViews{
+    self.selectedEmotionIndex = -1;
+    
     ZHEmotionView *emotionView = [[ZHEmotionView alloc] init];
     emotionView.delegate = self;
     [self addSubview:emotionView];
@@ -316,12 +341,15 @@
             
             break;
         case ZHEmotionToolBarItemTypeLXH:
+            self.selectedEmotions = self.lxhEmotions;
             self.emotionView.emotionArr = self.lxhEmotions;
             break;
         case ZHEmotionToolBarItemTypeDefault:
+            self.selectedEmotions = self.defaultEmotions;
             self.emotionView.emotionArr = self.defaultEmotions;
             break;
         case ZHEmotionToolBarItemTypeEMOJI:
+            self.selectedEmotions = self.emojiEmotions;
             self.emotionView.emotionArr = self.emojiEmotions;
             break;
         default:
@@ -364,7 +392,31 @@
 }
 
 #pragma mark - emotionView delegate
--(void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedAtIndex:(NSUInteger)index{
-    NSLog(@"---%d",index);
+
+-(void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedBeginedAtIndex:(NSUInteger)index{
+
+    self.selectedEmotionIndex = index;
+    ZHEmotionModel *emotionModel = self.selectedEmotions[index];
+    //NSLog(@"---%@",emotionModel.chs);
+}
+
+-(void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedMovedAtIndex:(NSUInteger)index{
+    //NSLog(@"---%d",index);
+    if (self.selectedEmotionIndex == index) return;
+    
+    self.selectedEmotionIndex = index;
+    ZHEmotionModel *emotionModel = self.selectedEmotions[index];
+    //NSLog(@"---%@",emotionModel.chs);
+}
+
+-(void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedEndAtIndex:(NSUInteger)index{
+    //if (self.selectedEmotionIndex == index) return;
+    
+    self.selectedEmotionIndex = (int)index;
+    ZHEmotionModel *emotionModel = self.selectedEmotions[index];
+
+    if ([self.delegate respondsToSelector:@selector(EmotionKeyboard:emotionInfo:)]) {
+        [self.delegate EmotionKeyboard:self emotionInfo:emotionModel];
+    }
 }
 @end

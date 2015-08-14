@@ -13,6 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.font = [UIFont systemFontOfSize:ZHTextViewFontSize];
+        self.typingAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:[UIColor yellowColor]};
         self.backgroundColor = [UIColor whiteColor];
         self.placeHolderColor = [UIColor blackColor];
         [self becomeFirstResponder];
@@ -57,6 +58,7 @@
 }
 
 -(void)drawRect:(CGRect)rect{
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[NSFontAttributeName] = self.font;
     dict[NSForegroundColorAttributeName] = [self.text isEqualToString:@""]?self.placeHolderColor:self.backgroundColor;

@@ -252,3 +252,19 @@
 }
 
 @end
+
+@implementation NSAttributedString(Extension)
+
+-(NSAttributedString *)appendImage:(NSString *)imageName{
+    NSTextAttachment *imageAtt = [[NSTextAttachment alloc] init];
+    imageAtt.image = [UIImage imageNamed:imageName];
+    imageAtt.bounds = CGRectMake(0, 0, 23, 23);
+    NSAttributedString *attrStr = [NSMutableAttributedString attributedStringWithAttachment:imageAtt];
+    
+    NSMutableAttributedString *textViewStr = [[NSMutableAttributedString alloc] initWithAttributedString:self];
+    [textViewStr appendAttributedString:attrStr];
+    
+    return textViewStr;
+}
+
+@end

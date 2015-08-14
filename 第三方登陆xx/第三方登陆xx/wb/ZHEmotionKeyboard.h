@@ -38,16 +38,24 @@ typedef enum{
 
 @class ZHEmotionView;
 @protocol ZHEmotionViewDelegate <NSObject>
-
-- (void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedAtIndex:(NSUInteger)index;
-
+@optional
+- (void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedBeginedAtIndex:(NSUInteger)index;
+- (void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedMovedAtIndex:(NSUInteger)index;
+- (void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedEndAtIndex:(NSUInteger)index;
 @end
 
 @interface ZHEmotionView : UIView
 @property (nonatomic ,weak) id<ZHEmotionViewDelegate> delegate;
 @end
 
+@class ZHEmotionKeyboard;
+@class ZHEmotionModel;
+@protocol ZHEmotionKeyboardDelegate <NSObject>
+
+- (void)EmotionKeyboard:(ZHEmotionKeyboard *)emotionKeyboard emotionInfo:(ZHEmotionModel *)emotionModel;
+
+@end
 
 @interface ZHEmotionKeyboard : UIView
-
+@property (nonatomic ,weak) id<ZHEmotionKeyboardDelegate> delegate;
 @end

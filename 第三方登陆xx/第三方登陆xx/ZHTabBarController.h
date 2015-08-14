@@ -12,8 +12,8 @@ typedef enum{
     ZHTabBarControllerSliderStateHidden
 }ZHTabBarControllerSliderState;
 
-#define ZHTabBarControllerSliderHiddenX 240
-#define ZHTabBarControllerSliderWillHiddenX 70
+#define ZHTabBarControllerSliderShowX 240
+#define ZHTabBarControllerSliderWillShowX 70
 
 @interface ZHTabBarController : UITabBarController
 //@property (nonatomic ,weak) UIView *sliderTableView;
