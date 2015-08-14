@@ -28,18 +28,25 @@ typedef enum{
 @property (nonatomic,weak,readonly) UIButton *selectedItem;
 @end
 
-#define ZHEmotionViewPageCount 3
-#define ZHEmotionViewCountPerRow 24
-#define ZHEmotionViewLength 32
-#define ZHEmotionViewMargin (ScreenWidth*ZHEmotionViewPageCount - ZHEmotionViewCountPerRow*ZHEmotionViewLength)/(ZHEmotionViewCountPerRow + 1)
+#define ZHEmotionViewPageSize 23
+#define ZHEmotionViewCountPerRow 8
 
-@interface ZHEmotion :UIView
+
+@interface ZHEmotion :UIControl
 - (instancetype)initWIthImageName:(NSString *)imageName;
 @end
 
-@interface ZHEmotionView : UIView
+@class ZHEmotionView;
+@protocol ZHEmotionViewDelegate <NSObject>
+
+- (void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedAtIndex:(NSUInteger)index;
 
 @end
+
+@interface ZHEmotionView : UIView
+@property (nonatomic ,weak) id<ZHEmotionViewDelegate> delegate;
+@end
+
 
 @interface ZHEmotionKeyboard : UIView
 

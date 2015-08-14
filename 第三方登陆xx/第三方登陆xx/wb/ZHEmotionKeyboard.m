@@ -53,7 +53,7 @@
 }
 
 - (void)itemClicked:(UIButton *)item{
-    ZHLog(@"%d",item.tag);
+    //ZHLog(@"%d",item.tag);
     self.selectedItem = item;
     
 }
@@ -79,6 +79,7 @@
         [self addSubview:imageView];
         
         self.imageView = imageView;
+        
     }
     return self;
 }
@@ -88,6 +89,8 @@
     self.imageView.x = (self.width - imageLength)/2;
     self.imageView.y = (self.height - imageLength)/2;
 }
+
+
 @end
 
 #pragma mark =====================================
@@ -95,30 +98,16 @@
 @interface ZHEmotionView()<UIScrollViewDelegate>
 @property (nonatomic ,strong) NSArray *emotionArr;
 @property (nonatomic ,weak) UIScrollView *scrollView;
+@property (nonatomic ,weak) UIPageControl *pageControl;
 @end
 
 @implementation ZHEmotionView
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-//        self.pagingEnabled = YES;
-//        NSMutableArray *emotionArr = [NSMutableArray array];
-//        for (int i = 0; i<3; i++) {
-//            NSMutableArray *emotionRowArr = [NSMutableArray array];
-//            for (int j = 0; j<ZHEmotionViewCountPerRow; j++) {
-//                ZHEmotion *emotion = [[ZHEmotion alloc] init];
-//                emotion.tag = (i+1)*(j+1);
-//                [self addSubview:emotion];
-//                emotion.backgroundColor = [UIColor greenColor];
-//                [emotionRowArr addObject:emotion];
-//            }
-//            [emotionArr addObject:emotionRowArr];
-//        }
-//        self.emotionArr = emotionArr;
-        
         
         UIScrollView *scrollView = [[UIScrollView alloc] init];
         scrollView.pagingEnabled = YES;
-        scrollView.backgroundColor = [UIColor yellowColor];
+        //scrollView.backgroundColor = [UIColor yellowColor];
         
         scrollView.delegate = self;
         [self addSubview:scrollView];
@@ -143,19 +132,41 @@
         
         [pan requireGestureRecognizerToFail:swipeLeft];
         [pan requireGestureRecognizerToFail:swipeRight];
+        
+        UIPageControl *pageControl = [[UIPageControl alloc] init];
+        [self addSubview:pageControl];
+        //pageControl.backgroundColor = [UIColor blueColor];
+        self.pageControl = pageControl;
     }
     return self;
 }
 #pragma mark - scrollView 手势回调方法
 - (void)pan:(UIPanGestureRecognizer *)pan{
-    NSLog(@"pan--%@",NSStringFromCGPoint([pan locationInView:self.scrollView]));
+    
+    //NSLog(@"pan--%@",NSStringFromCGPoint([pan locationInView:self.scrollView]));
     CGPoint touchPoint = [pan locationInView:self.scrollView];
+    
+    CGFloat emotionLength = self.scrollView.width/ZHEmotionViewCountPerRow;
+    
+    int page = self.pageControl.currentPage;
+    //当前页的位置
+    int emotionX = touchPoint.x - page*self.scrollView.width;
+    int emotionY = touchPoint.y;
+    
+    int row = emotionY/emotionLength;
+    int col = emotionX/emotionLength;
+    
+    NSUInteger index = page*ZHEmotionViewPageSize+row*ZHEmotionViewCountPerRow+col;
+    
+    [self sendCurrentEmotionClickedAtIndex:index];
     
 }
 - (void)swipeLeft:(UISwipeGestureRecognizer*)swipe{
     NSLog(@"swipeLeft");
     CGPoint offset = self.scrollView.contentOffset;
-    if (offset.x == ScreenWidth *3) return;
+    if (offset.x == (self.scrollView.contentSize.width-self.scrollView.width)) return;
+    self.pageControl.currentPage += 1;
+    
     offset = CGPointMake(offset.x + self.scrollView.width, offset.y);
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -166,32 +177,52 @@
     NSLog(@"swipeRight");
     CGPoint offset = self.scrollView.contentOffset;
     if (offset.x == 0) return;
+    self.pageControl.currentPage -= 1;
+    
     offset = CGPointMake(offset.x - self.scrollView.width, offset.y);
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.scrollView.contentOffset = offset;
     } completion:nil];
 }
-
+- (void)sendCurrentEmotionClickedAtIndex:(NSUInteger)index{
+    if ([self.delegate respondsToSelector:@selector(emotionView:EmotionBtnClickedAtIndex:)]) {
+        [self.delegate emotionView:self EmotionBtnClickedAtIndex:index];
+    }
+}
 -(void)setEmotionArr:(NSArray *)emotionArr{
+
     _emotionArr = emotionArr;
+    for (ZHEmotion *emotion in self.scrollView.subviews) {
+        [emotion removeFromSuperview];
+    }
+    self.scrollView.contentOffset = CGPointMake(0, 0);
     int count = emotionArr.count;
-    int pageSize = 23;
-    int rowSize = 8;
-    CGFloat emotionLength = ScreenWidth*1.0/rowSize;
-    int pageCount = count/pageSize;
+    int pageSize = ZHEmotionViewPageSize;
+    int rowSize = ZHEmotionViewCountPerRow;
+    CGFloat emotionLength = self.scrollView.width/rowSize;
+    int pageCount = count/pageSize + 1;
+    
+    self.scrollView.contentSize = CGSizeMake(self.width*pageCount, 0);
+    self.pageControl.numberOfPages = pageCount;
+    self.pageControl.currentPage = 0;
+    
     for (int i = 0; i<pageCount; i++) {
         for (int j = 0; j<pageSize; j++) {
             
-            ZHEmotionModel *model = emotionArr[i*pageSize+j];
-            
+            int currentCount = i*pageSize+j;
+            if (currentCount>count-1) break;
+            ZHEmotionModel *model = emotionArr[currentCount];
+            if (!model) return;
             int row = j/rowSize;
             int col = j%rowSize;
             
-            CGFloat emotionX = col * emotionLength;
+            CGFloat emotionX = col * emotionLength + i*self.scrollView.width;
             CGFloat emotionY = row * emotionLength;
             
             ZHEmotion *emotion = [[ZHEmotion alloc] initWIthImageName:model.png];
+            emotion.tag = currentCount;
+            [emotion addTarget:self action:@selector(emotionBtnClicked:) forControlEvents:UIControlEventTouchDown];
             emotion.frame = CGRectMake(emotionX, emotionY, emotionLength, emotionLength);
 
             
@@ -202,25 +233,26 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-//    NSMutableArray *emotionArr = self.emotionArr;
-//    for (int i = 0; i<3; i++) {
-//        NSMutableArray *emotionRowArr = emotionArr[i];
-//        for (int j = 0; j<ZHEmotionViewCountPerRow; j++) {
-//            UIView *emotion = emotionRowArr[j];
-//            CGFloat emotionX = j*(ZHEmotionViewLength + ZHEmotionViewMargin) + ZHEmotionViewMargin;
-//            CGFloat emotionY = i*(ZHEmotionViewLength + ZHEmotionViewMargin) + ZHEmotionViewMargin;
-//            emotion.frame = CGRectMake(emotionX, emotionY, ZHEmotionViewLength, ZHEmotionViewLength);
-//        }
-//    }
+
     self.scrollView.frame = self.bounds;
-    self.scrollView.contentSize = CGSizeMake(self.width*3, 0);
+    self.scrollView.height = self.height/4*3;
+    
+    CGFloat pageControlX = 0;
+    CGFloat pageControlY = CGRectGetMaxY(self.scrollView.frame);
+    CGFloat pageControlW = self.width;
+    CGFloat pageControlH = self.height - pageControlY;
+    self.pageControl.frame = CGRectMake(pageControlX, pageControlY, pageControlW, pageControlH);
+}
+#pragma mark - emotion button 回调方法
+- (void)emotionBtnClicked:(ZHEmotion *)emotion{
+    [self sendCurrentEmotionClickedAtIndex:emotion.tag];
 }
 @end
 
 #pragma mark =====================================
 #pragma mark - ZHEmotionKeyboard
 
-@interface ZHEmotionKeyboard()<ZHEmotionToolBarDelegate>
+@interface ZHEmotionKeyboard()<ZHEmotionToolBarDelegate,ZHEmotionViewDelegate>
 @property (nonatomic ,weak) ZHEmotionView *emotionView;
 @property (nonatomic ,weak) ZHEmotionToolBar *toolBar;
 
@@ -248,7 +280,7 @@
 }
 - (void)setUpSubViews{
     ZHEmotionView *emotionView = [[ZHEmotionView alloc] init];
-    
+    emotionView.delegate = self;
     [self addSubview:emotionView];
     self.emotionView = emotionView;
     
@@ -329,5 +361,10 @@
         _defaultEmotions = [ZHEmotionModel objectArrayWithKeyValuesArray:emotions];
     }
     return  _defaultEmotions;
+}
+
+#pragma mark - emotionView delegate
+-(void)emotionView:(ZHEmotionView *)emotionView EmotionBtnClickedAtIndex:(NSUInteger)index{
+    NSLog(@"---%d",index);
 }
 @end
