@@ -71,23 +71,41 @@
 #pragma mark  ZHEmotion
 @interface ZHEmotion()
 @property (nonatomic ,weak) UIImageView *imageView;
+@property (nonatomic ,weak) UILabel *title;
 @end
 @implementation ZHEmotion
-- (instancetype)initWIthImageName:(NSString *)imageName{
-    if (self = [super init]) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        UIImageView *imageView = [[UIImageView alloc] init];
         [self addSubview:imageView];
         
         self.imageView = imageView;
         
+        UILabel *title = [[UILabel alloc] init];
+        [self addSubview:title];
+        self.title = title;
     }
     return self;
 }
+
+- (void)setEmotionWithEmotionModel:(ZHEmotionModel *)model{
+    if (model.png) {
+        self.imageView.image = [UIImage imageNamed:model.png];
+    }else{
+        self.title.text = [model.code stringByReplacingPercentEscapesUsingEncoding:NSUTF16StringEncoding];
+    }
+}
+
 -(void)layoutSubviews{
     [super layoutSubviews];
-    CGFloat imageLength = self.imageView.size.width;
-    self.imageView.x = (self.width - imageLength)/2;
-    self.imageView.y = (self.height - imageLength)/2;
+    
+    CGFloat titleW = 32;
+    CGFloat titleH = 32;
+    CGFloat titleX = (self.width - titleW)/2;
+    CGFloat titleY = (self.height - titleH)/2;
+    self.title.frame = CGRectMake(titleX, titleY, titleW, titleH);
+    
+    self.imageView.frame = self.title.frame;
 }
 
 
@@ -234,12 +252,12 @@
             CGFloat emotionX = col * emotionLength + i*self.scrollView.width;
             CGFloat emotionY = row * emotionLength;
             
-            ZHEmotion *emotion = [[ZHEmotion alloc] initWIthImageName:model.png];
+            ZHEmotion *emotion = [[ZHEmotion alloc] initWithFrame:CGRectMake(emotionX, emotionY, emotionLength, emotionLength)];
             emotion.tag = currentCount;
+            //emotion.backgroundColor = [UIColor grayColor];
+            [emotion setEmotionWithEmotionModel:model];
             [emotion addTarget:self action:@selector(emotionBtnTouchDown:) forControlEvents:UIControlEventTouchDown];
             [emotion addTarget:self action:@selector(emotionBtnTouchUpinside:) forControlEvents:UIControlEventTouchUpInside];
-            emotion.frame = CGRectMake(emotionX, emotionY, emotionLength, emotionLength);
-
             
             [self.scrollView addSubview:emotion];
         }

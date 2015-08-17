@@ -9,7 +9,7 @@
 #import "ZHSendStatusController.h"
 #import "ZHAccountModel.h"
 #import "ZHExtension.h"
-#import "ZHTextView.h"
+#import "ZHEmotionTextView.h"
 #import "AFNetworking.h"
 #import "ZHComposeToolBar.h"
 #import "ZHProgrossHUD.h"
@@ -18,7 +18,7 @@
 #import "ZHEmotionKeyboard.h"
 #import "ZHEmotionModel.h"
 @interface ZHSendStatusController ()<UITextViewDelegate,UIAlertViewDelegate,ZHComposeToolBarDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ZHEmotionKeyboardDelegate>
-@property (nonatomic ,weak) ZHTextView *textView;
+@property (nonatomic ,weak) ZHEmotionTextView *textView;
 @property (nonatomic ,weak) ZHComposeToolBar *toolBar;
 //@property (nonatomic ,strong) NSMutableArray *uploadPictureDataArr;
 @property (nonatomic ,weak) ZHComposeAlbum *album;
@@ -155,7 +155,7 @@
 
 - (void)initTextViewAndAlbum{
     
-    ZHTextView *textView = [[ZHTextView alloc] initWithFrame:self.view.bounds];
+    ZHEmotionTextView *textView = [[ZHEmotionTextView alloc] initWithFrame:self.view.bounds];
     
     textView.placeHolder = @"想说点社么呢...";
     textView.alwaysBounceVertical = YES;
@@ -287,12 +287,8 @@
 #pragma mark - emotionKB delegate
 
 -(void)EmotionKeyboard:(ZHEmotionKeyboard *)emotionKeyboard emotionInfo:(ZHEmotionModel *)emotionModel{
-    //NSLog(@"%@",emotionModel);
+    [self.textView setEmotionWithEmotionModel:emotionModel];
     
-    self.textView.attributedText = [self.textView.attributedText appendImage:emotionModel.png];
-    //self.textView.text = [NSString stringWithFormat:@"%@%@",self.textView.text,emotionModel.chs];
-    self.textView.font = [UIFont systemFontOfSize:16];
-    NSLog(@"%@",self.textView.text);
 }
 
 @end

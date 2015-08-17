@@ -281,6 +281,7 @@
 		FC4E1BCC1B7CA1F200BC7409 /* lxh_zhuanfa.gif in Resources */ = {isa = PBXBuildFile; fileRef = FC4E1AEC1B7CA1F200BC7409 /* lxh_zhuanfa.gif */; };
 		FC4E1BCD1B7CA1F200BC7409 /* lxh_zhuanfa.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4E1AED1B7CA1F200BC7409 /* lxh_zhuanfa.png */; };
 		FC4E1BCE1B7CA1F200BC7409 /* lxh_zhuanfa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4E1AEE1B7CA1F200BC7409 /* lxh_zhuanfa@2x.png */; };
+		FC52BA691B814D8F00DF7517 /* ZHEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC52BA681B814D8F00DF7517 /* ZHEmotionTextView.m */; };
 		FC5E8DEF1B7426FF004DE555 /* ZHEmotionKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5E8DEE1B7426FF004DE555 /* ZHEmotionKeyboard.m */; };
 		FC6FA3F31B6E2255005AD5EF /* ZHComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */; };
 		FC6FA3F61B6E2FC6005AD5EF /* ZHProgrossHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */; };
@@ -711,6 +712,8 @@
 		FC4E1AEC1B7CA1F200BC7409 /* lxh_zhuanfa.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = lxh_zhuanfa.gif; sourceTree = "<group>"; };
 		FC4E1AED1B7CA1F200BC7409 /* lxh_zhuanfa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lxh_zhuanfa.png; sourceTree = "<group>"; };
 		FC4E1AEE1B7CA1F200BC7409 /* lxh_zhuanfa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lxh_zhuanfa@2x.png"; sourceTree = "<group>"; };
+		FC52BA671B814D8F00DF7517 /* ZHEmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHEmotionTextView.h; sourceTree = "<group>"; };
+		FC52BA681B814D8F00DF7517 /* ZHEmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHEmotionTextView.m; sourceTree = "<group>"; };
 		FC5E8DED1B7426FF004DE555 /* ZHEmotionKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHEmotionKeyboard.h; sourceTree = "<group>"; };
 		FC5E8DEE1B7426FF004DE555 /* ZHEmotionKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHEmotionKeyboard.m; sourceTree = "<group>"; };
 		FC6FA3F11B6E2255005AD5EF /* ZHComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHComposeToolBar.h; sourceTree = "<group>"; };
@@ -1584,6 +1587,8 @@
 				FC7D19A81B732C4B009F1124 /* ZHComposeAlbum.m */,
 				FC5E8DED1B7426FF004DE555 /* ZHEmotionKeyboard.h */,
 				FC5E8DEE1B7426FF004DE555 /* ZHEmotionKeyboard.m */,
+				FC52BA671B814D8F00DF7517 /* ZHEmotionTextView.h */,
+				FC52BA681B814D8F00DF7517 /* ZHEmotionTextView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -2198,6 +2203,7 @@
 				FCCDFB461B6A0D0E00C17EBA /* ZHPictureView.m in Sources */,
 				FC25142B1B5397F50091A44A /* NSObject+MJProperty.m in Sources */,
 				FCE2E11E1AEF695700E6B314 /* ZHFutureTrendModel.m in Sources */,
+				FC52BA691B814D8F00DF7517 /* ZHEmotionTextView.m in Sources */,
 				FCBABF901B3B920F00BB2D93 /* ZHExtension.m in Sources */,
 				FC78DD931AE731FA007B445A /* AFURLResponseSerialization.m in Sources */,
 				FCAE9D281AE63CDC003D69D7 /* SDWebImageDownloader.m in Sources */,

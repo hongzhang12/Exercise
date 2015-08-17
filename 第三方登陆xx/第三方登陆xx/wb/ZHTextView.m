@@ -13,13 +13,13 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.font = [UIFont systemFontOfSize:ZHTextViewFontSize];
-        self.typingAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:[UIColor yellowColor]};
+        //self.typingAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:[UIColor yellowColor]};
         self.backgroundColor = [UIColor whiteColor];
         self.placeHolderColor = [UIColor blackColor];
         [self becomeFirstResponder];
         
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center addObserver:self selector:@selector(setNeedsDisplay) name:UITextViewTextDidChangeNotification object:self];
+        [center addObserver:self selector:@selector(textchanged:) name:UITextViewTextDidChangeNotification object:self];
     }
     return self;
 }
@@ -29,23 +29,12 @@
     [center removeObserver:self];
 }
 
--(void)setText:(NSString *)text{
-    [super setText:text];
-    [self setNeedsDisplay];
-}
-- (void)setAttributedText:(NSAttributedString *)attributedText
-{
-    [super setAttributedText:attributedText];
-    [self setNeedsDisplay];
-}
 - (void)setFont:(UIFont *)font
 {
     [super setFont:font];
     [self setNeedsDisplay];
 }
--(void)willMoveToSuperview:(UIView *)newSuperview{
-    [super willMoveToSuperview:newSuperview];
-}
+
 - (void)setPlaceHolder:(NSString *)placeHolder
 {
     _placeHolder = [placeHolder copy];
@@ -54,6 +43,11 @@
 - (void)setPlaceHolderColor:(UIColor *)placeHolderColor
 {
     _placeHolderColor = placeHolderColor;
+    [self setNeedsDisplay];
+}
+
+- (void)textchanged:(NSNotification*)info{
+    //NSLog(@"%@",[info class]);
     [self setNeedsDisplay];
 }
 

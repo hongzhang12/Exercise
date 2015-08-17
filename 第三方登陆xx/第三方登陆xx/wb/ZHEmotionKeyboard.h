@@ -31,9 +31,9 @@ typedef enum{
 #define ZHEmotionViewPageSize 23
 #define ZHEmotionViewCountPerRow 8
 
-
+@class ZHEmotionModel;
 @interface ZHEmotion :UIControl
-- (instancetype)initWIthImageName:(NSString *)imageName;
+- (void)setEmotionWithEmotionModel:(ZHEmotionModel *)model;
 @end
 
 @class ZHEmotionView;
