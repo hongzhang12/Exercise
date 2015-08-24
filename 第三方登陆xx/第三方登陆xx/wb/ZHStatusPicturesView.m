@@ -98,7 +98,7 @@
     NSMutableArray *pictures = [NSMutableArray array];
     for (ZHPictureBtn *pic in self.pictureImages) {
         
-        [pictures addObject:pic.imageView.image];
+        [pictures addObject:pic.imageView];
     }
     
 //    ZHPictureView *pictureView = [[ZHPictureView alloc] initWithImages:pictures andPictureID:pictureBtn.tag andOriginalFrame:[pictureBtn golbalFrame]];
@@ -114,7 +114,7 @@
     }
     
     
-    ZHPictureView *pictureView = [[ZHPictureView alloc] initWithImageUrlS:pic_urls andPictureID:pictureBtn.tag andOriginalFrame:[pictureBtn golbalFrame]];
+    ZHPictureView *pictureView = [[ZHPictureView alloc] initWithBigImageUrlS:pic_urls andPictureID:pictureBtn.tag andPictures:pictures];
     //[hud hide:YES];
 
     [pictureView run];

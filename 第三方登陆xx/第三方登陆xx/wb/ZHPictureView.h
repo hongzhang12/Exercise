@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef enum{
-    ZHPictureTypeImage,
-    ZHPictureTypeUrl
-}ZHPictureType;
+//typedef enum{
+//    ZHPictureTypeImage,
+//    ZHPictureTypeUrl
+//}ZHPictureType;
 #define ZHPictureViewTransitionTime 0.25
 #define ZHPictureViewRunTime 0.75
 
@@ -21,16 +21,17 @@ typedef enum{
 @interface ZHPictureView : UIView
 @property (nonatomic ,weak) UILabel *pageLabel;
 @property (nonatomic ,strong) NSMutableArray *pictureImages;
+@property (nonatomic ,strong) NSArray *pictures;
 @property (nonatomic ,strong) NSArray *pictureUrls;
 @property (nonatomic ,assign) int pictureID;
-@property (nonatomic ,assign) CGRect originalFrame;
+
 @property (nonatomic ,weak) UIScrollView *scrollView;
-@property (nonatomic ,assign) ZHPictureType pictureType;
+
 /*
  默认属性
 */
 
-- (instancetype)initWithImages:(NSMutableArray *)images andPictureID:(int)pictureID andOriginalFrame:(CGRect)originalFrame;
-- (instancetype)initWithImageUrlS:(NSArray *)imageUrls andPictureID:(int)pictureID andOriginalFrame:(CGRect)originalFrame;
+//- (instancetype)initWithImages:(NSMutableArray *)images andPictureID:(int)pictureID andOriginalFrame:(CGRect)originalFrame;
+-(instancetype)initWithBigImageUrlS:(NSArray *)imageUrls andPictureID:(int)pictureID andPictures:(NSArray *)pictures;
 - (void)run;
 @end
