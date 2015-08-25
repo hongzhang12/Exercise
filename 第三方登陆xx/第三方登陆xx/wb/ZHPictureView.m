@@ -12,8 +12,6 @@
 #import "UIImageView+WebCache.h"
 @implementation ZHPicture
 
-
-
 @end
 
 @interface ZHPictureView()<UIScrollViewDelegate>
@@ -66,9 +64,15 @@
         
         for (int i = 0;i< pictures.count;i++) {
 
-            ZHPicture *imageView = [[ZHPicture alloc] initWithFrame:CGRectMake(ScreenWidth*i, 0, ScreenWidth, ScreenHeight)];
+            ZHPicture *imageView = [[ZHPicture alloc] init];
+            if (i == self.pictureID) {
+                UIImageView *smallImage = pictures[i];
+                imageView.frame = [smallImage golbalFrame];
+                imageView.x = imageView.x + ScreenWidth*i;
+            }else{
+                imageView.frame = CGRectMake(ScreenWidth*i, 0, ScreenWidth, ScreenHeight);
+            }
             imageView.backgroundColor = [UIColor clearColor];
-            imageView.centerY = ScreenHeight/2;
             
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             imageView.userInteractionEnabled = YES;
@@ -77,80 +81,51 @@
             [self.pictureImages addObject:imageView];
             
         }
-        if
-        self.scrollView.contentOffset = CGPointMake(ScreenWidth*self.pictureID, 0);
+        if(self.pictureID == 0){
+            [self loadBigImsgeAtIndex:self.pictureID];
+        }else{
+            self.scrollView.contentOffset = CGPointMake(ScreenWidth*self.pictureID, 0);
+        }
+        
         
     }
     return self;
 }
-//- (instancetype)initWithImages:(NSMutableArray *)images andPictureID:(int)pictureID andOriginalFrame:(CGRect)originalFrame{
-//    if (self = [super init]) {
-//        self.pictureType = ZHPictureTypeImage;
-//        self.pictureImages = images;
-//        self.alpha = 0;
-//
-//
-//        if (pictureID > (images.count - 1)) {
-//            self.pictureID = 0;
-//        }else{
-//            self.pictureID = pictureID;
-//        }
-//        
-//        UILabel *pageLabel = [[UILabel alloc] init];
-//        pageLabel.width = 50;
-//        pageLabel.height = 15;
-//        pageLabel.centerX = ScreenWidth/2;
-//        pageLabel.y = 30;
-//        
-//        pageLabel.text = [NSString stringWithFormat:@"%d/%d",pictureID+1,(int)images.count];
-//        pageLabel.textColor = [UIColor whiteColor];
-//        [self insertSubview:pageLabel aboveSubview:self.scrollView];
-//        self.pageLabel = pageLabel;
-//
-//        
-//        self.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
-//        self.scrollView.delegate = self;
-//        self.scrollView.backgroundColor = [UIColor blackColor];
-//        self.scrollView.pagingEnabled = YES;
-//        self.scrollView.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFromSuperview)];
-//        [self addGestureRecognizer:tap];
-//
-//        self.scrollView.contentSize = CGSizeMake(ScreenWidth*images.count, 0);
-//        self.scrollView.contentOffset = CGPointMake(ScreenWidth*self.pictureID, 0);
-//        
-//        
-//        for (int i = 0;i< images.count;i++) {
-//            UIImage *image = images[i];
-//            ZHPicture *imageView = [[ZHPicture alloc] initWithImage:image];
-//            imageView.userInteractionEnabled = YES;
-//            
-//            [self.scrollView addSubview:imageView];
-//            
-//            if (i == pictureID) {
-//
-//                imageView.x += ScreenWidth * i;
-//                //imageView.size = image.size;
-//                self.ratio = image.size.height/image.size.width;
-//                self.originalView = imageView;
-//                //self.originalView.alpha = 1;
-//            }else{
-//                CGFloat ratio = imageView.height/imageView.width;
-//                imageView.frame = CGRectMake(ScreenWidth*i, (ScreenHeight-ratio*ScreenWidth)/2, ScreenWidth, ratio*ScreenWidth);
-//            }
-//        }
-//        
-//    }
-//    return self;
-//}
 
 -(void)removeFromSuperview
 {
-    [UIView animateWithDuration:ZHPictureViewTransitionTime animations:^{
-        self.alpha = 0;
+    for (int i = 0; i<self.pictures.count; i++) {
+        UIImageView *smallPicture = self.pictures[i];
+        UIImageView *bigPicture = self.pictureImages[i];
+        if (bigPicture.image) {
+            smallPicture.image = bigPicture.image;
+        }
+        
+    }
+    NSUInteger index = [[self.pageLabel.text substringToIndex:1] integerValue] - 1;
+
+    UIImageView *bigImage = self.pictureImages[index];
+    UIImageView *smallImage = self.pictures[index];
+    CGRect frame = [smallImage golbalFrame];
+    frame.origin.x = frame.origin.x + ScreenWidth*index;
+    
+    [UIView animateWithDuration:ZHPictureViewRunTime animations:^{
+
+        bigImage.frame = frame;
+        
+        
     } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:ZHPictureViewTransitionTime animations:^{
+//            self.alpha = 0;
+//    
+//        } completion:^(BOOL finished) {
+//            [super removeFromSuperview];
+//        }];
         [super removeFromSuperview];
+        
     }];
+    
+
 }
 - (void)run{
     [[UIWindow currentWindow] addSubview:self];
@@ -161,11 +136,8 @@
     
     [UIView animateWithDuration:ZHPictureViewRunTime animations:^{
         
-        if (self.ratio < (ScreenHeight/ScreenWidth)) {
-//            self.originalView.frame = CGRectMake(ScreenWidth*self.pictureID, (ScreenHeight-self.ratio*ScreenWidth)/2, ScreenWidth, self.ratio*ScreenWidth);
-        }else{
-//            self.originalView.frame = CGRectMake(ScreenWidth*self.pictureID+(ScreenWidth-ScreenHeight/self.ratio)/2, 0, ScreenHeight/self.ratio, ScreenHeight);
-        }
+        UIImageView *bigImage = self.pictureImages[self.pictureID];
+        bigImage.frame = CGRectMake(ScreenWidth*self.pictureID, 0, ScreenWidth, ScreenHeight);
 
 
     } completion:^(BOOL finished) {

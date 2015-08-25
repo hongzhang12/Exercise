@@ -11,7 +11,7 @@
 //    ZHPictureTypeImage,
 //    ZHPictureTypeUrl
 //}ZHPictureType;
-#define ZHPictureViewTransitionTime 0.25
+#define ZHPictureViewTransitionTime 0.1
 #define ZHPictureViewRunTime 0.75
 
 @interface ZHPicture :UIImageView

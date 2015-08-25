@@ -19,18 +19,18 @@
     [super viewDidLoad];
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeToslideBar)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    //[self.view addGestureRecognizer:swipeRight];
+    [self.view addGestureRecognizer:swipeRight];
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeForBack)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    //[self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeLeft];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panForSlider:)];
-    [self.view addGestureRecognizer:pan];
+    //[self.view addGestureRecognizer:pan];
     
     self.view.backgroundColor = [UIColor orangeColor];
     
-    ZHSliderTableView *test = [[ZHSliderTableView alloc] initWithFrame:CGRectMake(-140, 0, 140, ScreenHeight)];
+    ZHSliderTableView *test = [[ZHSliderTableView alloc] initWithFrame:CGRectMake(-200, 0, 200, ScreenHeight)];
     [self.view insertSubview:test atIndex:0];
     test.dataSource = self;
     test.delegate = self;
@@ -51,7 +51,7 @@
     if (self.sliderState == ZHTabBarControllerSliderStateHidden) {
         topX = 0 + translationPoint.x;
         if (self.sliderTableView.x <-1) {
-            self.sliderTableView.x = translationPoint.x-140;
+            self.sliderTableView.x = translationPoint.x-200;
         }else{
             self.sliderTableView.x = 0;
         }
@@ -60,7 +60,7 @@
         if (self.sliderTableView.x >-139) {
             self.sliderTableView.x = translationPoint.x;
         }else{
-            self.sliderTableView.x = -140;
+            self.sliderTableView.x = -200;
         }
     }
     
@@ -122,9 +122,11 @@
     
     [UIView animateWithDuration:0.4 animations:^{
         topView.frame = CGRectMake(topX, topY, topW, topH);
+        self.sliderTableView.frame = CGRectMake(0, self.sliderTableView.y, self.sliderTableView.width, self.sliderTableView.height);
     } completion:^(BOOL finished) {
         //topView.userInteractionEnabled = NO;
         //topView.frame = CGRectMake(topX, topY, topW, topH);
+        
         for (UIView *subView in self.view.subviews) {
             if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
                 subView.userInteractionEnabled = NO;
@@ -143,6 +145,7 @@
     
     [UIView animateWithDuration:0.4 animations:^{
         topView.frame = self.view.bounds;
+        self.sliderTableView.frame = CGRectMake(-200, self.sliderTableView.y, self.sliderTableView.width, self.sliderTableView.height);
     } completion:^(BOOL finished) {
         for (UIView *subView in self.view.subviews) {
             if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
