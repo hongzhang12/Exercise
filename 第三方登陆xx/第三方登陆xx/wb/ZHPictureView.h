@@ -14,22 +14,23 @@
 #define ZHPictureViewTransitionTime 0.1
 #define ZHPictureViewRunTime 0.75
 
+
 @interface ZHPicture :UIImageView
 
 @end
 
 @interface ZHPictureView : UIView
-@property (nonatomic ,weak) UILabel *pageLabel;
-@property (nonatomic ,strong) NSMutableArray *pictureImages;
-@property (nonatomic ,strong) NSArray *pictures;
-@property (nonatomic ,strong) NSArray *pictureUrls;
-@property (nonatomic ,assign) int pictureID;
-
-@property (nonatomic ,weak) UIScrollView *scrollView;
-
 /*
- 默认属性
-*/
+默认属性
+ */
+// 默认2.0
+@property (nonatomic ,assign) CGFloat pictureMaxScale;
+// 默认0.3
+@property (nonatomic ,assign) CGFloat pictureMinScale;
+
+
+
+
 
 //- (instancetype)initWithImages:(NSMutableArray *)images andPictureID:(int)pictureID andOriginalFrame:(CGRect)originalFrame;
 -(instancetype)initWithBigImageUrlS:(NSArray *)imageUrls andPictureID:(int)pictureID andPictures:(NSArray *)pictures;

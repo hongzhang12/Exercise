@@ -11,12 +11,28 @@
 #import "ZHExtension.h"
 #import "UIImageView+WebCache.h"
 @implementation ZHPicture
+- (instancetype)init
+{
+    if (self = [super init]) {
+
+    }
+    return self;
+}
 
 @end
 
 @interface ZHPictureView()<UIScrollViewDelegate>
+@property (nonatomic ,assign) CGFloat preScale;
+@property (nonatomic ,assign) CGPoint prePoint;
 
 @property (nonatomic ,assign) CGFloat ratio;
+@property (nonatomic ,weak) UILabel *pageLabel;
+@property (nonatomic ,strong) NSMutableArray *pictureImages;
+@property (nonatomic ,strong) NSArray *pictures;
+@property (nonatomic ,strong) NSArray *pictureUrls;
+@property (nonatomic ,assign) int pictureID;
+
+@property (nonatomic ,weak) UIScrollView *scrollView;
 @end
 @implementation ZHPictureView
 
@@ -24,14 +40,25 @@
 
     if (self = [super init]) {
         
-
+        self.pictureMaxScale = 2;
+        self.pictureMinScale = 0.3;
+        self.preScale = 1.0;
+        self.prePoint = CGPointMake(0, 0);
         self.pictureUrls = imageUrls;
         self.pictures = pictures;
         self.alpha = 0;
         self.frame = CGRectMake(0, 0, ScreenWidth,ScreenHeight);
+        
+        UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
+        [self addGestureRecognizer:pinch];
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFromSuperview)];
+        [tap requireGestureRecognizerToFail:pinch];
         [self addGestureRecognizer:tap];
 
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        [self addGestureRecognizer:pan];
+        
         
         if (pictureID > (imageUrls.count - 1)) {
             self.pictureID = 0;
@@ -80,6 +107,7 @@
             [self.scrollView addSubview:imageView];
             [self.pictureImages addObject:imageView];
             
+
         }
         if(self.pictureID == 0){
             [self loadBigImsgeAtIndex:self.pictureID];
@@ -92,6 +120,39 @@
     return self;
 }
 
+- (void)pan:(UIPanGestureRecognizer *)pan{
+    
+    CGPoint trans = [pan translationInView:self];
+    ZHPicture *picture = self.pictureImages[[self currentIndex]];
+    CGPoint transPoint = CGPointMake(trans.x+self.prePoint.x , self.prePoint.y+trans.y);
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        picture.transform = CGAffineTransformScale(picture.transform, transPoint.x, transPoint.y);
+    }else{
+        picture.transform = CGAffineTransformMakeTranslation(transPoint.x, transPoint.y);
+    }
+    
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        self.prePoint = CGPointMake(transPoint.x, transPoint.y);
+    }
+}
+
+- (void)pinch:(UIPinchGestureRecognizer *)pinch{
+
+    ZHPicture *picture = self.pictureImages[[self currentIndex]];
+    CGFloat scale = self.preScale * pinch.scale;
+    if (scale >self.pictureMaxScale) scale = self.pictureMaxScale;
+    if (scale <self.pictureMinScale) scale = self.pictureMinScale;
+    if (pinch.state == UIGestureRecognizerStateBegan) {
+        picture.transform = CGAffineTransformScale(self.transform, scale, scale);
+    }else{
+        picture.transform = CGAffineTransformMakeScale(scale, scale);
+    }
+    
+    if (pinch.state == UIGestureRecognizerStateEnded) {
+        self.preScale = scale;
+    }
+    
+}
 -(void)removeFromSuperview
 {
     for (int i = 0; i<self.pictures.count; i++) {
@@ -102,7 +163,7 @@
         }
         
     }
-    NSUInteger index = [[self.pageLabel.text substringToIndex:1] integerValue] - 1;
+    NSUInteger index = [self currentIndex];
 
     UIImageView *bigImage = self.pictureImages[index];
     UIImageView *smallImage = self.pictures[index];
@@ -160,11 +221,17 @@
 {
     CGFloat x = scrollView.contentOffset.x;
     NSUInteger intX = (NSUInteger)(x/ScreenWidth+0.5);
-    NSLog(@"%f---%d",x/ScreenWidth,intX);
+
+    NSUInteger currentIndex = [self currentIndex];
+    if (currentIndex != intX+1) {
+        ZHPicture *picture = self.pictureImages[currentIndex];
+        picture.transform = CGAffineTransformIdentity;
+    }
     
     [self loadBigImsgeAtIndex:intX];
     
     self.pageLabel.text = [NSString stringWithFormat:@"%d/%d",intX+1,self.pictureUrls.count];
+    
 }
 - (void)loadBigImsgeAtIndex:(NSUInteger)index{
     UIImageView *imageView = self.pictureImages[index];
@@ -196,5 +263,8 @@
         _scrollView = scrollView;
     }
     return _scrollView;
+}
+- (NSUInteger)currentIndex{
+    return [[self.pageLabel.text substringToIndex:1] integerValue] - 1;
 }
 @end

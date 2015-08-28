@@ -19,6 +19,7 @@
 #import "ZHHomeTableViewController.h"
 #import "SDWebImageManager.h"
 #import "LoginViewController.h"
+#import "ZHAccountModel.h"
 #define PreiousVersion [[NSUserDefaults standardUserDefaults] objectForKey:@"preiousVersion"]
 #define CurrentVersion ([NSBundle mainBundle].infoDictionary)[@"CFBundleShortVersionString"]
 @interface AppDelegate ()
@@ -43,17 +44,24 @@
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
+    UIViewController *rootViewController;
     if ([CurrentVersion isEqualToString:PreiousVersion]) {
 
-        LoginViewController *loginViewcontroller = [[LoginViewController alloc] init];
-        
-        window.rootViewController = [[customNavigationController alloc] initWithRootViewController:loginViewcontroller];
+        if (![ZHAccountModel accountModel].oAuthToken) {
+            LoginViewController *loginViewcontroller = [[LoginViewController alloc] init];
+            
+            rootViewController =  [[customNavigationController alloc] initWithRootViewController:loginViewcontroller];
+        }else{
+            ZHHomeTableViewController *homeViewController = [[ZHHomeTableViewController alloc] init];
+            rootViewController =  [[customNavigationController alloc] initWithRootViewController:homeViewController];
+        }
+
     }else{
         [userDefaults setObject:CurrentVersion forKey:@"preiousVersion"];
         [userDefaults synchronize];
         window.rootViewController = [[ZHNewFeaturesController alloc] init];
     }
-    
+    window.rootViewController = rootViewController;
     [window makeKeyAndVisible];
     self.window = window;
     

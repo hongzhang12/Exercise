@@ -9,6 +9,9 @@
 #import "ZHNewFeaturesController.h"
 #import "ZHExtension.h"
 #import "customNavigationController.h"
+#import "LoginViewController.h"
+#import "ZHHomeTableViewController.h"
+#import "ZHAccountModel.h"
 #define NewFeaturesPage 4
 @interface ZHNewFeaturesController ()<UIScrollViewDelegate>
 @property (nonatomic ,weak) UIScrollView *scrollView;
@@ -81,10 +84,18 @@
 }
 - (void)beginBtnClicked:(UIButton *)button{
     
-    customNavigationController *nav = [[customNavigationController alloc] init];
+    UIViewController *rootViewController;
+    if (![ZHAccountModel accountModel].oAuthToken) {
+        LoginViewController *loginViewcontroller = [[LoginViewController alloc] init];
+        
+        rootViewController =  [[customNavigationController alloc] initWithRootViewController:loginViewcontroller];
+    }else{
+        ZHHomeTableViewController *homeViewController = [[ZHHomeTableViewController alloc] init];
+        rootViewController =  [[customNavigationController alloc] initWithRootViewController:homeViewController];
+    }
 
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    window.rootViewController = nav;
+    window.rootViewController = rootViewController;
 
     
 }
