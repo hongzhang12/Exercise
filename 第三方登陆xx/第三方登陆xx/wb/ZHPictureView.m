@@ -78,7 +78,7 @@
         [self insertSubview:pageLabel aboveSubview:self.scrollView];
         self.pageLabel = pageLabel;
         
-        
+        self.scrollView.scrollEnabled = NO;
         self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor blackColor];
         self.scrollView.pagingEnabled = YES;
@@ -121,18 +121,35 @@
 }
 
 - (void)pan:(UIPanGestureRecognizer *)pan{
-    
-    CGPoint trans = [pan translationInView:self];
     ZHPicture *picture = self.pictureImages[[self currentIndex]];
-    CGPoint transPoint = CGPointMake(trans.x+self.prePoint.x , self.prePoint.y+trans.y);
-    if (pan.state == UIGestureRecognizerStateBegan) {
-        picture.transform = CGAffineTransformScale(picture.transform, transPoint.x, transPoint.y);
-    }else{
-        picture.transform = CGAffineTransformMakeTranslation(transPoint.x, transPoint.y);
-    }
+
+
     
+    CGPoint trans = [pan translationInView:[UIWindow currentWindow]];
+    
+    CGPoint currentPoint = CGPointMake(trans.x-self.prePoint.x, trans.y-self.prePoint.y);
+
+    
+    if (pan.state == UIGestureRecognizerStateBegan) {
+
+        CGPoint transPoint = CGPointMake(trans.x+self.prePoint.x , self.prePoint.y+trans.y);
+        CGAffineTransform aff = picture.transform;
+        aff = CGAffineTransformTranslate(picture.transform, transPoint.x, transPoint.y);
+        picture.transform = aff;
+
+    }else{
+        picture.transform = CGAffineTransformTranslate(picture.transform,currentPoint.x, currentPoint.y);
+
+        if (picture.x>self.width*[self currentIndex]) {
+            picture.x = self.width*[self currentIndex];
+            self.scrollView.scrollEnabled = YES;
+        }
+        NSLog(@"%@",NSStringFromCGRect(picture.frame));
+
+    }
+    self.prePoint = CGPointMake(trans.x, trans.y);
     if (pan.state == UIGestureRecognizerStateEnded) {
-        self.prePoint = CGPointMake(transPoint.x, transPoint.y);
+        self.prePoint = CGPointMake(0, 0);
     }
 }
 
@@ -226,6 +243,7 @@
     if (currentIndex != intX+1) {
         ZHPicture *picture = self.pictureImages[currentIndex];
         picture.transform = CGAffineTransformIdentity;
+//        self.scrollView.userInteractionEnabled = NO;
     }
     
     [self loadBigImsgeAtIndex:intX];
