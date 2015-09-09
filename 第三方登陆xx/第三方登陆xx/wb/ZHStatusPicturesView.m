@@ -118,5 +118,7 @@
     //[hud hide:YES];
 
     [pictureView run];
+    
+
 }
 @end
