@@ -19,14 +19,14 @@
     [super viewDidLoad];
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeToslideBar)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:swipeRight];
+    //[self.view addGestureRecognizer:swipeRight];
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeForBack)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeft];
+    //[self.view addGestureRecognizer:swipeLeft];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panForSlider:)];
-    //[self.view addGestureRecognizer:pan];
+    [self.view addGestureRecognizer:pan];
     
     self.view.backgroundColor = [UIColor orangeColor];
     
@@ -38,35 +38,23 @@
     self.sliderTableView = test;
     
     self.sliderState = ZHTabBarControllerSliderStateHidden;
+    self.tabBar.hidden = YES;
 }
 - (void)panForSlider:(UIPanGestureRecognizer *)pan{
     NSLog(@"%f",[pan locationInView:self.view].x);
+    
+    static CGFloat x = 0;
+    
     CGPoint translationPoint = [pan translationInView:self.view];
-    
+    CGPoint vel = [pan velocityInView:self.view];
     UIView *topView = self.selectedViewController.view;
-    
+
     CGFloat ratio = topView.width/topView.height;
-    
-    CGFloat topX;
-    if (self.sliderState == ZHTabBarControllerSliderStateHidden) {
-        topX = 0 + translationPoint.x;
-        if (self.sliderTableView.x <-1) {
-            self.sliderTableView.x = translationPoint.x-200;
-        }else{
-            self.sliderTableView.x = 0;
-        }
-    }else{
-        topX = ZHTabBarControllerSliderShowX + translationPoint.x;
-        if (self.sliderTableView.x >-139) {
-            self.sliderTableView.x = translationPoint.x;
-        }else{
-            self.sliderTableView.x = -200;
-        }
-    }
-    
-    
-    
+
+
     if (pan.state == UIGestureRecognizerStateBegan) {
+        x = topView.x;
+        
         for (UIView *subView in self.view.subviews) {
             if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
                 subView.userInteractionEnabled = NO;
@@ -79,32 +67,49 @@
             if ([subView isKindOfClass:NSClassFromString(@"UITransitionView")]) {
                 
                 NSLog(@"%@",subView.subviews);
-                
-                if (topX>ZHTabBarControllerSliderWillShowX) {
-                    topX = ZHTabBarControllerSliderShowX;
-                    self.sliderState = ZHTabBarControllerSliderStateShow;
-                    subView.userInteractionEnabled = NO;
-                }else{
-                    topX = 0;
-                    self.sliderState = ZHTabBarControllerSliderStateHidden;
-                    subView.userInteractionEnabled = YES;
-                }
+                subView.userInteractionEnabled = YES;
+
             }
         }
     }
+    CGFloat topX = translationPoint.x+x;
     CGFloat topY = topX/3;
     CGFloat topH = self.view.height - topY*2;
     CGFloat topW = ratio*topH;
     
-    if (topX<0 || topX>ZHTabBarControllerSliderShowX) {
-        NSLog(@"%f",topX);
-        return;
-    };
+//    if (topX<0 || topX>ZHTabBarControllerSliderShowX) {
+//        NSLog(@"%f",topX);
+//        return;
+//    };
     
     if (pan.state == UIGestureRecognizerStateEnded) {
-        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            topView.frame = CGRectMake(topX, topY, topW, topH);
-        } completion:nil];
+        
+        if (self.sliderState == ZHTabBarControllerSliderStateHidden) {
+            if (vel.x>2) {
+                self.sliderState = ZHTabBarControllerSliderStateShow;
+                [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    topView.frame = CGRectMake(240, 80, 320*ratio, 320);
+                } completion:nil];
+            }else{
+                [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    topView.frame = CGRectMake(0, 0, 320, 480);
+                } completion:nil];
+            }
+        }else{
+            if (vel.x<-2) {
+                self.sliderState = ZHTabBarControllerSliderStateHidden;
+                [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    topView.frame = CGRectMake(0, 0, 320, 480);
+                } completion:nil];
+            }else{
+                [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    
+                    topView.frame = CGRectMake(240, 80, 320*ratio, 320);
+                } completion:nil];
+            }
+        }
+            
+        
     }else{
         topView.frame = CGRectMake(topX, topY, topW, topH);
     }

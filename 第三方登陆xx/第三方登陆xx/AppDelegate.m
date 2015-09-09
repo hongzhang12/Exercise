@@ -20,6 +20,7 @@
 #import "SDWebImageManager.h"
 #import "LoginViewController.h"
 #import "ZHAccountModel.h"
+#import "ZHTabBarController.h"
 #define PreiousVersion [[NSUserDefaults standardUserDefaults] objectForKey:@"preiousVersion"]
 #define CurrentVersion ([NSBundle mainBundle].infoDictionary)[@"CFBundleShortVersionString"]
 @interface AppDelegate ()
@@ -52,8 +53,13 @@
             
             rootViewController =  [[customNavigationController alloc] initWithRootViewController:loginViewcontroller];
         }else{
+        
+            ZHTabBarController *tabBarController = [[ZHTabBarController alloc] init];
             ZHHomeTableViewController *homeViewController = [[ZHHomeTableViewController alloc] init];
-            rootViewController =  [[customNavigationController alloc] initWithRootViewController:homeViewController];
+            
+            customNavigationController *navController = [[customNavigationController alloc] initWithRootViewController:homeViewController];
+            tabBarController.viewControllers = @[navController];
+            rootViewController =  tabBarController;
         }
 
     }else{
