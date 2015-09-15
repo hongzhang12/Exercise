@@ -21,6 +21,7 @@
         self.minimumZoomScale = 0.5;
 
         self.alwaysBounceHorizontal = YES;
+        self.alwaysBounceVertical = YES;
         self.contentSize = CGSizeMake(ScreenWidth, ScreenHeight);
 
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];

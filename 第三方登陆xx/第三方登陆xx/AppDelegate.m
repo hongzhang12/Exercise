@@ -15,8 +15,8 @@
 #import "WeiboSDK.h"
 #import <BaiduMapAPI/BMapKit.h>
 #import "ZHNewFeaturesController.h"
-#import "customNavigationController.h"
-#import "ZHHomeTableViewController.h"
+
+
 #import "SDWebImageManager.h"
 #import "LoginViewController.h"
 #import "ZHAccountModel.h"
@@ -51,14 +51,11 @@
         if (![ZHAccountModel accountModel].oAuthToken) {
             LoginViewController *loginViewcontroller = [[LoginViewController alloc] init];
             
-            rootViewController =  [[customNavigationController alloc] initWithRootViewController:loginViewcontroller];
+            rootViewController =  [[UINavigationController alloc] initWithRootViewController:loginViewcontroller];
         }else{
         
             ZHTabBarController *tabBarController = [[ZHTabBarController alloc] init];
-            ZHHomeTableViewController *homeViewController = [[ZHHomeTableViewController alloc] init];
             
-            customNavigationController *navController = [[customNavigationController alloc] initWithRootViewController:homeViewController];
-            tabBarController.viewControllers = @[navController];
             rootViewController =  tabBarController;
         }
 

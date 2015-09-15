@@ -8,11 +8,16 @@
 
 #import "ZHTabBarController.h"
 #import "ZHSliderTableView.h"
-
+#import "ZHHomeTableViewController.h"
+#import "ZHWeatherController.h"
+#import "customNavigationController.h"
+#import "ZHSliderModel.h"
 @interface ZHTabBarController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,weak) ZHSliderTableView *sliderTableView;
 @property (nonatomic ,assign) ZHTabBarControllerSliderState sliderState;
 @property (nonatomic ,weak) UIView *transitionView;
+
+@property (nonatomic ,strong) NSMutableArray *sliderModelArr;
 @end
 
 @implementation ZHTabBarController
@@ -49,6 +54,24 @@
     
     self.sliderState = ZHTabBarControllerSliderStateHidden;
     self.tabBar.hidden = YES;
+    
+    ZHHomeTableViewController *homeViewController = [[ZHHomeTableViewController alloc] init];
+    
+    [self addViewControllers:homeViewController title:@"WB"];
+    
+    ZHWeatherController *weatherViewController = [[ZHWeatherController alloc] init];
+    [self addViewControllers:weatherViewController title:@"天气"];
+    
+}
+- (void)addViewControllers:(UIViewController *)controller title:(NSString *)title{
+    customNavigationController *navController = [[customNavigationController alloc] initWithRootViewController:controller];
+    NSMutableArray *tempArr = [NSMutableArray arrayWithArray:self.viewControllers];
+    [tempArr addObject:navController];
+    self.viewControllers = tempArr;
+    
+    ZHSliderModel *model = [[ZHSliderModel alloc] init];
+    model.name = title;
+    [self.sliderModelArr addObject:model];
 }
 - (void)panForSlider:(UIPanGestureRecognizer *)pan{
     NSLog(@"%f",[pan locationInView:self.view].x);
@@ -162,26 +185,66 @@
 
 #pragma mark - tableView delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.sliderModelArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *sliderCellID = @"sliderCellID";
-    static int i = 0;
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sliderCellID];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sliderCellID];
     }
+    ZHSliderModel *model = self.sliderModelArr[indexPath.row];
+    
     cell.backgroundColor = [UIColor clearColor];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%d%d%d",i,i,i];
+    cell.textLabel.text = model.name;
     cell.textLabel.textColor = [UIColor whiteColor];
-    i++;
+
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"%@",cell.textLabel.text);
     
+    self.selectedViewController = self.viewControllers[indexPath.row];
+    
+    UIView *topView = self.selectedViewController.view;
+    topView.frame = CGRectMake(240, 80, 320*ScreenWidth/ScreenHeight, 320);
+    [self.sliderTableView hidden];
+    self.sliderState = ZHTabBarControllerSliderStateHidden;
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        topView.frame = CGRectMake(0, 0, 320, 480);
+    } completion:nil];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        UIView *header = [[UIView alloc] init];
+        header.backgroundColor = [UIColor orangeColor];
+        return header;
+    }else{
+        return nil;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        
+        return 100;
+    }else{
+        return 0;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 70;
+}
+
+-(NSMutableArray *)sliderModelArr{
+    if (_sliderModelArr == nil) {
+        _sliderModelArr = [NSMutableArray array];
+    }
+    return _sliderModelArr;
 }
 @end

@@ -286,11 +286,6 @@
 		FC6FA3F31B6E2255005AD5EF /* ZHComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F21B6E2255005AD5EF /* ZHComposeToolBar.m */; };
 		FC6FA3F61B6E2FC6005AD5EF /* ZHProgrossHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */; };
 		FC6FA3F81B6E330F005AD5EF /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC6FA3F71B6E330F005AD5EF /* Storyboard.storyboard */; };
-		FC6FAE5F1BA2E11D00EA00B1 /* questionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FAE5A1BA2E11D00EA00B1 /* questionCell.m */; };
-		FC6FAE601BA2E11D00EA00B1 /* questionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FAE5C1BA2E11D00EA00B1 /* questionView.m */; };
-		FC6FAE611BA2E11D00EA00B1 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FAE5E1BA2E11D00EA00B1 /* QuestionViewController.m */; };
-		FC6FAE641BA2E12D00EA00B1 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FAE631BA2E12D00EA00B1 /* DataModel.m */; };
-		FC6FAE671BA2E13D00EA00B1 /* SLSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6FAE661BA2E13D00EA00B1 /* SLSwitcher.m */; };
 		FC78DD8C1AE731FA007B445A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD7A1AE731FA007B445A /* AFHTTPRequestOperation.m */; };
 		FC78DD8D1AE731FA007B445A /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD7C1AE731FA007B445A /* AFHTTPRequestOperationManager.m */; };
 		FC78DD8E1AE731FA007B445A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78DD7E1AE731FA007B445A /* AFHTTPSessionManager.m */; };
@@ -420,6 +415,7 @@
 		FCEDAC261AE8C90A00884858 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEDAC251AE8C90A00884858 /* OpenGLES.framework */; };
 		FCEDAC281AE8C91D00884858 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEDAC271AE8C91C00884858 /* CoreLocation.framework */; };
 		FCEDAC2A1AE8C93500884858 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEDAC291AE8C93500884858 /* CoreGraphics.framework */; };
+		FCFFE5C81BA79621001429EE /* ZHSliderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFFE5C71BA79621001429EE /* ZHSliderModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -732,16 +728,6 @@
 		FC6FA3F41B6E2FC6005AD5EF /* ZHProgrossHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHProgrossHUD.h; sourceTree = "<group>"; };
 		FC6FA3F51B6E2FC6005AD5EF /* ZHProgrossHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHProgrossHUD.m; sourceTree = "<group>"; };
 		FC6FA3F71B6E330F005AD5EF /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
-		FC6FAE591BA2E11D00EA00B1 /* questionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = questionCell.h; sourceTree = "<group>"; };
-		FC6FAE5A1BA2E11D00EA00B1 /* questionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = questionCell.m; sourceTree = "<group>"; };
-		FC6FAE5B1BA2E11D00EA00B1 /* questionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = questionView.h; sourceTree = "<group>"; };
-		FC6FAE5C1BA2E11D00EA00B1 /* questionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = questionView.m; sourceTree = "<group>"; };
-		FC6FAE5D1BA2E11D00EA00B1 /* QuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionViewController.h; sourceTree = "<group>"; };
-		FC6FAE5E1BA2E11D00EA00B1 /* QuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionViewController.m; sourceTree = "<group>"; };
-		FC6FAE621BA2E12D00EA00B1 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
-		FC6FAE631BA2E12D00EA00B1 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
-		FC6FAE651BA2E13D00EA00B1 /* SLSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSwitcher.h; sourceTree = "<group>"; };
-		FC6FAE661BA2E13D00EA00B1 /* SLSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSwitcher.m; sourceTree = "<group>"; };
 		FC78DD791AE731FA007B445A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FC78DD7A1AE731FA007B445A /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FC78DD7B1AE731FA007B445A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -942,6 +928,8 @@
 		FCEDAC251AE8C90A00884858 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		FCEDAC271AE8C91C00884858 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		FCEDAC291AE8C93500884858 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FCFFE5C61BA79621001429EE /* ZHSliderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHSliderModel.h; sourceTree = "<group>"; };
+		FCFFE5C71BA79621001429EE /* ZHSliderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHSliderModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1408,23 +1396,6 @@
 			path = lxh;
 			sourceTree = "<group>";
 		};
-		FC6FAE581BA2E10C00EA00B1 /* question */ = {
-			isa = PBXGroup;
-			children = (
-				FC6FAE651BA2E13D00EA00B1 /* SLSwitcher.h */,
-				FC6FAE661BA2E13D00EA00B1 /* SLSwitcher.m */,
-				FC6FAE621BA2E12D00EA00B1 /* DataModel.h */,
-				FC6FAE631BA2E12D00EA00B1 /* DataModel.m */,
-				FC6FAE591BA2E11D00EA00B1 /* questionCell.h */,
-				FC6FAE5A1BA2E11D00EA00B1 /* questionCell.m */,
-				FC6FAE5B1BA2E11D00EA00B1 /* questionView.h */,
-				FC6FAE5C1BA2E11D00EA00B1 /* questionView.m */,
-				FC6FAE5D1BA2E11D00EA00B1 /* QuestionViewController.h */,
-				FC6FAE5E1BA2E11D00EA00B1 /* QuestionViewController.m */,
-			);
-			name = question;
-			sourceTree = "<group>";
-		};
 		FC78DD781AE731FA007B445A /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1763,7 +1734,6 @@
 		FCEA4E741AE62F8B00D5CE55 /* 第三方登陆xx */ = {
 			isa = PBXGroup;
 			children = (
-				FC6FAE581BA2E10C00EA00B1 /* question */,
 				FCA6F2371BA00A12008BDAD4 /* ZHPictureView */,
 				FCCDFB2F1B6A0D0E00C17EBA /* wb */,
 				FCEDAC2B1AE8F30100884858 /* 第三方框架 */,
@@ -1849,6 +1819,8 @@
 				FC8B25BD1B7B1E6500C3BDF6 /* ZHTabBarController.m */,
 				FC8B25BF1B7B27AA00C3BDF6 /* ZHSliderTableView.h */,
 				FC8B25C01B7B27AA00C3BDF6 /* ZHSliderTableView.m */,
+				FCFFE5C61BA79621001429EE /* ZHSliderModel.h */,
+				FCFFE5C71BA79621001429EE /* ZHSliderModel.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -2244,6 +2216,7 @@
 				FCEA4EC01AE6304900D5CE55 /* LoginViewController.m in Sources */,
 				FCE2E1211AEF695700E6B314 /* ZHGeneralModel.m in Sources */,
 				FC2514261B5397F50091A44A /* MJFoundation.m in Sources */,
+				FCFFE5C81BA79621001429EE /* ZHSliderModel.m in Sources */,
 				FC2514281B5397F50091A44A /* MJType.m in Sources */,
 				FCAE9D2A1AE63CDC003D69D7 /* SDWebImageManager.m in Sources */,
 				FCAE9D251AE63CDC003D69D7 /* SDImageCache.m in Sources */,
@@ -2253,7 +2226,6 @@
 				FCAE9D321AE63CDC003D69D7 /* UIView+WebCacheOperation.m in Sources */,
 				FCEDAC221AE89B2400884858 /* MBProgressHUD.m in Sources */,
 				FC78DD8E1AE731FA007B445A /* AFHTTPSessionManager.m in Sources */,
-				FC6FAE611BA2E11D00EA00B1 /* QuestionViewController.m in Sources */,
 				FCE2E1221AEF695700E6B314 /* ZHGeneralVIew.m in Sources */,
 				FCE2E11F1AEF695700E6B314 /* ZHFutureTrendView.m in Sources */,
 				FCEA4E781AE62F8B00D5CE55 /* main.m in Sources */,
@@ -2294,22 +2266,18 @@
 				FCCDFB451B6A0D0E00C17EBA /* ZHPictureBtn.m in Sources */,
 				FC78DD921AE731FA007B445A /* AFURLRequestSerialization.m in Sources */,
 				FCCDFB441B6A0D0E00C17EBA /* ZHNewStatusCountLabel.m in Sources */,
-				FC6FAE671BA2E13D00EA00B1 /* SLSwitcher.m in Sources */,
 				FCCDFB431B6A0D0E00C17EBA /* ZHHomeTableViewController.m in Sources */,
 				FCAE9D621AE63E82003D69D7 /* ZHProgressView.m in Sources */,
 				FCAE9D271AE63CDC003D69D7 /* SDWebImageDecoder.m in Sources */,
 				FCEA4EC31AE6305D00D5CE55 /* customNavigationController.m in Sources */,
 				FC78DD8D1AE731FA007B445A /* AFHTTPRequestOperationManager.m in Sources */,
 				FCAE9D231AE63CDC003D69D7 /* MKAnnotationView+WebCache.m in Sources */,
-				FC6FAE601BA2E11D00EA00B1 /* questionView.m in Sources */,
 				FCE2E1251AEF695700E6B314 /* ZHTrendView.m in Sources */,
 				FC6FA3F61B6E2FC6005AD5EF /* ZHProgrossHUD.m in Sources */,
 				FC2514271B5397F50091A44A /* MJProperty.m in Sources */,
-				FC6FAE641BA2E12D00EA00B1 /* DataModel.m in Sources */,
 				FCAE9D261AE63CDC003D69D7 /* SDWebImageCompat.m in Sources */,
 				FCE2E11D1AEF695700E6B314 /* ZHDetailWeatherControllerViewController.m in Sources */,
 				FC78DD8F1AE731FA007B445A /* AFNetworkReachabilityManager.m in Sources */,
-				FC6FAE5F1BA2E11D00EA00B1 /* questionCell.m in Sources */,
 				FCEA4E9D1AE6302A00D5CE55 /* AppDelegate.m in Sources */,
 				FCAE9D641AE63E82003D69D7 /* ZHViewController.m in Sources */,
 				FCAE9D2E1AE63CDC003D69D7 /* UIImage+MultiFormat.m in Sources */,

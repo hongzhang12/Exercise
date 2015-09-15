@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import <ShareSDK/ShareSDK.h>
-#import "ZHWeatherController.h"
+
 #import <BaiduMapAPI/BMapKit.h>
 #import "MBProgressHUD+MJ.h"
 #import "ZHAccountModel.h"
@@ -101,8 +101,7 @@
             }else{
                 
                 NSLog(@"%@",json[@"city"]);
-                ZHWeatherController *weather = [[ZHWeatherController alloc] init];
-                weather.title = json[@"city"];
+
 
                 ZHHomeTableViewController *home = [[ZHHomeTableViewController alloc] init];
                 ZHTabBarController *tabBarCtrl = [[ZHTabBarController alloc] init];

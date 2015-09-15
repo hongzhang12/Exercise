@@ -54,6 +54,7 @@
                 UIImageView *smallImage = pictures[i];
                 scrView.imageView.frame = [smallImage golbalFrame];
             }
+            scrView.backgroundColor = [UIColor colorWithRed:i/5.0 green:i/5.0 blue:i/5.0 alpha:1.0];
             [scrollView addSubview:scrView];
             scrView.delegate = self;
             
@@ -98,7 +99,15 @@
 - (void)removeFromSuperview{
 
     
+    
     ZHPicture *bigImage = self.pictureImages[self.index];
+
+    if (bigImage.zoomScale>1.0) {
+        [bigImage setZoomScale:1.0];
+    }
+    
+    //[bigImage setContentOffset:CGPointMake(0, 0) animated:NO];
+    NSLog(@"%@",NSStringFromCGRect(bigImage.frame));
     UIImageView *smallImage = self.pictures[self.index];
     CGRect frame = [smallImage golbalFrame];
 
@@ -123,16 +132,17 @@
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
     return [scrollView.subviews firstObject];
 }
+
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
 
     NSLog(@"%f",scale);
-    if (scrollView != self.scrollView) {
-        if (scale<1.0) {
-            self.scrollView.scrollEnabled = YES;
-        }else{
-            self.scrollView.scrollEnabled = NO;
-        }
-    }
+//    if (scrollView != self.scrollView) {
+//        if (scale<1.0) {
+//            self.scrollView.scrollEnabled = YES;
+//        }else{
+//            self.scrollView.scrollEnabled = NO;
+//        }
+//    }
 
 }
 //-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
