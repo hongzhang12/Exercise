@@ -257,8 +257,8 @@
 
 - (void)setDataWithGeneralModel:(ZHGeneralModel *)general
 {
-//    NSAttributedString *title = [[NSAttributedString alloc] initWithString:general.airQualityBtn attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12] ,NSForegroundColorAttributeName:[UIColor whiteColor]}];
-//    [self.airQualityBtn setAttributedTitle:title forState:UIControlStateNormal];
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:general.airQualityBtn attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12] ,NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.airQualityBtn setAttributedTitle:title forState:UIControlStateNormal];
     
     self.publishTimeLabel.text = general.publishTimeLabel;
     self.weatherLabel.text = general.weatherLabel;

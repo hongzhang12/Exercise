@@ -40,13 +40,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     ZHAccountModel *account = [ZHAccountModel accountModel];
     self.navigationItem.title = account.nickname;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(sendStatus)];
     
-    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(84, 0, 0, 0);
     self.tableView.backgroundColor = ZHColor(211, 211, 211);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self initViews];
@@ -59,8 +61,15 @@
     [self refreshStatus:self.refreshControl];
     
     //[UIWindow currentWindow].userInteractionEnabled = NO;
+    //这行代码并没有什么卵用
+    self.view.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-64);
+    
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
 
+    NSLog(@"-----%@",NSStringFromCGRect(self.view.frame));
+}
 - (void)sendStatus{
     
     ZHSendStatusController *sendCtrl = [[ZHSendStatusController alloc] init];

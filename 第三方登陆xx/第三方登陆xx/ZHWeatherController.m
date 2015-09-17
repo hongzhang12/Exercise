@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
+    self.title = @"长沙市";
     ZHAccountModel *model = [NSKeyedUnarchiver unarchiveObjectWithFile:AccountInfo];
     NSLog(@"%@--%@--%@",model.oAuthToken,model.nickname,model.profileImage);
     

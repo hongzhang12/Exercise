@@ -231,14 +231,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         
-        return 100;
+        return 80;
     }else{
         return 0;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70;
+    return 60;
 }
 
 -(NSMutableArray *)sliderModelArr{
