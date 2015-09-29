@@ -301,6 +301,9 @@
 		FC83D7031B2EAE260075060D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC83D7021B2EAE260075060D /* libc++.dylib */; };
 		FC8B25BE1B7B1E6500C3BDF6 /* ZHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8B25BD1B7B1E6500C3BDF6 /* ZHTabBarController.m */; };
 		FC8B25C11B7B27AA00C3BDF6 /* ZHSliderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8B25C01B7B27AA00C3BDF6 /* ZHSliderTableView.m */; };
+		FC8D7D221BBA8BBA001771C7 /* ZHCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8D7D1D1BBA8BBA001771C7 /* ZHCalendarCell.m */; };
+		FC8D7D231BBA8BBA001771C7 /* ZHCalendarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8D7D1F1BBA8BBA001771C7 /* ZHCalendarController.m */; };
+		FC8D7D241BBA8BBA001771C7 /* ZHCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8D7D211BBA8BBA001771C7 /* ZHCollectionViewCell.m */; };
 		FCA049791BA11BDD00F2F6C1 /* bg_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCA049751BA11BDD00F2F6C1 /* bg_background.jpg */; };
 		FCA0497A1BA11BDD00F2F6C1 /* bg_home_960@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCA049761BA11BDD00F2F6C1 /* bg_home_960@2x.jpg */; };
 		FCA0497B1BA11BDD00F2F6C1 /* bg_home_1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA049771BA11BDD00F2F6C1 /* bg_home_1136@2x.png */; };
@@ -757,6 +760,12 @@
 		FC8B25BD1B7B1E6500C3BDF6 /* ZHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHTabBarController.m; sourceTree = "<group>"; };
 		FC8B25BF1B7B27AA00C3BDF6 /* ZHSliderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHSliderTableView.h; sourceTree = "<group>"; };
 		FC8B25C01B7B27AA00C3BDF6 /* ZHSliderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHSliderTableView.m; sourceTree = "<group>"; };
+		FC8D7D1C1BBA8BBA001771C7 /* ZHCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHCalendarCell.h; sourceTree = "<group>"; };
+		FC8D7D1D1BBA8BBA001771C7 /* ZHCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHCalendarCell.m; sourceTree = "<group>"; };
+		FC8D7D1E1BBA8BBA001771C7 /* ZHCalendarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHCalendarController.h; sourceTree = "<group>"; };
+		FC8D7D1F1BBA8BBA001771C7 /* ZHCalendarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHCalendarController.m; sourceTree = "<group>"; };
+		FC8D7D201BBA8BBA001771C7 /* ZHCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHCollectionViewCell.h; sourceTree = "<group>"; };
+		FC8D7D211BBA8BBA001771C7 /* ZHCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHCollectionViewCell.m; sourceTree = "<group>"; };
 		FCA049751BA11BDD00F2F6C1 /* bg_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg_background.jpg; sourceTree = "<group>"; };
 		FCA049761BA11BDD00F2F6C1 /* bg_home_960@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg_home_960@2x.jpg"; sourceTree = "<group>"; };
 		FCA049771BA11BDD00F2F6C1 /* bg_home_1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_1136@2x.png"; sourceTree = "<group>"; };
@@ -1451,6 +1460,19 @@
 			name = lib;
 			sourceTree = "<group>";
 		};
+		FC8D7D1B1BBA8BBA001771C7 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				FC8D7D1C1BBA8BBA001771C7 /* ZHCalendarCell.h */,
+				FC8D7D1D1BBA8BBA001771C7 /* ZHCalendarCell.m */,
+				FC8D7D1E1BBA8BBA001771C7 /* ZHCalendarController.h */,
+				FC8D7D1F1BBA8BBA001771C7 /* ZHCalendarController.m */,
+				FC8D7D201BBA8BBA001771C7 /* ZHCollectionViewCell.h */,
+				FC8D7D211BBA8BBA001771C7 /* ZHCollectionViewCell.m */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		FCA0496C1BA11BA100F2F6C1 /* sliderImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1734,6 +1756,7 @@
 		FCEA4E741AE62F8B00D5CE55 /* 第三方登陆xx */ = {
 			isa = PBXGroup;
 			children = (
+				FC8D7D1B1BBA8BBA001771C7 /* Calendar */,
 				FCA6F2371BA00A12008BDAD4 /* ZHPictureView */,
 				FCCDFB2F1B6A0D0E00C17EBA /* wb */,
 				FCEDAC2B1AE8F30100884858 /* 第三方框架 */,
@@ -2227,13 +2250,16 @@
 				FCEDAC221AE89B2400884858 /* MBProgressHUD.m in Sources */,
 				FC78DD8E1AE731FA007B445A /* AFHTTPSessionManager.m in Sources */,
 				FCE2E1221AEF695700E6B314 /* ZHGeneralVIew.m in Sources */,
+				FC8D7D231BBA8BBA001771C7 /* ZHCalendarController.m in Sources */,
 				FCE2E11F1AEF695700E6B314 /* ZHFutureTrendView.m in Sources */,
+				FC8D7D241BBA8BBA001771C7 /* ZHCollectionViewCell.m in Sources */,
 				FCEA4E781AE62F8B00D5CE55 /* main.m in Sources */,
 				FC8B25BE1B7B1E6500C3BDF6 /* ZHTabBarController.m in Sources */,
 				FCE2E11C1AEF695700E6B314 /* ZHDetailView.m in Sources */,
 				FCEDAC201AE89B2400884858 /* MBProgressHUD+MJ.m in Sources */,
 				FCAE9D2C1AE63CDC003D69D7 /* UIButton+WebCache.m in Sources */,
 				FCCDFB4A1B6A0D0E00C17EBA /* ZHUserModel.m in Sources */,
+				FC8D7D221BBA8BBA001771C7 /* ZHCalendarCell.m in Sources */,
 				FCAE9D241AE63CDC003D69D7 /* NSData+ImageContentType.m in Sources */,
 				FC78DD941AE731FA007B445A /* AFURLSessionManager.m in Sources */,
 				FCCDFB471B6A0D0E00C17EBA /* ZHStatusModel.m in Sources */,

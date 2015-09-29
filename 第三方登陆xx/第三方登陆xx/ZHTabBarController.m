@@ -12,6 +12,7 @@
 #import "ZHWeatherController.h"
 #import "customNavigationController.h"
 #import "ZHSliderModel.h"
+#import "ZHCalendarController.h"
 @interface ZHTabBarController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,weak) ZHSliderTableView *sliderTableView;
 @property (nonatomic ,assign) ZHTabBarControllerSliderState sliderState;
@@ -62,6 +63,8 @@
     ZHWeatherController *weatherViewController = [[ZHWeatherController alloc] init];
     [self addViewControllers:weatherViewController title:@"天气"];
     
+    ZHCalendarController *calendarViewController = [[ZHCalendarController alloc] init];
+    [self addViewControllers:calendarViewController title:@"日历"];
 }
 - (void)addViewControllers:(UIViewController *)controller title:(NSString *)title{
     customNavigationController *navController = [[customNavigationController alloc] initWithRootViewController:controller];

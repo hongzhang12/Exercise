@@ -14,12 +14,13 @@
 + (void)initialize
 {
     UIBarButtonItem *item = [UIBarButtonItem appearance];
-    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavItemFont]} forState:UIControlStateNormal];
+    [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavItemFont]} forState:UIControlStateNormal];
     [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavItemFont]} forState:UIControlStateDisabled];
     
     UINavigationBar *bar = [UINavigationBar appearance];
-    bar.tintColor = [UIColor whiteColor];
-    bar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavBarFont]};
+    bar.barTintColor = [UIColor blackColor];
+
+    bar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:ZHCustomerNavBarFont]};
 
 }
 
